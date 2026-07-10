@@ -185,7 +185,7 @@ end
 -- 同步接收数据，回调函数在同步后执行  
 -- 同一个 id 只能注册一个回调函数，后注册的会覆盖前面的
 ---@param id string
----@param callback async fun(data: Serialization.SupportTypes, source: Player)
+---@param callback async fun(data: any, source: Player)
 function M.onSync(id, callback)
     M.syncMap[id] = callback
 end
