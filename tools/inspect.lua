@@ -69,31 +69,37 @@ end
 
 
 local shortControlCharEscapes = {
-   ["\a"] = "\\a", ["\b"] = "\\b", ["\f"] = "\\f", ["\n"] = "\\n",
-   ["\r"] = "\\r", ["\t"] = "\\t", ["\v"] = "\\v", ["\127"] = "\\127",
+    ['\a'] = '\\a',
+    ['\b'] = '\\b',
+    ['\f'] = '\\f',
+    ['\n'] = '\\n',
+    ['\r'] = '\\r',
+    ['\t'] = '\\t',
+    ['\v'] = '\\v',
+    ['\127'] = '\\127',
 }
-local longControlCharEscapes = { ["\127"] = "\127" }
+local longControlCharEscapes = { ['\127'] = '\127' }
 for i = 0, 31 do
    local ch = char(i)
    if not shortControlCharEscapes[ch] then
-      shortControlCharEscapes[ch] = "\\" .. i
-      longControlCharEscapes[ch] = fmt("\\%03d", i)
+        shortControlCharEscapes[ch] = '\\' .. i
+        longControlCharEscapes[ch] = fmt('\\%03d', i)
    end
 end
 
 local function escape(str)
-   return (gsub(gsub(gsub(str, "\\", "\\\\"),
-   "(%c)%f[0-9]", longControlCharEscapes),
-   "%c", shortControlCharEscapes))
+    return (gsub(gsub(gsub(str, '\\', '\\\\'),
+            '(%c)%f[0-9]', longControlCharEscapes),
+        '%c', shortControlCharEscapes))
 end
 
 local function isIdentifier(str)
-   return type(str) == "string" and not not str:match("^[_%a][_%a%d]*$")
+    return type(str) == 'string' and not not str:match('^[_%a][_%a%d]*$')
 end
 
 local flr = math.floor
 local function isSequenceKey(k, sequenceLength)
-   return type(k) == "number" and
+    return type(k) == 'number' and
    flr(k) == k and
    1 <= (k) and
    k <= sequenceLength
@@ -139,7 +145,7 @@ local function getKeys(t)
 end
 
 local function countCycles(x, cycles)
-   if type(x) == "table" then
+    if type(x) == 'table' then
       if cycles[x] then
          cycles[x] = cycles[x] + 1
       else
@@ -173,7 +179,7 @@ local function processRecursive(process,
    if visited[item] then return visited[item] end
 
    local processed = process(item, path)
-   if type(processed) == "table" then
+    if type(processed) == 'table' then
       local processedCopy = {}
       visited[item] = processedCopy
       local processedKey
@@ -262,9 +268,9 @@ function Inspector:putValue(v)
                if isIdentifier(k) then
                   puts(buf, k)
                else
-                  puts(buf, "[")
+                        puts(buf, '[')
                   self:putValue(k)
-                  puts(buf, "]")
+                        puts(buf, ']')
                end
                puts(buf, ' = ')
                self:putValue(t[k])

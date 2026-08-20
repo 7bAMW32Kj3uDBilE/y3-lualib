@@ -1,4 +1,4 @@
----@class NPBehave.Node `abstract`, 不应该直接实例化, 请使用子类<br>
+---@class NPBehave.Node: Class.Base `abstract`, 不应该直接实例化, 请使用子类<br>
 ---@field protected currentState NPBehave.Enum.NodeState
 ---@field CurrentState NPBehave.Enum.NodeState `__getter`
 ---@field RootNode NPBehave.Root
@@ -9,14 +9,15 @@
 ---@field Clock NPBehave.Clock `__getter`
 ---@field IsStopRequested boolean `__getter`
 ---@field IsActive boolean `__getter`
----@overload fun(name: string): self
-local Node = Class("NPBehave.Node")
+---@overload fun(name: string): NPBehave.Node
+local Node = Class('NPBehave.Node')
 
+local is_debug = y3.game.is_debug_mode()
 ---@class NPBehave.Node: NPBehave.Tool.MethodDecorator
-Extends('NPBehave.Node', "NPBehave.Tool.MethodDecorator")
 
 
 
+Extends('NPBehave.Node', 'NPBehave.Tool.MethodDecorator')
 
 ---@diagnostic disable-next-line: undefined-field
 Node.__getter.CurrentState = function(self)
@@ -56,8 +57,18 @@ end
 ---@param name string
 ---@return self
 function Node:__init(name)
-    self.name = name
+    self.Name         = name
     self.currentState = NPBehave.Enum.NodeState.Inactive
+    -- #region MARK: DEBUG
+    if is_debug then
+        self.DebugLastStopRequestAt = 0
+        self.DebugLastStoppedAt     = 0
+        self.DebugNumStartCalls     = 0
+        self.DebugNumStopCalls      = 0
+        self.DebugNumStoppedCalls   = 0
+        self.DebugLastResult        = false
+    end
+    -- #endregion
     return self
 end
 
@@ -73,14 +84,23 @@ function Node:SetParent(parentNode)
 end
 
 function Node:Start()
-    assert(self.currentState == NPBehave.Enum.NodeState.Inactive, "只能启动非活动节点")
+    assert(self.currentState == NPBehave.Enum.NodeState.Inactive, '只能启动非活动节点')
     self.currentState = NPBehave.Enum.NodeState.Active
+    if is_debug then
+        self.RootNode.TotalNumStartCalls = self.RootNode.TotalNumStartCalls + 1
+        self.DebugNumStartCalls          = self.DebugNumStartCalls + 1
+    end
     self:DoStart()
 end
 
 function Node:CancelWithoutReturnResult()
-    assert(self.currentState == NPBehave.Enum.NodeState.Active, "只能停止活动节点，试图停止")
+    assert(self.currentState == NPBehave.Enum.NodeState.Active, '只能停止活动节点，试图停止')
     self.currentState = NPBehave.Enum.NodeState.StopRequested
+    if is_debug then
+        self.RootNode.TotalNumStopCalls = self.RootNode.TotalNumStopCalls + 1
+        self.DebugLastStopRequestAt     = y3.game.current_game_run_time()
+        self.DebugNumStopCalls          = self.DebugNumStopCalls + 1
+    end
     self:DoCancel()
 end
 
@@ -97,8 +117,14 @@ end
 ---virtual<br>
 ---这绝对必须是函数中的最后一个调用, 调用停止后切勿修改任何状态!!! 
 function Node:Stopped(success)
-    assert(self.currentState ~= NPBehave.Enum.NodeState.Inactive, "在 `INACTIVE` 状态下调用了 `Stopped`, 说明出了问题")
+    assert(self.currentState ~= NPBehave.Enum.NodeState.Inactive, '在 `INACTIVE` 状态下调用了 `Stopped`, 说明出了问题')
     self.currentState = NPBehave.Enum.NodeState.Inactive
+    if is_debug then
+        self.RootNode.TotalNumStoppedCalls = self.RootNode.TotalNumStoppedCalls + 1
+        self.DebugNumStoppedCalls          = self.DebugNumStoppedCalls + 1
+        self.DebugLastStoppedAt            = y3.game.current_game_run_time()
+        self.DebugLastResult               = success
+    end
     if self.ParentNode ~= nil then
         self.ParentNode:ChildStopped(self, success)
     end

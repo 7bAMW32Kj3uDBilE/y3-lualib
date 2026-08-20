@@ -86,9 +86,18 @@ local RESERVED = {
 ---@class Utility
 local m = {}
 
+---@class Utility.dumpOption
+---@field longStringKey? boolean                                                                         是否把长字符串的 key 用 ["key"] 的形式表示
+---@field alignment?     boolean                                                                         是否对齐键名（使等号对齐，便于阅读）
+---@field sorter?        fun(keys: any[], keymap?: table<any, string>)                                   在表内从 keys[1] 到 keys[#keys] 原地 对其间元素按指定次序排序。
+---@field noArrayKey?    boolean                                                                         是否隐藏数组部分的数字索引（只显示值，不显示 [1] =）
+---@field format?        table<any, fun(value: any, unpack: function, deep: integer, stack: any[]): any> 按键定制格式化的表。键是要格式化的字段名，值是格式化函数。格式化函数参数：value(原始值)、unpack(内部递归函数，可用于手动展开表)、deep(当前深度+1)、stack(键路径栈数组)。返回格式化后的值（可以是任意类型，会重新判断类型）
+---@field loop?          string                                                                          当检测到循环引用时显示的文本（默认 "<Loop>"）
+---@field deep?          integer                                                                         最大递归深度（默认无限制），超过后显示 "<Deep>"
+---@field number?        fun(value: number): string                                                      数字类型的格式化函数，接收数字值返回格式化后的字符串表示
 --- 打印表的结构
 ---@param tbl any
----@param option? table
+---@param option? Utility.dumpOption
 ---@return string
 function m.dump(tbl, option)
     if not option then
@@ -247,13 +256,15 @@ local function sortTable(tbl)
     local mark = {}
     local n = 0
     for key in next, tbl do
-        n=n+1;keys[n] = key
+        n         = n + 1
+        keys[n]   = key
         mark[key] = true
     end
     tableSort(keys)
     function mt:__newindex(key, value)
         rawset(self, key, value)
-        n=n+1;keys[n] = key
+        n         = n + 1
+        keys[n]   = key
         mark[key] = true
         if type(value) == 'table' then
             sortTable(value)
@@ -264,7 +275,8 @@ local function sortTable(tbl)
         local m = 0
         for key in next, self do
             if not mark[key] then
-                m=m+1;list[m] = key
+                m       = m + 1
+                list[m] = key
             end
         end
         if m > 0 then
@@ -328,7 +340,7 @@ end
 ---@return boolean ok
 ---@return string? errMsg
 function m.saveFile(path, content)
-    local f, e = ioOpen(path, "wb")
+    local f, e = ioOpen(path, 'wb')
 
     if f then
         f:write(content)
@@ -459,6 +471,15 @@ function m.defer(callback)
     return setmetatable({ callback }, deferMT)
 end
 
+-- 添加5.4<close>对函数类型的支持
+-- ```
+-- do
+--     local cleanup <close> = function()
+--         log.info('离开作用域，自动执行清理')
+--     end
+--     -- ... 业务代码
+-- end  -- ← 这里 cleanup() 被自动调用
+-- ```
 function m.enableCloseFunction()
     setmetatable(function () end, { __close = function (f) f() end })
 end
@@ -737,10 +758,10 @@ end
 ---@param mode? '"left"'|'"right"'
 ---@return string
 function m.trim(str, mode)
-    if mode == "left" then
+    if mode == 'left' then
         return (str:gsub('^%s+', ''))
     end
-    if mode == "right" then
+    if mode == 'right' then
         return (str:gsub('%s+$', ''))
     end
     return (str:match '^%s*(.-)%s*$')
@@ -783,20 +804,21 @@ function m.arrayToHash(l)
 end
 
 ---@class switch
----@field cachedCases string[]
+---@overload fun(name: string | integer, ...): any
+---@field cachedCases string[] | integer[]
 ---@field map table<string, function>
 ---@field _default fun(...):...
 local switchMT = {}
 switchMT.__index = switchMT
 
----@param name string
+---@param name string | integer
 ---@return switch
 function switchMT:case(name)
     self.cachedCases[#self.cachedCases+1] = name
     return self
 end
 
----@param callback async fun(...):...
+---@param callback async fun(...): any...
 ---@return switch
 function switchMT:call(callback)
     for i = 1, #self.cachedCases do
@@ -1032,14 +1054,20 @@ m.MODE_K  = { __mode = 'k' }
 m.MODE_V  = { __mode = 'v' }
 m.MODE_KV = { __mode = 'kv' }
 
+---@param t? table
+---@return table
 function m.weakTable(t)
     return setmetatable(t or {}, m.MODE_KV)
 end
 
+---@param t? table
+---@return table
 function m.weakKTable(t)
     return setmetatable(t or {}, m.MODE_K)
 end
 
+---@param t? table
+---@return table
 function m.weakVTable(t)
     return setmetatable(t or {}, m.MODE_V)
 end

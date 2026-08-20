@@ -137,7 +137,7 @@ function M:add_fast_event(event, callback)
         GameAPI.create_ui_comp_event_ex_ex(self.handle, y3.const.UIEventMap[event] or event, id, '')
         M._added_fast_events[id] = true
     end
-    return self.player:event("界面-消息", id, callback)
+    return self.player:event('界面-消息', id, callback)
 end
 
 --创建本地界面事件  

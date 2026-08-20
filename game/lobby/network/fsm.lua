@@ -1,4 +1,4 @@
-﻿---@class fsm The template of Finite state machine
+---@class fsm The template of Finite state machine
 local fsm = {}
 
 
@@ -10,7 +10,7 @@ local fsm = {}
 ---@field current_state fsm.State|nil The current state of the fsm
 
 ---@alias fsm.State table<string, function> The state of the fsm
----@alias fsm.OnEnter fun(any...): boolean The function to be called when entering the
+---@alias fsm.OnEnter fun(...): boolean The function to be called when entering the
 ---@alias fsm.OnExit fun(): boolean The function to be called when exiting the state
 ---@return fsm # fsm object
 function fsm:new()

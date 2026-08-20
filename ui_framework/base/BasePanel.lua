@@ -4,6 +4,8 @@
 ---@field _localPlayer Player 本地玩家
 ---@field _localPlayerId integer 本地玩家ID
 ---@field _name string 界面名称
+---@field _block                UI                        背景遮罩（* 阻止鼠标穿透)
+---@field block?                boolean                   是否启用背景遮罩（默认开启，M.block = false 可关闭）
 ---@field _isAttached boolean 是否已完成 attach
 ---@field _eventHandlers table<string, function[]> 面板内部事件监听器
 ---@field _eventBusUnsubscribes function[] 全局事件总线的取消订阅函数列表
@@ -50,7 +52,7 @@ function M:findAllUnderscoreControls(parent)
     local children = parent:get_childs()
     for _, child in pairs(children) do
         local controlName = child:get_name()
-        if y3.util.stringStartWith(controlName, "_") then
+        if y3.util.stringStartWith(controlName, '_') then
             self._controls[controlName] = child
         end
         -- 递归查找子控件的子控件
@@ -64,7 +66,7 @@ end
 function M:getControl(name)
     local control = self._controls[name]
     if control == nil then
-        log.warn("Error: Failed to get control for " .. name)
+        log.warn('Error: Failed to get control for ' .. name)
         return nil
     end
     return control
@@ -151,11 +153,11 @@ function M:attach(ui)
     self._gcHost = self._gcHost or New "GCHost" ()
 
     -- 支持传入 UUID 字符串
-    if type(ui) == "string" then
+    if type(ui) == 'string' then
         local localPlayer = self:getLocalPlayer()
         ui = y3.ui.get_by_handle(localPlayer, ui)
         if not ui then
-            log.error("[BasePanel] attach: 无法通过 UUID 获取 UI")
+            log.error('[BasePanel] attach: 无法通过 UUID 获取 UI')
             return
         end
     end
@@ -194,12 +196,22 @@ end
 ---@param ... any 传递给 on_refresh 的参数
 function M:open(...)
     if not self._panelObj then
-        log.warn("[BasePanel] open: panelObj is nil")
+        log.warn('[BasePanel] open: panelObj is nil')
         return
     end
 
     self._panelObj:set_visible(true)
 
+    -- 背景遮罩默认开启：阻断点击穿透到场景
+    -- 子类可用 M.block = false 关闭
+    if self.block ~= false and self._block then
+        if self._block_trigger then
+            self._block_trigger:enable()
+        else
+            self._block_trigger = self._block:add_fast_event('鼠标-右击', function(trg, data)
+            end)
+        end
+    end
     -- 调用子类 on_refresh
     self:on_refresh(...)
 end
@@ -210,6 +222,9 @@ function M:close()
         return
     end
 
+    if self.block ~= false and self._block_trigger then
+        self._block_trigger:disable()
+    end
     self._panelObj:set_visible(false)
 
     -- 调用子类 on_hide
@@ -264,7 +279,7 @@ end
 function M:createLocalUI(childPath)
     local child = self._panelObj:get_child(childPath)
     if not child then
-        log.warn("Error: Failed to get child for LocalUI: " .. childPath)
+        log.warn('Error: Failed to get child for LocalUI: ' .. childPath)
         return nil
     end
     local logic = y3.local_ui.create(child)
@@ -288,11 +303,11 @@ end
 ---@param callback function 点击回调
 function M:bindClick(control, callback)
     if not control then
-        log.warn("[BasePanel] bindClick: control is nil")
+        log.warn('[BasePanel] bindClick: control is nil')
         return
     end
 
-    local trigger = control:add_fast_event("左键-点击", function(trg, data)
+    local trigger = control:add_fast_event('左键-点击', function(trg, data)
         if callback then
             callback()
         end
@@ -310,7 +325,7 @@ function M:bindPress(control, callback)
     if not control then return end
 
     ---@diagnostic disable-next-line: param-type-mismatch
-    local trigger = control:add_fast_event("左键-按下", function(trg, data)
+    local trigger = control:add_fast_event('左键-按下', function(trg, data)
         if callback then
             callback()
         end
@@ -328,7 +343,7 @@ function M:bindRelease(control, callback)
     if not control then return end
 
     ---@diagnostic disable-next-line: param-type-mismatch
-    local trigger = control:add_fast_event("左键-抬起", function(trg, data)
+    local trigger = control:add_fast_event('左键-抬起', function(trg, data)
         if callback then
             callback()
         end

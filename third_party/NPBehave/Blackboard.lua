@@ -2,19 +2,22 @@ local tableInsert = table.insert
 local tableRemove = table.remove
 local pairs = pairs
 local ipairs = ipairs
----@class NPBehave.Blackboard
+---@class NPBehave.Blackboard: Class.Base
 ---@field private _parentBlackboard? NPBehave.Blackboard
+---@field data {[string]: any} 存放黑板的数据
+---@field observers {[string]: fun(type: NPBehaveBlackboardType, value: any)[]} 观察者列表
+---@field clock NPBehave.Clock 黑板使用的时钟
 ---@overload fun(clock: NPBehave.Clock, parent?: NPBehave.Blackboard): NPBehave.Blackboard
-local Blackboard = Class("NPBehave.Blackboard")
+local Blackboard = Class('NPBehave.Blackboard')
 
 ---@class NPBehave.Blackboard: NPBehave.Tool.MethodDecorator
-Extends('NPBehave.Blackboard', "NPBehave.Tool.MethodDecorator")
+Extends('NPBehave.Blackboard', 'NPBehave.Tool.MethodDecorator')
 
 ---@enum NPBehaveBlackboardType
 local NPBehaveBlackboardType = {
-    Add = "Add",
-    Remove = "Remove",
-    Change = "Change",
+    Add    = 'Add',
+    Remove = 'Remove',
+    Change = 'Change',
 }
 
 ---@private
@@ -42,9 +45,7 @@ end
 ---@return self
 function Blackboard:__init(clock, parent)
     self._clock = clock
-    ---@type {[string]: any}
     self._data = {}
-    ---@type {[string]: fun(type: NPBehaveBlackboardType, value: any)[]}
     self._observers = {} -- 观察者, 实际执行的函数
     self._isNotifying = false
     ---@type {[string]: fun(type: NPBehaveBlackboardType, value: any)[]}
@@ -61,6 +62,15 @@ function Blackboard:__init(clock, parent)
     return self
 end
 
+Blackboard.__getter.data = function(self)
+    return self._data
+end
+Blackboard.__getter.observers = function(self)
+    return self._observers
+end
+Blackboard.__getter.clock = function(self)
+    return self._clock
+end
 ---启用黑板
 function Blackboard:Enable()
     if self._parentBlackboard then
@@ -85,19 +95,24 @@ function Blackboard:Set(key, value)
     if self._parentBlackboard and self._parentBlackboard:IsSet(key) then
         self._parentBlackboard:Set(key, value)
     else
-        if not self._data[key] then
+        local old = self._data[key]
+        -- 新增键
+        if old == nil and value ~= nil then
             self._data[key] = value
             tableInsert(self._notifications, Notification(key, NPBehaveBlackboardType.Add, value))
             self._clock:AddTimer(0, 0, self:bind(self.NotifyObservers))
-        else
-            if (self._data[key] == nil and value ~= nil) or (self._data[key] ~= nil and self._data[key] ~= value) then
+        elseif old ~= nil and value == nil then
+            self._data[key] = nil
+            tableInsert(self._notifications, Notification(key, NPBehaveBlackboardType.Remove, nil))
+            self._clock:AddTimer(0, 0, self:bind(self.NotifyObservers))
+            -- 值改变
+        elseif old ~= nil and value ~= nil and old ~= value then
                 self._data[key] = value
                 tableInsert(self._notifications, Notification(key, NPBehaveBlackboardType.Change, value))
                 self._clock:AddTimer(0, 0, self:bind(self.NotifyObservers))
             end
         end
     end
-end
 
 ---检查键是否已设置
 ---@param key string
@@ -109,7 +124,7 @@ end
 ---取消设置键值
 ---@param key string
 function Blackboard:Unset(key)
-    if self._data[key] then
+    if self._data[key] ~= nil then
         self._data[key] = nil
         tableInsert(self._notifications, Notification(key, NPBehaveBlackboardType.Remove, nil))
         self._clock:AddTimer(0, 0, self:bind(self.NotifyObservers))
@@ -120,7 +135,7 @@ end
 ---@param key string
 ---@return any?
 function Blackboard:Get(key)
-    if self._data[key] then
+    if self._data[key] ~= nil then
         return self._data[key]
     elseif self._parentBlackboard then
         return self._parentBlackboard:Get(key)

@@ -1,5 +1,5 @@
 ---@class NPBehave.Decorator.TimeMin : NPBehave.Decorator.Decorator
----@overload fun(limit: number, decoratee: NPBehave.Node, waitOnFailure: boolean, randomVariation: number): self
+---@overload fun(limit: number, decoratee: NPBehave.Node, waitOnFailure: boolean, randomVariation: number): NPBehave.Decorator.TimeMin
 local TimeMin = Class(NPBehave.ClassName.TimeMin)
 local superName = NPBehave.ClassName.Decorator
 

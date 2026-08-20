@@ -6,12 +6,12 @@ local New = New
 ---@field public TimerId number
 ---@field public Timer NPBehave.Clock.Timer
 ---@overload fun(): NPBehave.Clock.AddTimerStruct
-local AddTimerStruct = Class("NPBehave.Clock.AddTimerStruct")
+local AddTimerStruct = Class('NPBehave.Clock.AddTimerStruct')
 
 ---@class NPBehave.Clock.Timer
 ---@field Action? NPBehave.Tool.BindCallback
 ---@overload fun(): NPBehave.Clock.Timer
-local Timer = Class("NPBehave.Clock.Timer")
+local Timer = Class('NPBehave.Clock.Timer')
 ---@return self
 function Timer:__init()
     self.ScheduledTime = 0.0
@@ -21,23 +21,24 @@ function Timer:__init()
     self.Delay = 0.0
     self.RandomVariance = 0.0
     self.Action = nil
-    self.repeat_count = 0
+    self.Repeat = 0
     return self
 end
 
 ---@param elapsedTime number
 function Timer:ScheduleAbsoluteTime(elapsedTime)
-    self.ScheduledTime = elapsedTime + self.Delay - self.RandomVariance * 0.5 +
-        self.RandomVariance * NPBehave.Context.Platform:GenerateRandom()
+    self.ScheduledTime = elapsedTime + self.Delay +
+        self.RandomVariance * (NPBehave.Context.Platform:GenerateRandom() - 0.5)
 end
 
----@class NPBehave.Clock
+---@class NPBehave.Clock: Class.Base
+---@field timerPool NPBehave.Clock.Timer[] 计时器对象池
+---@field timerLookup {[fun()]: number} 激活的计时器
 ---@overload fun(): NPBehave.Clock
-local Clock = Class("NPBehave.Clock")
+local Clock = Class('NPBehave.Clock')
 
 ---@return self
 function Clock:__init()
-    ---@type {[fun()]: number}
     self._timerLookup = {}
     ---@private
     ---@class SortedDictionary.Clock: SortedDictionary --@ 由于不支持泛型提示, 必须手动添加类型提示
@@ -52,12 +53,20 @@ function Clock:__init()
     self._timerNum = 0
 
     self.ElapsedTime = 0.0 -- 经过时间
-    ---@type NPBehave.Clock.Timer[]
     self._timerPool = {}
     self._currentTimerPoolIndex = 0
     return self
 end
 
+Clock.__getter.timerPool = function(self)
+    return self._timerPool
+end
+Clock.__getter.timerLookup = function(self)
+    return self._timerLookup
+end
+function Clock:GetActiveTimerCount()
+    return y3.util.countTable(self._timers)
+end
 ---注册一个具有随机方差的计时器函数
 ---@param delay number 延迟时间(以毫秒为单位)
 ---@param repeat_count number 重复次数, 设为 -1 则重复直至取消注册.
@@ -84,7 +93,7 @@ function Clock:AddTimer(delay, repeat_count, action, randomVariance)
         if not self._addTimers[action] then
             timerId = self._timerNum
             self._timerNum = self._timerNum + 1
-            local addTimer = New("NPBehave.Clock.AddTimerStruct")()
+            local addTimer = New('NPBehave.Clock.AddTimerStruct')()
             addTimer.TimerId = timerId
             addTimer.Timer = self:GetTimerFromPool()
             self._addTimers[action] = addTimer
@@ -100,7 +109,7 @@ function Clock:AddTimer(delay, repeat_count, action, randomVariance)
     assert(timer.Used)
     timer.Delay = delay
     timer.RandomVariance = randomVariance
-    timer.repeat_count = repeat_count
+    timer.Repeat = repeat_count
     timer.Action = action
     timer:ScheduleAbsoluteTime(self.ElapsedTime)
 end
@@ -234,7 +243,7 @@ function Clock:GetTimerFromPool()
     end
 
     if timer == nil then
-        timer = New("NPBehave.Clock.Timer")()
+        timer = New('NPBehave.Clock.Timer')()
         self._currentTimerPoolIndex = 0
         tableInsert(self._timerPool, timer)
     end

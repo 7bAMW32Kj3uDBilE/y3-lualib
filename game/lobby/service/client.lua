@@ -1,4 +1,4 @@
-﻿require 'y3.game.lobby.service.define'
+require 'y3.game.lobby.service.define'
 local const = require "y3.game.lobby.network.protocol"
 local fsm = require "y3.game.lobby.network.fsm"
 

@@ -365,7 +365,7 @@ end
 ---判断是否锁定
 ---@param str string 锁定标识
 ---@return boolean
-function M:islock(str)
+function M:isLock(str)
     return self._uiLock[str] ~= nil
 end
 

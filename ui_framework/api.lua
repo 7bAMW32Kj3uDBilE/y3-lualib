@@ -93,6 +93,15 @@ function API.close(name)
     share.uiMgr:closeUI(name)
 end
 
+---开关界面
+---@param name string 界面名
+function API.switch(name)
+    if share.uiMgr:isUIOpen(name) then
+        share.uiMgr:closeUI(name)
+    else
+        share.uiMgr:openUI(name)
+    end
+end
 ---关闭栈顶弹窗（ESC 响应）
 function API.close_top()
     share.uiMgr:closeTopUI()
@@ -118,8 +127,9 @@ function API.has_popup()
 end
 
 ---获取界面控制器（BasePanel 实例）
----@param name string 界面名
----@return BasePanel|nil
+---@generic T: string
+---@param name `T` 界面名
+---@return T|nil
 function API.get_ctrl(name)
     return share.uiMgr:getUICtrl(name)
 end
@@ -204,7 +214,7 @@ end
 ---@param key string 锁定标识
 ---@return boolean
 function API.is_locked(key)
-    return share.uiMgr:islock(key)
+    return share.uiMgr:isLock(key)
 end
 
 return API

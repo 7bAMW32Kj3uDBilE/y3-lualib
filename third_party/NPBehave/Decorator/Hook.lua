@@ -1,5 +1,5 @@
 ---@class NPBehave.Decorator.Hook : NPBehave.Decorator.Decorator
----@overload fun(onStart: fun(), decoratee: NPBehave.Node): self
+---@overload fun(onStart: fun(), decoratee: NPBehave.Node): NPBehave.Decorator.Hook
 local Hook = Class(NPBehave.ClassName.Hook)
 local superName = NPBehave.ClassName.Decorator
 

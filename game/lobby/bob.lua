@@ -1,4 +1,4 @@
-﻿local work = require 'y3.game.lobby.service.client'
+local work = require 'y3.game.lobby.service.client'
 
 ---@diagnostic disable-next-line: deprecated
 local local_player = y3.player.get_local()

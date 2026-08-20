@@ -80,7 +80,7 @@ end
 ---当前协程等待多个异步函数执行完毕
 ---@async
 ---@param callbacks async fun()[]
----@return [boolean, ...][]
+---@return [boolean, any][]
 function API.waitAll(callbacks)
     local cur = coroutine.running()
     local cos = {}

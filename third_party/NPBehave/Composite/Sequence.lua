@@ -4,9 +4,9 @@ local superName = NPBehave.ClassName.Composite
 
 ---@class NPBehave.Composite.Sequence: NPBehave.Composite.Composite
 ---@field package __super NPBehave.Composite.Composite
----@overload fun(...: NPBehave.Node): self
+---@overload fun(...: NPBehave.Node): NPBehave.Composite.Sequence
 local Sequence = Class(NPBehave.ClassName.Sequence, superName, function(self, super, ...)
-    super("Sequence", ...)
+    super('Sequence', ...)
 end)
 
 
@@ -84,6 +84,12 @@ end
 ---@override
 ---@return string
 function Sequence:__tostring()
-    ---@diagnostic disable-next-line: invisible
-    return Sequence.__super:__tostring() .. "[" .. self._currentIndex .. "]"
+    local str = ''
+    if self.Name then
+        str = str .. self.Name
+    end
+    if self.Label then
+        str = str .. '{' .. self.Label .. '}'
+    end
+    return str .. ' : ' .. self._currentIndex
 end

@@ -4,9 +4,9 @@ local superName = NPBehave.ClassName.Composite
 
 ---@class NPBehave.Composite.Selector: NPBehave.Composite.Composite
 ---@field package __super NPBehave.Composite.Composite
----@overload fun(...: NPBehave.Node): self
+---@overload fun(...: NPBehave.Node): NPBehave.Composite.Selector
 local Selector = Class(NPBehave.ClassName.Selector, superName, function(self, super, ...)
-    super("Selector", ...)
+    super('Selector', ...)
 end)
 
 function Selector:__init(children)
@@ -83,6 +83,12 @@ end
 ---@override
 ---@return string
 function Selector:__tostring()
-    ---@diagnostic disable-next-line: invisible
-    return Selector.__super:__tostring() .. "[" .. self._currentIndex .. "]"
+    local str = ''
+    if self.Name then
+        str = str .. self.Name
+    end
+    if self.Label then
+        str = str .. '{' .. self.Label .. '}'
+    end
+    return str .. ' : ' .. self._currentIndex
 end

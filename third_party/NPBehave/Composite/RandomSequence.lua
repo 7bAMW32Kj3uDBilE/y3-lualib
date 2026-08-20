@@ -2,7 +2,7 @@ local superName = NPBehave.ClassName.Composite
 
 ---@class NPBehave.Composite.RandomSequence: NPBehave.Composite.Composite
 ---@field package __super NPBehave.Composite.Composite
----@overload fun(...: NPBehave.Node): self
+---@overload fun(...: NPBehave.Node): NPBehave.Composite.RandomSequence
 local RandomSequence = Class(NPBehave.ClassName.RandomSequence, superName, function (self, super, ...)
     super("Random Sequence", ...)
 end)

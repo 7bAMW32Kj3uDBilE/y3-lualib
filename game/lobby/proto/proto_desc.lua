@@ -1,4 +1,4 @@
-﻿local proto_desc = {
+local proto_desc = {
   ["args"] = {
     ["protocol.Team_UpdatePlayerInfo_args"] = {
       ["service_uuid"] = 1127534713319988089,

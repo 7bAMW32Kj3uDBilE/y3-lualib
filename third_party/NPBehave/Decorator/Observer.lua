@@ -1,5 +1,5 @@
 ---@class NPBehave.Decorator.Observer : NPBehave.Decorator.Decorator
----@overload fun(onStart: fun(), onStop: fun(result: boolean), decoratee: NPBehave.Node): self
+---@overload fun(onStart: fun(), onStop: fun(result: boolean), decoratee: NPBehave.Node): NPBehave.Decorator.Observer
 local Observer = Class(NPBehave.ClassName.Observer)
 local superName = NPBehave.ClassName.Decorator
 

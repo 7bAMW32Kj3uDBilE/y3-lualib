@@ -1,12 +1,12 @@
 ---@class NPBehave.Decorator.TimeMax : NPBehave.Decorator.Decorator
----@overload fun(limit: number, randomVariation: number, waitForChildButFailOnLimitReached: boolean, decoratee: NPBehave.Node): self
+---@overload fun(limit: number, randomVariation: number, waitForChildButFailOnLimitReached: boolean, decoratee: NPBehave.Node): NPBehave.Decorator.TimeMax
 local TimeMax = Class(NPBehave.ClassName.TimeMax)
 local superName = NPBehave.ClassName.Decorator
 
 ---@class NPBehave.Decorator.TimeMax: NPBehave.Decorator.Decorator
 Extends(NPBehave.ClassName.TimeMax, superName, function(self, super, ...)
     local limit, randomVariation, waitForChildButFailOnLimitReached, decoratee = ...
-    super("TimeMax", decoratee)
+    super('TimeMax', decoratee)
 end)
 
 ---@param limit number 限制
@@ -19,7 +19,7 @@ function TimeMax:__init(limit, randomVariation, waitForChildButFailOnLimitReache
     self._randomVariation = randomVariation or limit * 0.05
     self._waitForChildButFailOnLimitReached = waitForChildButFailOnLimitReached
     self._isLimitReached = false
-    assert(limit > 0, "limit 必须大于 0")
+    assert(limit > 0, 'limit 必须大于 0')
     return self
 end
 

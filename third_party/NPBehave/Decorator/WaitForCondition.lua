@@ -1,14 +1,14 @@
 local assert = assert
 ---@class NPBehave.Decorator.WaitForCondition : NPBehave.Decorator.Decorator
----@overload fun(condition: fun():boolean, checkInterval: number, randomVariance: number, decoratee: NPBehave.Node): self
+---@overload fun(condition: fun():boolean, checkInterval: number, randomVariance: number, decoratee: NPBehave.Node): NPBehave.Decorator.WaitForCondition
 local WaitForCondition = Class(NPBehave.ClassName.WaitForCondition)
 local superName = NPBehave.ClassName.Decorator
 
 ---@class NPBehave.Decorator.WaitForCondition: NPBehave.Decorator.Decorator
 Extends(NPBehave.ClassName.WaitForCondition, superName, function(self, super, ...)
     local condition, checkInterval, randomVariance, decoratee = ...
-    super("WaitForCondition", decoratee)
 
+    super('WaitForCondition', decoratee)
 end)
 
 ---@param condition fun():boolean
@@ -20,7 +20,7 @@ function WaitForCondition:__init(condition, checkInterval, randomVariance, decor
     self._condition = condition
     self._checkInterval = checkInterval or 0.0
     self._checkVariance = randomVariance or 0.0
-    self.Label = "" .. (checkInterval - randomVariance) .. "..." .. (checkInterval + randomVariance) .. "s"
+    self.Label = '' .. (checkInterval - randomVariance) .. '...' .. (checkInterval + randomVariance) .. 's'
     return self
 end
 

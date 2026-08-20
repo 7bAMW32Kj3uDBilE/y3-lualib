@@ -90,7 +90,7 @@ local function startWorker(dispose)
                 broadcast_with_log(id, bin)
                 goto continue
             elseif #bin > M.syncLimit then
-                log.error('sync.lua', '同步数据过大，id: {%s}, 长度: {%s}' % { id, #bin })
+                log.error('sync.lua', ('同步数据过大，id: %s, 长度: %s'):format(id, #bin))
             else
                 local index = M.syncPartsLocalCount + 1
                 M.syncPartsLocalCount = index

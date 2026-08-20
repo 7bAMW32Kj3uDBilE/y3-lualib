@@ -1,11 +1,11 @@
 ---@class NPBehave.Task.WaitUntilStopped
----@overload fun(successWhenStopped?: boolean): self
-local WaitUntilStopped = Class("NPBehave.Task.WaitUntilStopped")
+---@overload fun(successWhenStopped?: boolean): NPBehave.Task.WaitUntilStopped
+local WaitUntilStopped = Class('NPBehave.Task.WaitUntilStopped')
 
-local superName = "NPBehave.Task.Task"
+local superName = 'NPBehave.Task.Task'
 ---@class NPBehave.Task.WaitUntilStopped: NPBehave.Task.Task
 Extends('NPBehave.Task.WaitUntilStopped', superName, function(self, super, ...)
-    super("WaitUntilStopped")
+    super('WaitUntilStopped')
 end)
 
 ---@param successWhenStopped? boolean

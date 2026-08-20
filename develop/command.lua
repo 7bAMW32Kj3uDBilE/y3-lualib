@@ -7,7 +7,7 @@ local M = Class 'Develop.Command'
 ---@class Develop.Command.ExecuteParam
 ---@field command string # 输入的命令（和输入一致，不保证大小写状态）
 ---@field args string[] # 命令参数
----@field player? Player # 调用命令的玩家
+---@field player Player # 调用命令的玩家
 
 ---@class Develop.Command.InfoParam
 ---@field onCommand? fun(...)

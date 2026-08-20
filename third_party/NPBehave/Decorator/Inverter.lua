@@ -1,5 +1,5 @@
 ---@class NPBehave.Decorator.Inverter : NPBehave.Decorator.Decorator
----@overload fun(decoratee: NPBehave.Node): self
+---@overload fun(decoratee: NPBehave.Node): NPBehave.Decorator.Inverter
 local Inverter = Class(NPBehave.ClassName.Inverter)
 local superName = NPBehave.ClassName.Decorator
 

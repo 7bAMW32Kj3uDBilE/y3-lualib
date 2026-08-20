@@ -1,4 +1,4 @@
-﻿--玩家状态
+--玩家状态
 PlayerState = {
     Normal = 1,     --空闲
     Matching = 2,   --匹配

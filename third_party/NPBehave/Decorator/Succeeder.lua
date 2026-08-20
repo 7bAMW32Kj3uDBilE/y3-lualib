@@ -1,5 +1,5 @@
 ---@class NPBehave.Decorator.Succeeder : NPBehave.Decorator.Decorator
----@overload fun(decoratee: NPBehave.Node): self
+---@overload fun(decoratee: NPBehave.Node): NPBehave.Decorator.Succeeder
 local Succeeder = Class(NPBehave.ClassName.Succeeder)
 local superName = NPBehave.ClassName.Decorator
 

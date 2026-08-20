@@ -1,11 +1,11 @@
 ---@class NPBehave.Task.Wait : NPBehave.Task.Task
----@overload fun(name: string): self
+---@overload fun(data: NPBehave.Task.Wait.Data): NPBehave.Task.Wait
 local Wait = Class(NPBehave.ClassName.Wait)
 local superName = NPBehave.ClassName.Task
 
 ---@class NPBehave.Task.Wait: NPBehave.Task.Task
 Extends(NPBehave.ClassName.Wait, superName, function(self, super, ...)
-    super("Wait")
+    super('Wait')
 end)
 
 
@@ -41,7 +41,7 @@ function Wait:DoStart()
     if seconds < 0 then
         seconds = 0
     end
-    if self._randomVariance >= 0 then
+    if self._randomVariance and self._randomVariance >= 0 then
         self.Clock:AddTimer(seconds, 0, self:bind(self.OnTimer), self._randomVariance)
     else
         self.Clock:AddTimer(seconds, 0, self:bind(self.OnTimer))

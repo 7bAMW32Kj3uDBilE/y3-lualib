@@ -46,6 +46,7 @@ M._errorHandler = error
 ---@field package __name string
 ---@field public  __getter table
 ---@field public  __setter table
+---@field public __inited__ boolean
 ---@field public  __super  Class.Base
 ---@field package __config Class.Config
 
@@ -103,7 +104,7 @@ function M.declare(name, super, superInit)
     local getter = {}
     local setter = {}
     local keyMap
-    local keyMapRev -- integer slot -> 原始 key，仅用于 __pairs
+    local keyMapRev         -- integer slot -> 原始 key，仅用于 __pairs -- integer slot -> 原始 key，仅用于 __pairs
     class.__name   = name
     class.__getter = getter
     class.__setter = setter
@@ -306,6 +307,7 @@ function M.declare(name, super, superInit)
 
     function class:__call(...)
         config:runInit(self, ...)
+        rawset(self, '__inited__', true)
         return self
     end
 
@@ -347,7 +349,7 @@ end
 ---@generic T: string
 ---@param name `T`
 ---@param tbl? table
----@return T | fun(...):T
+---@return T
 function M.new(name, tbl)
     local class = M._classes[name]
     if not class then

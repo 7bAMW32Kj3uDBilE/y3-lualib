@@ -4,10 +4,12 @@
 ---@field _localPlayerId integer 本地玩家ID
 ---@field _pos integer[]|nil 固定位置（nil则跟随鼠标）
 ---@field _isAttached boolean 是否已完成 attach
+---@field _mask          UI.MaskInstance 全屏遮罩实例（点击空白关闭）
+---@field mask           UI              遮罩挂载节点（非nil则启用）
 local M = Class 'BaseTips'
 
 -- 继承 GCHost，与 BasePanel / LocalUILogic 保持一致
-Extends("BaseTips", "GCHost")
+Extends('BaseTips', 'GCHost')
 
 ---初始化Tips（由外部调用一次）
 ---@param uiNode? string UUID或路径
@@ -44,15 +46,30 @@ end
 ---显示Tips
 ---@param data? table 传递给 on_refresh 的数据
 function M:show(data)
+    if self:isOpen() then
+        self:hide()
+    end
     if self._root then
         self._root:set_visible(true)
     end
     self:on_refresh(data)
+    -- 设置了挂载节点 self.mask 的Tips，创建全屏遮罩
+    -- 点击空白处自动关闭，同时拦截鼠标穿透到底层界面
+    if self.mask then
+        self._mask = y3.ui.create_mask(self._localPlayer, self.mask, function()
+            self:hide()
+        end)
+    end
 end
 
 ---隐藏Tips
 ---@param data? table 传递给 on_hide 的数据
 function M:hide(data)
+    -- 已启用遮罩则先移除，再隐藏根节点，最后执行子类 on_hide
+    if self.mask then
+        y3.ui.remove_mask(self)
+    end
+    self:_hideRoot()
     self:on_hide(data)
 end
 
@@ -91,8 +108,9 @@ function M:setPoint(pos)
         self._root:set_anchor(x, y)
         self._root:set_follow_mouse(true, 5, 5)
     else
-        self._root:set_anchor(0.5, 1)
-        self._root:set_pos(self._pos[1], self._pos[2])
+        self._root:set_anchor(x, y)
+        self._root:set_follow_mouse(false)
+        self._root:set_absolute_pos(self._pos[1], self._pos[2])
     end
 end
 
@@ -120,13 +138,13 @@ function M:setPointByUI(ui, offset)
     local isTop = mouseYPercent < 0.5
 
     if isLeft and isTop then
-        direction = "right_down" -- 左上 > 右下
+        direction = 'right_down' -- 左上 > 右下
     elseif not isLeft and isTop then
-        direction = "left_down"  -- 右上 > 左下
+        direction = 'left_down' -- 右上 > 左下
     elseif isLeft and not isTop then
-        direction = "right_up"   -- 左下 > 右上
+        direction = 'right_up' -- 左下 > 右上
     else
-        direction = "left_up"    -- 右下 > 左上
+        direction = 'left_up' -- 右下 > 左上
     end
 
     -- 四个方向的参数配置

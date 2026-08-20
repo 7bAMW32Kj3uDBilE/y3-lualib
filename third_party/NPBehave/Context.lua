@@ -1,12 +1,12 @@
 ---abstract<br>
 ---@class NPBehave.Platform
 ---@field GenerateRandom fun(): number abstract<br>
-local Platform = Class("NPBehave.Platform")
+local Platform = Class('NPBehave.Platform')
 
 ---abstract<br>
 ---@class NPBehave.Context
 ---@field Blackboards table<string, NPBehave.Blackboard>
-local Context = Class("NPBehave.Context")
+local Context = Class('NPBehave.Context')
 NPBehave.Context = NPBehave.Context or Context;
 ---@type NPBehave.Context
 Context.Instance = nil;
@@ -20,7 +20,7 @@ end
 ---@type NPBehave.GamePlatform
 Context.Platform = nil;
 ---@type NPBehave.Clock
-Context.Clock = New("NPBehave.Clock")();
+Context.Clock = New('NPBehave.Clock')();
 
 
 function Context:__init()
@@ -34,7 +34,7 @@ end
 function Context.GetSharedBlackboard(key)
     local context = Context.GetInstance();
     if not context.Blackboards[key] then
-        context.Blackboards[key] = New("NPBehave.Blackboard")(Context.Clock);
+        context.Blackboards[key] = New('NPBehave.Blackboard')(Context.Clock);
     end
     return context.Blackboards[key];
 end

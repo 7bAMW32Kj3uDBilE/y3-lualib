@@ -7,12 +7,13 @@ local superName = NPBehave.ClassName.Decorator
 ---@field private _clock NPBehave.Clock
 ---@field Clock NPBehave.Clock `__getter`
 ---@field package __super NPBehave.Decorator.Decorator
----@overload fun(mainNode: NPBehave.Node, blackboard: NPBehave.Blackboard, clock: NPBehave.Clock): self
-local Root = Class("NPBehave.Root", superName, function(self, super, ...)
+---@overload fun(mainNode: NPBehave.Node, blackboard: NPBehave.Blackboard, clock?: NPBehave.Clock): NPBehave.Root
+local Root = Class('NPBehave.Root', superName, function(self, super, ...)
     local mainNode = ...
-    super("Root", mainNode)
+    super('Root', mainNode)
 end)
 
+local is_debug = y3.game.is_debug_mode()
 
 ---@diagnostic disable-next-line: undefined-field
 Root.__getter.Blackboard = function(self)
@@ -35,16 +36,21 @@ end
 ---@return self
 function Root:__init(mainNode, blackboard, clock)
     clock = clock or NPBehave.Context.Clock;
-    blackboard = blackboard or New("NPBehave.Blackboard")(clock);
+    blackboard = blackboard or New('NPBehave.Blackboard')(clock);
     self._blackboard = blackboard;
     self._clock = clock;
     self:SetRoot(self);
+    if is_debug then
+        self.TotalNumStartCalls   = 0
+        self.TotalNumStopCalls    = 0
+        self.TotalNumStoppedCalls = 0
+    end
     return self
 end
 
 ---@param rootNode NPBehave.Root
 function Root:SetRoot(rootNode)
-    assert(self == rootNode, "Root节点只能设置为自己的根节点")
+    assert(self == rootNode, 'Root节点只能设置为自己的根节点')
     Root.__super.SetRoot(self, rootNode)
 end
 

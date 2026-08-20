@@ -1,5 +1,5 @@
 ---@class NPBehave.Composite.Parallel
----@overload fun(successPolicy: NPBehave.Enum.ParallelPolicy, failurePolicy: NPBehave.Enum.ParallelPolicy, ...: NPBehave.Node): self
+---@overload fun(successPolicy: NPBehave.Enum.ParallelPolicy, failurePolicy: NPBehave.Enum.ParallelPolicy, ...: NPBehave.Node): NPBehave.Composite.Parallel
 local Parallel = Class(NPBehave.ClassName.Parallel)
 local superName = NPBehave.ClassName.Composite
 

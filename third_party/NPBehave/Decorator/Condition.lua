@@ -1,12 +1,12 @@
 ---@class NPBehave.Decorator.Condition : NPBehave.Decorator.ObservingDecorator
----@overload fun(condition: fun():boolean, stopsOnChange: NPBehave.Enum.Stops, decoratee: NPBehave.Node, checkInterval: number, randomVariance: number): self
+---@overload fun(condition: fun():boolean, stopsOnChange: NPBehave.Enum.Stops, decoratee: NPBehave.Node, checkInterval: number, randomVariance: number): NPBehave.Decorator.Condition
 local Condition = Class(NPBehave.ClassName.Condition)
 local superName = NPBehave.ClassName.ObservingDecorator
 
 ---@class NPBehave.Decorator.Condition: NPBehave.Decorator.ObservingDecorator
 Extends(NPBehave.ClassName.Condition, superName, function(self, super, ...)
     local condition, stopsOnChange, decoratee, checkInterval, randomVariance = ...
-    super("Condition", stopsOnChange, decoratee)
+    super('Condition', stopsOnChange, decoratee)
 end)
 
 

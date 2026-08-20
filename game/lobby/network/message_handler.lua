@@ -1,4 +1,4 @@
-﻿---@class message_handler
+---@class message_handler
 local message_handler = Class("LobbyMessageHandler")
 
 local const = require "y3.game.lobby.network.protocol"

@@ -2,9 +2,9 @@ local superName = NPBehave.ClassName.Composite
 
 ---@class NPBehave.Composite.RandomSelector: NPBehave.Composite.Composite
 ---@field package __super NPBehave.Composite.Composite
----@overload fun(...: NPBehave.Node): self
+---@overload fun(...: NPBehave.Node): NPBehave.Composite.RandomSelector
 local RandomSelector = Class(NPBehave.ClassName.RandomSelector, superName, function(self, super, ...)
-    super("Random Selector", ...)
+    super('Random Selector', ...)
 end)
 
 ---@param ... NPBehave.Node
@@ -96,5 +96,5 @@ end
 ---@return string
 function RandomSelector:__tostring()
     ---@diagnostic disable-next-line: invisible
-    return RandomSelector.__super:__tostring() .. "[" .. self._currentIndex .. "]"
+    return RandomSelector.__super:__tostring() .. '[' .. self._currentIndex .. ']'
 end

@@ -1,9 +1,10 @@
-local superName = "NPBehave.Container"
+local superName = 'NPBehave.Container'
 
 ---@class NPBehave.Decorator.Decorator: NPBehave.Container
+---@field Children NPBehave.Node[] `__getter`
 ---@field protected Decoratee NPBehave.Node
 ---@field package __super NPBehave.Container
----@overload fun(name: string, decoratee: NPBehave.Node): self
+---@overload fun(name: string, decoratee: NPBehave.Node): NPBehave.Decorator.Decorator
 local Decorator = Class(NPBehave.ClassName.Decorator, superName, function(self, super, ...)
     local name = ...
     super(name)
@@ -19,6 +20,9 @@ function Decorator:__init(name, decoratee)
     return self
 end
 
+Decorator.__getter.Children = function(self)
+    return self.Decoratee.Children
+end
 ---override<br>
 ---@param rootNode NPBehave.Root
 function Decorator:SetRoot(rootNode)

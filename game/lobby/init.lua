@@ -1,4 +1,4 @@
-﻿local client_api = require 'y3.game.lobby.client'
+local client_api = require 'y3.game.lobby.client'
 local state = require 'y3.game.lobby.state'
 local result = require 'y3.game.lobby.result'
 

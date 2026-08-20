@@ -1,13 +1,13 @@
 local stringFormat = string.format
 ---@class NPBehave.Decorator.Service
----@overload fun(interval: number, service: fun(), decoratee: NPBehave.Node, randomVariation: number): self
-local Service = Class("NPBehave.Decorator.Service")
-local superName = "NPBehave.Decorator.Decorator"
+---@overload fun(interval: number, service: fun(), decoratee: NPBehave.Node, randomVariation?: number): NPBehave.Decorator.Service
+local Service = Class('NPBehave.Decorator.Service')
+local superName = 'NPBehave.Decorator.Decorator'
 
 ---@class NPBehave.Decorator.Service: NPBehave.Decorator.Decorator
 Extends('NPBehave.Decorator.Service', superName, function(self, super, ...)
     local interval, service, decoratee, randomVariation = ...
-    super("Service", decoratee)
+    super('Service', decoratee)
 end)
 
 ---@param interval? number 间隔时间, 默认为 `-1.0` (每帧都执行)
@@ -21,10 +21,10 @@ function Service:__init(interval, service, decoratee, randomVariation)
     self._randomVariation = randomVariation or interval * 0.05;
 
     if self._interval > 0.0 then
-        self.Label = stringFormat("%s...%s", self._interval - self._randomVariation,
+        self.Label = stringFormat('%s~%s', self._interval - self._randomVariation,
             self._interval + self._randomVariation)
     else
-        self.Label = "every tick"
+        self.Label = 'every tick'
     end
     return self
 end

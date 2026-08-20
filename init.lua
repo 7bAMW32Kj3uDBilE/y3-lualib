@@ -31,7 +31,6 @@ Type    = y3.class.type
 Alias   = y3.class.alias
 IsInstanceOf = y3.class.isInstanceOf
 
----@diagnostic disable-next-line: undefined-field
 if not GameAPI.api_is_client or GameAPI.api_is_client() then
     require 'y3.util.log'
 end
@@ -110,6 +109,18 @@ y3.ui           = require 'y3.object.scene_object.ui'
 y3.ui_prefab    = require 'y3.object.scene_object.ui_prefab'
 y3.shape        = require 'y3.object.scene_object.shape'
 
+y3.object    = require 'y3.util.object'
+y3.save_data = require 'y3.util.save_data'
+y3.dump      = require 'y3.util.dump'
+y3.sync      = require 'y3.util.sync'
+y3.network   = require 'y3.util.network'
+y3.eca       = require 'y3.util.eca_helper'
+y3.base64    = require 'y3.util.base64'
+y3.aes       = require 'y3.util.aes'
+y3.local_ui  = require 'y3.util.local_ui'
+y3.fs        = require 'y3.util.fs'
+y3.rt        = require 'y3.util.eca_runtime'
+y3.rsa       = require 'y3.util.rsa'
 y3.object       = require 'y3.util.object'
 y3.save_data    = require 'y3.util.save_data'
 y3.dump         = require 'y3.util.dump'

@@ -4,7 +4,7 @@ local IsInstanceOf = IsInstanceOf
 ---@field StartObserving fun() abstract
 ---@field StopObserving fun() abstract
 ---@field IsConditionMet fun() abstract
----@overload fun(name: string, stopsOnChange: NPBehave.Enum.Stops, decoratee: NPBehave.Node): self
+---@overload fun(name: string, stopsOnChange: NPBehave.Enum.Stops, decoratee: NPBehave.Node): NPBehave.Decorator.ObservingDecorator
 local ObservingDecorator = Class(NPBehave.ClassName.ObservingDecorator)
 local superName = NPBehave.ClassName.Decorator
 

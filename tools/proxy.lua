@@ -162,11 +162,16 @@ function M.rawRecusive(proxyObj)
 end
 
 ---@param proxyObj table
----@return table
+---@return Proxy.Config
 function M.config(proxyObj)
     return proxyObj[CONFIG]
 end
 
+---@param proxyObj table
+---@return Proxy.Config
+function M.custom(proxyObj)
+    return proxyObj[CUSTOM]
+end
 -- 把数组中的元素顺序*原地*反转
 ---@param arr any[]
 ---@return any[]

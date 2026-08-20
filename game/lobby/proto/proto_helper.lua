@@ -1,4 +1,4 @@
-﻿local pb = require("pb")
+local pb = require("pb")
 
 local service_protocol = require 'y3.game.lobby.proto.service_pb'
 

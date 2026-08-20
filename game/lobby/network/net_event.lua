@@ -1,4 +1,4 @@
-﻿---@class net_event # net_event object
+---@class net_event # net_event object
 ---@field protocol_type number # protocol type
 ---@field proto_data string|nil # protobuff data
 ---@field message_id? integer # service uuid

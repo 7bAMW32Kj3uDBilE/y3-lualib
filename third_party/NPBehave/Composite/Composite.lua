@@ -1,12 +1,12 @@
 local ipairs = ipairs
-local superName = "NPBehave.Container"
+local superName = 'NPBehave.Container'
 
 ---@class NPBehave.Composite.Composite: NPBehave.Container
 ---@field protected Children? NPBehave.Node[]
 ---@field StopLowerPriorityChildrenForChild fun(self: self, child: NPBehave.Node, immediateRestart: boolean) abstract<br>
 ---@field package __super NPBehave.Container
----@overload fun(name: string, children: NPBehave.Node[]): self
-local Composite = Class("NPBehave.Composite.Composite", superName, function (self, super, ...)
+---@overload fun(name: string, children: NPBehave.Node[]): NPBehave.Composite.Composite
+local Composite = Class('NPBehave.Composite.Composite', superName, function(self, super, ...)
     local name = ...
     super(name)
 end)

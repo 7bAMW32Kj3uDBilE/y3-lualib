@@ -148,7 +148,7 @@ function M.get_point_offset_vector(point, direction, offset)
 end
 
 ---路径中的点
----@param path table 目标路径
+---@param path Road 目标路径
 ---@param index integer 索引
 ---@return Point
 function M.get_point_in_path(path,index)

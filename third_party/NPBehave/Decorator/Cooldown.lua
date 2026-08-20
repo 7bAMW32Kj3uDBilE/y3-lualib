@@ -1,12 +1,12 @@
 ---@class NPBehave.Decorator.Cooldown : NPBehave.Decorator.Decorator
----@overload fun(cooldownTime: number, randomVariation: number, startAfterDecoratee: boolean, resetOnFailure: boolean, failOnCooldown: boolean, decoratee: NPBehave.Node): self
+---@overload fun(cooldownTime: number, randomVariation: number, startAfterDecoratee: boolean, resetOnFailure: boolean, failOnCooldown: boolean, decoratee: NPBehave.Node): NPBehave.Decorator.Cooldown
 local Cooldown = Class(NPBehave.ClassName.Cooldown)
 local superName = NPBehave.ClassName.Decorator
 
 ---@class NPBehave.Decorator.Cooldown: NPBehave.Decorator.Decorator
 Extends(NPBehave.ClassName.Cooldown, superName, function(self, super, ...)
     local cooldownTime, randomVariation, startAfterDecoratee, resetOnFailure, failOnCooldown, decoratee = ...
-    super("TimeCooldown", decoratee)
+    super('TimeCooldown', decoratee)
 end)
 
 ---@param cooldownTime number
@@ -17,7 +17,7 @@ end)
 ---@param decoratee NPBehave.Node
 ---@return self
 function Cooldown:__init(cooldownTime, randomVariation, startAfterDecoratee, resetOnFailure, failOnCooldown, decoratee)
-    assert(cooldownTime > 0, "必须设置冷却时间")
+    assert(cooldownTime > 0, '必须设置冷却时间')
     self._startAfterDecoratee = startAfterDecoratee
     self._cooldownTime = cooldownTime
     self._resetOnFailure = resetOnFailure

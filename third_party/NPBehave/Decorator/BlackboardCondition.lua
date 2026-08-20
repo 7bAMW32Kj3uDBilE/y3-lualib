@@ -1,14 +1,14 @@
 local assert = assert
 local type = type
 ---@class NPBehave.Decorator.BlackboardCondition
----@overload fun(key: string, op: NPBehave.Enum.Operator, value: any, stopsOnChange: NPBehave.Enum.Stops, decoratee: NPBehave.Node): self
+---@overload fun(key: string, op: NPBehave.Enum.Operator, value: any, stopsOnChange: NPBehave.Enum.Stops, decoratee: NPBehave.Node): NPBehave.Decorator.BlackboardCondition
 local BlackboardCondition = Class(NPBehave.ClassName.BlackboardCondition)
 local superName = NPBehave.ClassName.ObservingDecorator
 
 ---@class NPBehave.Decorator.BlackboardCondition: NPBehave.Decorator.ObservingDecorator
 Extends(NPBehave.ClassName.BlackboardCondition, superName, function(self, super, ...)
     local key, op, value, stopsOnChange, decoratee = ...
-    super("BlackboardCondition", stopsOnChange, decoratee)
+    super('BlackboardCondition', stopsOnChange, decoratee)
 end)
 
 
@@ -47,63 +47,64 @@ function BlackboardCondition:OnValueChanged(type, newValue)
     self:Evaluate()
 end
 
+local switch = y3.util.switch()
+    :case('AlwaysTrue'):call(function(curr_val, cond_val)
+        return true
+    end)
+    :case('IsNotSet'):call(function(curr_val, cond_val)
+        return curr_val == nil
+    end)
+    :case('IsSet'):call(function(curr_val, cond_val)
+        return curr_val ~= nil
+    end)
+    :case('IsEqual'):call(function(curr_val, cond_val)
+        return curr_val == cond_val
+    end)
+    :case('IsNotEqual'):call(function(curr_val, cond_val)
+        return curr_val ~= cond_val
+    end)
+    :case('IsGreaterOrEqual'):call(function(curr_val, cond_val)
+        local o = curr_val
+        return type(o) == 'number' and o >= cond_val or false
+    end)
+    :case('IsGreater'):call(function(curr_val, cond_val)
+        local o = curr_val
+        return type(o) == 'number' and o > cond_val or false
+    end)
+    :case('IsSmallerOrEqual'):call(function(curr_val, cond_val)
+        local o = curr_val
+        return type(o) == 'number' and o <= cond_val or false
+    end)
+    :case('IsSmaller'):call(function(curr_val, cond_val)
+        local o = curr_val
+        return type(o) == 'number' and o < cond_val or false
+    end)
 ---override<br>
 ---@protected
 ---@return boolean
 function BlackboardCondition:IsConditionMet()
-    if self._op == NPBehave.Enum.Operator.AlwaysTrue then
-        return true
+
+    return switch(self._op, self.RootNode.Blackboard:Get(self._key), self._value)
     end
 
-    if not self.RootNode.Blackboard:IsSet(self._key) then
-        return self._op == NPBehave.Enum.Operator.IsNotSet
-    end
 
-    local o = self.RootNode.Blackboard:Get(self._key)
-
-    if self._op == NPBehave.Enum.Operator.IsSet then
-        return true
-    elseif self._op == NPBehave.Enum.Operator.IsEqual then
-        return o == self._value
-    elseif self._op == NPBehave.Enum.Operator.IsNotEqual then
-        return o ~= self._value
-    elseif self._op == NPBehave.Enum.Operator.IsGreaterOrEqual then
-        if type(o) == "number" then
-            return o >= self._value
-        else
-            assert(false, "Type not comparable: " .. type(o))
-            return false
-        end
-    elseif self._op == NPBehave.Enum.Operator.IsGreater then
-        if type(o) == "number" then
-            return o > self._value
-        else
-            assert(false, "Type not comparable: " .. type(o))
-            return false
-        end
-    elseif self._op == NPBehave.Enum.Operator.IsSmallerOrEqual then
-        if type(o) == "number" then
-            return o <= self._value
-        else
-            assert(false, "Type not comparable: " .. type(o))
-            return false
-        end
-    elseif self._op == NPBehave.Enum.Operator.IsSmaller then
-        if type(o) == "number" then
-            return o < self._value
-        else
-            assert(false, "Type not comparable: " .. type(o))
-            return false
-        end
-    else
-        return false
-    end
-end
+---@type table<NPBehave.Enum.Operator,string>
+local operatorToString = {
+    IsSet            = '*',
+    IsNotSet         = '?',
+    IsEqual          = '=',
+    IsNotEqual       = '≠',
+    IsGreaterOrEqual = '≥',
+    IsGreater        = '>',
+    IsSmallerOrEqual = '≤',
+    IsSmaller        = '<',
+    AlwaysTrue       = '✓'
+}
 
 ---override<br>
 ---@return string
 function BlackboardCondition:__tostring()
-    return "(" .. self._op .. ") " .. self._key .. " ? " .. tostring(self._value)
+    return self._key .. operatorToString[self._op] .. tostring(self._value)
 end
 
 return BlackboardCondition

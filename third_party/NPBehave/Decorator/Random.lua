@@ -1,5 +1,5 @@
 ---@class NPBehave.Decorator.Random : NPBehave.Decorator.Decorator
----@overload fun(probability: number, decoratee: NPBehave.Node): self
+---@overload fun(probability: number, decoratee: NPBehave.Node): NPBehave.Decorator.Random
 local Random = Class(NPBehave.ClassName.Random)
 local superName = NPBehave.ClassName.Decorator
 

@@ -3,7 +3,7 @@ local tableInsert = table.insert
 local tableSort = table.sort
 
 ---@class NPBehave.Tool.MethodDecorator
----@overload fun(): self
+---@overload fun(): NPBehave.Tool.MethodDecorator
 local MethodDecorator = Class 'NPBehave.Tool.MethodDecorator'
 
 ---@class NPBehave.Tool.BindCallback
@@ -25,7 +25,7 @@ end
 ---@class SortedDictionary -- 排序字典, 支持通过索引设置键值对, 但不支持通过索引获取键值对.
 ---@field dictionary table<any, any>
 ---@overload fun():SortedDictionary
-SortedDictionary = Class("SortedDictionary")
+SortedDictionary = Class('SortedDictionary')
 
 -- 构造函数
 function SortedDictionary:__init()
@@ -87,9 +87,9 @@ end
 
 function SortedDictionary:__newindex(key, value)
     --@ 将键值对存储到字典中
-    if rawget(self, "dictionary") then
+    if rawget(self, 'dictionary') then
         rawset(self.dictionary, key, value)
-    elseif key == "dictionary" then
+    elseif key == 'dictionary' then
         rawset(self, key, value)
     end
 end

@@ -1,4 +1,4 @@
-﻿local const = {}
+local const = {}
 
 local function protect(tbl)
     return setmetatable({}, {

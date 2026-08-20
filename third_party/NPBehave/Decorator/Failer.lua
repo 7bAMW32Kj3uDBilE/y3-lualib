@@ -1,12 +1,12 @@
 ---@class NPBehave.Decorator.Failer : NPBehave.Decorator.Decorator
----@overload fun(decoratee: NPBehave.Node): self
+---@overload fun(decoratee: NPBehave.Node): NPBehave.Decorator.Failer
 local Failer = Class(NPBehave.ClassName.Failer)
 local superName = NPBehave.ClassName.Decorator
 
 ---@class NPBehave.Decorator.Failer: NPBehave.Decorator.Decorator
 Extends(NPBehave.ClassName.Failer, superName, function(self, super, ...)
     local decoratee = ...
-    super("Failer", decoratee)
+    super('Failer', decoratee)
 end)
 
 ---@param decoratee NPBehave.Node

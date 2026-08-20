@@ -1,4 +1,4 @@
-﻿local protocol = require("y3.game.lobby.network.protocol")
+local protocol = require("y3.game.lobby.network.protocol")
 
 local coder = {}
 

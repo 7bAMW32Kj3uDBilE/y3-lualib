@@ -8,6 +8,7 @@ M.config = {}
 
 ---@class EventParam.ET_LOGIC_UNIT_DESTROY
 ---@alias EventParam.未知-ET_LOGIC_UNIT_DESTROY EventParam.ET_LOGIC_UNIT_DESTROY
+
 --LOGIC_UNIT_DESTROY
 M.config["未知-ET_LOGIC_UNIT_DESTROY"] = {
     _deprecated = true,
@@ -22,6 +23,7 @@ M.config["未知-ET_LOGIC_UNIT_DESTROY"] = {
 
 ---@class EventParam.ET_GAME_INIT
 ---@alias EventParam.游戏-初始化 EventParam.ET_GAME_INIT
+
 --游戏初始化
 M.config["游戏-初始化"] = {
     desc = "游戏初始化时触发。",
@@ -35,6 +37,7 @@ M.config["游戏-初始化"] = {
 
 ---@class EventParam.ET_RELAUNCH_FRAME_CATCHING_FINISHED
 ---@alias EventParam.游戏-追帧完成 EventParam.ET_RELAUNCH_FRAME_CATCHING_FINISHED
+
 --重启客户端追帧完成
 M.config["游戏-追帧完成"] = {
     desc = "",
@@ -49,6 +52,7 @@ M.config["游戏-追帧完成"] = {
 ---@class EventParam.ET_GAME_SNAPSHOT_MISMATCH
 ---@field int1 integer # 不同步帧号
 ---@alias EventParam.游戏-逻辑不同步 EventParam.ET_GAME_SNAPSHOT_MISMATCH
+
 --快照不同步
 M.config["游戏-逻辑不同步"] = {
     desc = "",
@@ -71,6 +75,7 @@ M.config["游戏-逻辑不同步"] = {
 ---@class EventParam.ET_SCENE_PRESET_LOADING_FINISH
 ---@field scene_preset py.ScenePreset # 场景预设hash
 ---@alias EventParam.游戏-地形预设加载完成 EventParam.ET_SCENE_PRESET_LOADING_FINISH
+
 --地形预设变更加载完成
 M.config["游戏-地形预设加载完成"] = {
     desc = "",
@@ -93,6 +98,7 @@ M.config["游戏-地形预设加载完成"] = {
 ---@class EventParam.ET_RECV_TRIGGER
 ---@field trigger_id py.TriggerID # 触发器id
 ---@alias EventParam.未知-ET_RECV_TRIGGER EventParam.ET_RECV_TRIGGER
+
 --接收触发事件
 M.config["未知-ET_RECV_TRIGGER"] = {
     _deprecated = true,
@@ -115,6 +121,7 @@ M.config["未知-ET_RECV_TRIGGER"] = {
 
 ---@class EventParam.ET_GAME_END
 ---@alias EventParam.游戏-结束 EventParam.ET_GAME_END
+
 --游戏结束
 M.config["游戏-结束"] = {
     desc = "游戏结束时触发",
@@ -128,6 +135,7 @@ M.config["游戏-结束"] = {
 
 ---@class EventParam.ET_GAME_PAUSE
 ---@alias EventParam.游戏-暂停 EventParam.ET_GAME_PAUSE
+
 --游戏暂停
 M.config["游戏-暂停"] = {
     desc = "游戏暂停时触发",
@@ -141,6 +149,7 @@ M.config["游戏-暂停"] = {
 
 ---@class EventParam.ET_GAME_RESUME
 ---@alias EventParam.游戏-恢复 EventParam.ET_GAME_RESUME
+
 --游戏恢复
 M.config["游戏-恢复"] = {
     desc = "游戏恢复时触发",
@@ -154,6 +163,7 @@ M.config["游戏-恢复"] = {
 
 ---@class EventParam.ET_EMPTY
 ---@alias EventParam.未知-ET_EMPTY EventParam.ET_EMPTY
+
 --空事件
 M.config["未知-ET_EMPTY"] = {
     _deprecated = true,
@@ -169,6 +179,7 @@ M.config["未知-ET_EMPTY"] = {
 ---@class EventParam.TIMER_TIMEOUT
 ---@field name string # 计时器名称
 ---@alias EventParam.未知-TIMER_TIMEOUT EventParam.TIMER_TIMEOUT
+
 --全局计时器超时
 M.config["未知-TIMER_TIMEOUT"] = {
     _deprecated = true,
@@ -192,6 +203,7 @@ M.config["未知-TIMER_TIMEOUT"] = {
 ---@class EventParam.ET_DAY_NIGHT_CHANGE
 ---@field is_day_to_night boolean # 是否是白天转到黑夜
 ---@alias EventParam.游戏-昼夜变化 EventParam.ET_DAY_NIGHT_CHANGE
+
 --昼夜发生变化
 M.config["游戏-昼夜变化"] = {
     desc = "通过参数判断进入白天还是进入夜晚",
@@ -215,6 +227,7 @@ M.config["游戏-昼夜变化"] = {
 ---@field name string # 容器名
 ---@field container py.ActorContainer # 容器
 ---@alias EventParam.未知-ET_CONTAINER_ADDED EventParam.ET_CONTAINER_ADDED
+
 --添加容器
 M.config["未知-ET_CONTAINER_ADDED"] = {
     _deprecated = true,
@@ -246,6 +259,7 @@ M.config["未知-ET_CONTAINER_ADDED"] = {
 ---@class EventParam.ET_CONTAINER_ACTOR_ADDED
 ---@field owner py.Actor # 容器从属actor
 ---@alias EventParam.未知-ET_CONTAINER_ACTOR_ADDED EventParam.ET_CONTAINER_ACTOR_ADDED
+
 --容器中添加actor
 M.config["未知-ET_CONTAINER_ACTOR_ADDED"] = {
     _deprecated = true,
@@ -269,6 +283,7 @@ M.config["未知-ET_CONTAINER_ACTOR_ADDED"] = {
 ---@class EventParam.ET_CONTAINER_ACTOR_REMOVED
 ---@field owner py.Actor # 原容器从属actor
 ---@alias EventParam.未知-ET_CONTAINER_ACTOR_REMOVED EventParam.ET_CONTAINER_ACTOR_REMOVED
+
 --容器中删除actor
 M.config["未知-ET_CONTAINER_ACTOR_REMOVED"] = {
     _deprecated = true,
@@ -292,6 +307,7 @@ M.config["未知-ET_CONTAINER_ACTOR_REMOVED"] = {
 ---@class EventParam.ET_ACTOR_ATTR_UPDATED
 ---@field name string # 属性名
 ---@alias EventParam.未知-ET_ACTOR_ATTR_UPDATED EventParam.ET_ACTOR_ATTR_UPDATED
+
 --actor属性更新
 M.config["未知-ET_ACTOR_ATTR_UPDATED"] = {
     _deprecated = true,
@@ -317,6 +333,7 @@ M.config["未知-ET_ACTOR_ATTR_UPDATED"] = {
 ---@field area Area # 区域
 ---@field trigger_id py.TriggerID # 触发器ID
 ---@alias EventParam.区域-进入 EventParam.ET_AREA_ENTER
+
 --单位进入区域
 M.config["区域-进入"] = {
     desc = "任意单位进入区域时触发",
@@ -364,6 +381,7 @@ M.config["区域-进入"] = {
 ---@field area Area # 区域
 ---@field trigger_id py.TriggerID # 触发器ID
 ---@alias EventParam.区域-离开 EventParam.ET_AREA_LEAVE
+
 --单位离开区域
 M.config["区域-离开"] = {
     desc = "任意单位离开区域时触发",
@@ -411,6 +429,7 @@ M.config["区域-离开"] = {
 ---@field http_resp_body string # 响应内容
 ---@field http_resp_status string # 响应状态
 ---@alias EventParam.游戏-http返回 EventParam.ET_HTTP_RESPONSE
+
 --http请求返回
 M.config["游戏-http返回"] = {
     desc = "",
@@ -451,6 +470,7 @@ M.config["游戏-http返回"] = {
 ---@field broadcast_lua_msg_content string # 消息内容
 ---@field player Player # 玩家
 ---@alias EventParam.游戏-接收广播信息 EventParam.ET_BROADCAST_LUA_MSG
+
 --广播自定义Lua消息
 M.config["游戏-接收广播信息"] = {
     desc = "",
@@ -490,6 +510,7 @@ M.config["游戏-接收广播信息"] = {
 ---@field player Player # 玩家
 ---@field is_middle_join boolean # 是否中途加入
 ---@alias EventParam.玩家-加入游戏 EventParam.ET_ROLE_JOIN_BATTLE
+
 --玩家加入战斗
 M.config["玩家-加入游戏"] = {
     desc = "玩家加入游戏时触发",
@@ -521,6 +542,7 @@ M.config["玩家-加入游戏"] = {
 ---@class EventParam.ET_ROLE_ACTIVE_EXIT_GAME_EVENT
 ---@field player Player # 玩家
 ---@alias EventParam.玩家-离开游戏 EventParam.ET_ROLE_ACTIVE_EXIT_GAME_EVENT
+
 --玩家主动退出游戏
 M.config["玩家-离开游戏"] = {
     desc = "玩家离开游戏时触发",
@@ -544,6 +566,7 @@ M.config["玩家-离开游戏"] = {
 ---@class EventParam.ET_ROLE_LOSE_CONNECT
 ---@field player Player # 玩家
 ---@alias EventParam.玩家-掉线 EventParam.ET_ROLE_LOSE_CONNECT
+
 --玩家断开服务器连接
 M.config["玩家-掉线"] = {
     desc = "玩家掉线时触发",
@@ -567,6 +590,7 @@ M.config["玩家-掉线"] = {
 ---@class EventParam.ET_AI_TAKE_CONTROL
 ---@field player Player # 玩家
 ---@alias EventParam.未知-ET_AI_TAKE_CONTROL EventParam.ET_AI_TAKE_CONTROL
+
 --AI接管玩家
 M.config["未知-ET_AI_TAKE_CONTROL"] = {
     _deprecated = true,
@@ -590,6 +614,7 @@ M.config["未知-ET_AI_TAKE_CONTROL"] = {
 ---@class EventParam.ET_DOWNLOAD_MAP_ARCHIVE_CALLBACK
 ---@field player Player # 玩家
 ---@alias EventParam.未知-ET_DOWNLOAD_MAP_ARCHIVE_CALLBACK EventParam.ET_DOWNLOAD_MAP_ARCHIVE_CALLBACK
+
 --下载档案数据回调
 M.config["未知-ET_DOWNLOAD_MAP_ARCHIVE_CALLBACK"] = {
     _deprecated = true,
@@ -615,6 +640,7 @@ M.config["未知-ET_DOWNLOAD_MAP_ARCHIVE_CALLBACK"] = {
 ---@field store_key py.StoreKey # 收费道具编号
 ---@field use_cnt integer # 使用次数
 ---@alias EventParam.玩家-使用平台道具 EventParam.ET_ROLE_USE_STORE_ITEM_END
+
 --玩家成功使用收费道具
 M.config["玩家-使用平台道具"] = {
     desc = "玩家使用平台道具时触发",
@@ -655,6 +681,7 @@ M.config["玩家-使用平台道具"] = {
 ---@field player Player # 玩家
 ---@field store_key py.StoreKey # 收费道具编号
 ---@alias EventParam.未知-ET_CONSUME_STORE_ITEM EventParam.ET_CONSUME_STORE_ITEM
+
 --玩家成功使用收费道具（触发器内）
 M.config["未知-ET_CONSUME_STORE_ITEM"] = {
     _deprecated = true,
@@ -687,6 +714,7 @@ M.config["未知-ET_CONSUME_STORE_ITEM"] = {
 ---@field player Player # 玩家
 ---@field store_key py.StoreKey # 收费道具编号
 ---@alias EventParam.玩家-持有平台道具 EventParam.ET_ROLE_HOLD_STORE_ITEM
+
 --玩家持有收费道具
 M.config["玩家-持有平台道具"] = {
     desc = "玩家进入游戏时如果持有指定平台道具会触发",
@@ -721,6 +749,7 @@ M.config["玩家-持有平台道具"] = {
 ---@field res_value integer # 玩家资源值
 ---@field res_value_delta number # 玩家资源变量值
 ---@alias EventParam.玩家-属性变化 EventParam.ET_ROLE_RESOURCE_CHANGED
+
 --玩家资源变化
 M.config["玩家-属性变化"] = {
     desc = "玩家属性变化时触发",
@@ -769,6 +798,7 @@ M.config["玩家-属性变化"] = {
 ---@field player Player # 玩家
 ---@field msg string # 字符串
 ---@alias EventParam.玩家-发送指定消息 EventParam.ET_ROLE_INPUT_MSG
+
 --玩家输入字符串
 M.config["玩家-发送指定消息"] = {
     desc = "玩家发送指定消息时触发",
@@ -807,6 +837,7 @@ M.config["玩家-发送指定消息"] = {
 ---@field player Player # 玩家
 ---@field activation_code_group string # 激活码组
 ---@alias EventParam.未知-ET_ROLE_INPUT_ACTIVATION_CODE EventParam.ET_ROLE_INPUT_ACTIVATION_CODE
+
 --玩家输入激活码
 M.config["未知-ET_ROLE_INPUT_ACTIVATION_CODE"] = {
     _deprecated = true,
@@ -840,6 +871,7 @@ M.config["未知-ET_ROLE_INPUT_ACTIVATION_CODE"] = {
 ---@field tech_no py.TechKey # 科技编号
 ---@field curr_lv integer # 当前科技等级
 ---@alias EventParam.玩家-科技提升 EventParam.ET_ROLE_TECH_UPGRADE
+
 --玩家科技升级
 M.config["玩家-科技提升"] = {
     desc = "玩家科技每提升一级都会触发一次",
@@ -881,6 +913,7 @@ M.config["玩家-科技提升"] = {
 ---@field tech_no py.TechKey # 科技编号
 ---@field curr_lv integer # 当前科技等级
 ---@alias EventParam.玩家-科技降低 EventParam.ET_ROLE_TECH_DOWNGRADE
+
 --玩家科技降级
 M.config["玩家-科技降低"] = {
     desc = "玩家科技每降低一级都会触发一次",
@@ -923,6 +956,7 @@ M.config["玩家-科技降低"] = {
 ---@field curr_lv integer # 当前科技等级
 ---@field delta_lv integer # 科技变化等级
 ---@alias EventParam.玩家-科技变化 EventParam.ET_ROLE_TECH_CHANGED
+
 --玩家科技变化
 M.config["玩家-科技变化"] = {
     desc = "玩家科技变化时触发，一次变化多个等级也只会触发一次",
@@ -972,6 +1006,7 @@ M.config["玩家-科技变化"] = {
 ---@field player Player # 单位所属玩家
 ---@field tech_no py.TechKey # 科技编号
 ---@alias EventParam.单位-研发科技 EventParam.ET_UNIT_UPGRADE_TECH
+
 --单位研发科技
 M.config["单位-研发科技"] = {
     desc = "单位研发科技时触发",
@@ -1013,6 +1048,7 @@ M.config["单位-研发科技"] = {
 ---@field player Player # 单位所属玩家
 ---@field tech_no py.TechKey # 科技编号
 ---@alias EventParam.单位-获得科技 EventParam.ET_UNIT_ADD_TECH
+
 --单位添加科技
 M.config["单位-获得科技"] = {
     desc = "单位获得科技时触发",
@@ -1054,6 +1090,7 @@ M.config["单位-获得科技"] = {
 ---@field player Player # 单位所属玩家
 ---@field tech_no py.TechKey # 科技编号
 ---@alias EventParam.单位-失去科技 EventParam.ET_UNIT_REMOVE_TECH
+
 --单位删除科技
 M.config["单位-失去科技"] = {
     desc = "单位失去科技时触发",
@@ -1095,6 +1132,7 @@ M.config["单位-失去科技"] = {
 ---@field dst_player Player # 目标玩家
 ---@field relation py.RoleRelation # 关系
 ---@alias EventParam.玩家-关系变化 EventParam.ET_ROLE_CHANGE_RELATION
+
 --玩家敌对关系变化
 M.config["玩家-关系变化"] = {
     desc = "玩家之间的关系改变时触发",
@@ -1134,6 +1172,7 @@ M.config["玩家-关系变化"] = {
 ---@class EventParam.ET_ROLE_RECONNECT
 ---@field player Player # 玩家
 ---@alias EventParam.玩家-重连 EventParam.ET_ROLE_RECONNECT
+
 --玩家断线重连
 M.config["玩家-重连"] = {
     desc = "玩家重连时触发",
@@ -1159,6 +1198,7 @@ M.config["玩家-重连"] = {
 ---@field old_unit_key py.UnitKey # 老的单位物编
 ---@field new_unit_key py.UnitKey # 新的单位物编
 ---@alias EventParam.单位-建筑升级开始 EventParam.ET_UNIT_BUILD_UPGRADE_START
+
 --建筑单位升级开始
 M.config["单位-建筑升级开始"] = {
     desc = "",
@@ -1200,6 +1240,7 @@ M.config["单位-建筑升级开始"] = {
 ---@field old_unit_key py.UnitKey # 老的单位物编
 ---@field new_unit_key py.UnitKey # 新的单位物编
 ---@alias EventParam.单位-建筑升级取消 EventParam.ET_UNIT_BUILD_UPGRADE_CANCEL
+
 --建筑单位升级取消
 M.config["单位-建筑升级取消"] = {
     desc = "",
@@ -1241,6 +1282,7 @@ M.config["单位-建筑升级取消"] = {
 ---@field old_unit_key py.UnitKey # 老的单位物编
 ---@field new_unit_key py.UnitKey # 新的单位物编
 ---@alias EventParam.单位-建筑升级完成 EventParam.ET_UNIT_BUILD_UPGRADE_FINISH
+
 --建筑单位升级成功
 M.config["单位-建筑升级完成"] = {
     desc = "",
@@ -1280,6 +1322,7 @@ M.config["单位-建筑升级完成"] = {
 ---@class EventParam.ET_UNIT_CONSTRUCT_START
 ---@field unit Unit # 开始建造的单位
 ---@alias EventParam.单位-建造开始 EventParam.ET_UNIT_CONSTRUCT_START
+
 --单位建造开始
 M.config["单位-建造开始"] = {
     desc = "",
@@ -1303,6 +1346,7 @@ M.config["单位-建造开始"] = {
 ---@class EventParam.ET_UNIT_CONSTRUCT_CANCEL
 ---@field unit Unit # 取消建造的单位
 ---@alias EventParam.单位-建造取消 EventParam.ET_UNIT_CONSTRUCT_CANCEL
+
 --单位建造取消
 M.config["单位-建造取消"] = {
     desc = "",
@@ -1326,6 +1370,7 @@ M.config["单位-建造取消"] = {
 ---@class EventParam.ET_UNIT_CONSTRUCT_FINISH
 ---@field unit Unit # 建造完成的单位
 ---@alias EventParam.单位-建造完成 EventParam.ET_UNIT_CONSTRUCT_FINISH
+
 --单位建造成功
 M.config["单位-建造完成"] = {
     desc = "",
@@ -1354,6 +1399,7 @@ M.config["单位-建造完成"] = {
 ---@field unit Unit # 主人
 ---@field build_unit Unit # 建造出来的单位
 ---@alias EventParam.技能-建造完成 EventParam.ET_ABILITY_BUILD_FINISH
+
 --建筑技能建造成功
 M.config["技能-建造完成"] = {
     desc = "通过建造类技能建造完成时触发，可以获取到被建造出来的单位",
@@ -1423,6 +1469,7 @@ M.config["技能-建造完成"] = {
 ---@class EventParam.ET_ACTIVE_ABILITY_CHANGED
 ---@field ability_index py.AbilityIndex # 技能坑位
 ---@alias EventParam.未知-ET_ACTIVE_ABILITY_CHANGED EventParam.ET_ACTIVE_ABILITY_CHANGED
+
 --单位获得新技能
 M.config["未知-ET_ACTIVE_ABILITY_CHANGED"] = {
     _deprecated = true,
@@ -1448,6 +1495,7 @@ M.config["未知-ET_ACTIVE_ABILITY_CHANGED"] = {
 ---@field ability Ability # 技能对象
 ---@field unit Unit # 单位
 ---@alias EventParam.技能-学习 EventParam.ET_ABILITY_PLUS_POINT
+
 --技能加点
 M.config["技能-学习"] = {
     desc = "学习技能后触发",
@@ -1494,6 +1542,7 @@ M.config["技能-学习"] = {
 ---@field ability_index py.AbilityIndex # 技能坑位
 ---@field is_forbidden boolean # 是否禁用
 ---@alias EventParam.技能-可用状态变化 EventParam.ET_ABILITY_FORBIDDEN_CHANGED
+
 --技能禁用状态发生变化
 M.config["技能-可用状态变化"] = {
     desc = "",
@@ -1531,6 +1580,7 @@ M.config["技能-可用状态变化"] = {
 ---@class EventParam.ET_ABILITY_SILENT_CHANGED
 ---@field is_silent boolean # 是否禁用
 ---@alias EventParam.技能-沉默状态变化 EventParam.ET_ABILITY_SILENT_CHANGED
+
 --技能的沉默状态发生变化
 M.config["技能-沉默状态变化"] = {
     desc = "",
@@ -1559,6 +1609,7 @@ M.config["技能-沉默状态变化"] = {
 
 ---@class EventParam.ET_ABILITY_ICON_CHANGED
 ---@alias EventParam.技能-图标变化 EventParam.ET_ABILITY_ICON_CHANGED
+
 --技能的图标发生变化
 M.config["技能-图标变化"] = {
     desc = "",
@@ -1572,6 +1623,7 @@ M.config["技能-图标变化"] = {
 
 ---@class EventParam.ET_UNIT_NAME_CHANGE
 ---@alias EventParam.单位-名称变化 EventParam.ET_UNIT_NAME_CHANGE
+
 --单位的名称发生变化
 M.config["单位-名称变化"] = {
     desc = "",
@@ -1586,6 +1638,7 @@ M.config["单位-名称变化"] = {
 
 ---@class EventParam.ET_UNIT_CHANGE_MINI_MAP_ICON
 ---@alias EventParam.单位-小地图图标变化 EventParam.ET_UNIT_CHANGE_MINI_MAP_ICON
+
 --单位的小地图图标发生变化
 M.config["单位-小地图图标变化"] = {
     desc = "",
@@ -1601,6 +1654,7 @@ M.config["单位-小地图图标变化"] = {
 ---@class EventParam.ET_UNIT_ICON_CHANGE
 ---@field unit Unit # 无描述
 ---@alias EventParam.单位-头像变化 EventParam.ET_UNIT_ICON_CHANGE
+
 --单位头像图标发生变化
 M.config["单位-头像变化"] = {
     desc = "",
@@ -1622,6 +1676,7 @@ M.config["单位-头像变化"] = {
 ---@class EventParam.ET_ROLE_UNIT_CHANGE
 ---@field unit Unit # 无描述
 ---@alias EventParam.未知-ET_ROLE_UNIT_CHANGE EventParam.ET_ROLE_UNIT_CHANGE
+
 --阵营内单位变化
 M.config["未知-ET_ROLE_UNIT_CHANGE"] = {
     _deprecated = true,
@@ -1643,6 +1698,7 @@ M.config["未知-ET_ROLE_UNIT_CHANGE"] = {
 ---@class EventParam.ET_ROLE_UNIT_TAG_CHANGE
 ---@field unit Unit # 无描述
 ---@alias EventParam.未知-ET_ROLE_UNIT_TAG_CHANGE EventParam.ET_ROLE_UNIT_TAG_CHANGE
+
 --阵营内单位标签变化
 M.config["未知-ET_ROLE_UNIT_TAG_CHANGE"] = {
     _deprecated = true,
@@ -1664,6 +1720,7 @@ M.config["未知-ET_ROLE_UNIT_TAG_CHANGE"] = {
 ---@class EventParam.ET_UNIT_ENTER_MOVER_STATE
 ---@field unit Unit # 无描述
 ---@alias EventParam.未知-ET_UNIT_ENTER_MOVER_STATE EventParam.ET_UNIT_ENTER_MOVER_STATE
+
 --单位进入运动器状态
 M.config["未知-ET_UNIT_ENTER_MOVER_STATE"] = {
     _deprecated = true,
@@ -1685,6 +1742,7 @@ M.config["未知-ET_UNIT_ENTER_MOVER_STATE"] = {
 ---@class EventParam.ET_UNIT_REMOVE
 ---@field unit Unit # 无描述
 ---@alias EventParam.单位-移除 EventParam.ET_UNIT_REMOVE
+
 --单位删除（ECA专用）
 M.config["单位-移除"] = {
     desc = "单位被移除后触发",
@@ -1706,6 +1764,7 @@ M.config["单位-移除"] = {
 ---@class EventParam.ET_UNIT_DELETE
 ---@field unit Unit # 无描述
 ---@alias EventParam.单位-移除后 EventParam.ET_UNIT_DELETE
+
 --单位删除（对象真正销毁）
 M.config["单位-移除后"] = {
     desc = "",
@@ -1727,6 +1786,7 @@ M.config["单位-移除后"] = {
 ---@class EventParam.ET_UNIT_END_TRANSLATE
 ---@field unit Unit # 无描述
 ---@alias EventParam.单位-传送结束 EventParam.ET_UNIT_END_TRANSLATE
+
 --单位传送结束
 M.config["单位-传送结束"] = {
     desc = "",
@@ -1750,6 +1810,7 @@ M.config["单位-传送结束"] = {
 ---@field attr string # 无描述
 ---@field old_float_attr_value number # 无描述
 ---@alias EventParam.单位-属性变化 EventParam.ET_UNIT_ATTR_CHANGE
+
 --单位属性变化
 M.config["单位-属性变化"] = {
     desc = "指定单位的指定属性变化后触发",
@@ -1799,6 +1860,7 @@ M.config["单位-属性变化"] = {
 ---@field damage_type integer # 伤害类型
 ---@field unit Unit # 无描述
 ---@alias EventParam.单位-即将死亡 EventParam.ET_BEFORE_UNIT_DIE
+
 --单位即将死亡
 M.config["单位-即将死亡"] = {
     desc = "单位死亡前触发",
@@ -1867,6 +1929,7 @@ M.config["单位-即将死亡"] = {
 ---@field damage_type integer # 伤害类型
 ---@field unit Unit # 无描述
 ---@alias EventParam.单位-死亡 EventParam.ET_UNIT_DIE
+
 --单位死亡
 M.config["单位-死亡"] = {
     desc = "单位死亡后触发",
@@ -1930,6 +1993,7 @@ M.config["单位-死亡"] = {
 ---@field unit Unit # 无描述
 ---@field player Player # 无描述
 ---@alias EventParam.未知-ET_UNIT_ON_UNBIND_ROLE EventParam.ET_UNIT_ON_UNBIND_ROLE
+
 --单位解绑玩家
 M.config["未知-ET_UNIT_ON_UNBIND_ROLE"] = {
     _deprecated = true,
@@ -1958,6 +2022,7 @@ M.config["未知-ET_UNIT_ON_UNBIND_ROLE"] = {
 ---@field unit Unit # 无描述
 ---@field player Player # 无描述
 ---@alias EventParam.未知-ET_UNIT_ON_BIND_ROLE EventParam.ET_UNIT_ON_BIND_ROLE
+
 --单位绑定玩家
 M.config["未知-ET_UNIT_ON_BIND_ROLE"] = {
     _deprecated = true,
@@ -1992,6 +2057,7 @@ M.config["未知-ET_UNIT_ON_BIND_ROLE"] = {
 ---@field unit Unit # 无描述
 ---@field damage_instance DamageInstance # 伤害实例
 ---@alias EventParam.单位-受到伤害前 EventParam.ET_UNIT_BE_HURT
+
 --单位即将受到攻击
 M.config["单位-受到伤害前"] = {
     desc = "在其他计算前触发，可以修改闪避",
@@ -2081,6 +2147,7 @@ M.config["单位-受到伤害前"] = {
 ---@field unit Unit # 无描述
 ---@field damage_instance DamageInstance # 伤害实例
 ---@alias EventParam.单位-造成伤害前 EventParam.ET_UNIT_HURT_OTHER
+
 --单位即将击中其他单位
 M.config["单位-造成伤害前"] = {
     desc = "在其他计算前触发，可以修改闪避",
@@ -2169,6 +2236,7 @@ M.config["单位-造成伤害前"] = {
 ---@field unit Unit # 无描述
 ---@field damage_instance DamageInstance # 伤害实例
 ---@alias EventParam.单位-受到伤害时 EventParam.ET_UNIT_BE_HURT_BEFORE_APPLY
+
 --单位即将受到攻击（计算加成后）
 M.config["单位-受到伤害时"] = {
     desc = "可以修改伤害值",
@@ -2258,6 +2326,7 @@ M.config["单位-受到伤害时"] = {
 ---@field unit Unit # 无描述
 ---@field damage_instance DamageInstance # 伤害实例
 ---@alias EventParam.单位-造成伤害时 EventParam.ET_UNIT_HURT_OTHER_BEFORE_APPLY
+
 --单位即将击中其他单位（计算加成后）
 M.config["单位-造成伤害时"] = {
     desc = "可以修改伤害值",
@@ -2347,6 +2416,7 @@ M.config["单位-造成伤害时"] = {
 ---@field unit Unit # 无描述
 ---@field damage_instance DamageInstance # 伤害实例
 ---@alias EventParam.单位-造成伤害后 EventParam.ET_UNIT_HURT_OTHER_FINISH
+
 --单位实际对其他单位造成伤害
 M.config["单位-造成伤害后"] = {
     desc = "伤害已结算，只能获取伤害值",
@@ -2443,6 +2513,7 @@ M.config["单位-造成伤害后"] = {
 ---@field unit Unit # 无描述
 ---@field damage_instance DamageInstance # 伤害实例
 ---@alias EventParam.单位-受到伤害后 EventParam.ET_UNIT_BE_HURT_COMPLETE
+
 --单位实际受到伤害
 M.config["单位-受到伤害后"] = {
     desc = "伤害已结算，只能获取伤害值",
@@ -2536,6 +2607,7 @@ M.config["单位-受到伤害后"] = {
 ---@field ability Ability # 当前治疗所属技能
 ---@field heal_instance HealInstance # 治疗实例
 ---@alias EventParam.单位-受到治疗前 EventParam.ET_UNIT_GET_CURE_BEFORE_APPLY
+
 --单位即将受到治疗
 M.config["单位-受到治疗前"] = {
     desc = "可在其他计算前触发，可以修改有效性",
@@ -2598,6 +2670,7 @@ M.config["单位-受到治疗前"] = {
 ---@field cured_value number # 受到的治疗值
 ---@field ability Ability # 当前治疗所属技能
 ---@alias EventParam.单位-受到治疗后 EventParam.ET_UNIT_GET_CURE_FINISH
+
 --单位受到治疗结束
 M.config["单位-受到治疗后"] = {
     desc = "治疗已结算，只能获取治疗值",
@@ -2649,6 +2722,7 @@ M.config["单位-受到治疗后"] = {
 ---@field ability Ability # 当前治疗所属技能
 ---@field heal_instance HealInstance # 治疗实例
 ---@alias EventParam.单位-受到治疗时 EventParam.ET_UNIT_GET_CURE
+
 --单位受到治疗
 M.config["单位-受到治疗时"] = {
     desc = "可以修改治疗值",
@@ -2709,6 +2783,7 @@ M.config["单位-受到治疗时"] = {
 ---@field res_key py.RoleResKey # 资源
 ---@field icon_id integer # ICON ID
 ---@alias EventParam.玩家-属性图标变化 EventParam.ET_RES_ICON_CHANGED
+
 --修改玩家属性图标
 M.config["玩家-属性图标变化"] = {
     desc = "",
@@ -2741,6 +2816,7 @@ M.config["玩家-属性图标变化"] = {
 ---@field unit Unit # 触发事件的单位unit_
 ---@field ability_target_unit Unit # 技能的目标单位
 ---@alias EventParam.单位-施放技能 EventParam.ET_UNIT_RELEASE_ABILITY
+
 --单位施放技能事件
 M.config["单位-施放技能"] = {
     desc = "单位施放技能时触发",
@@ -2781,6 +2857,7 @@ M.config["单位-施放技能"] = {
 ---@field ability Ability # 施放的技能对象
 ---@field unit Unit # 触发事件的单位unit_
 ---@alias EventParam.未知-ET_UNIT_RELEASE_ABILITY_START EventParam.ET_UNIT_RELEASE_ABILITY_START
+
 --单位施放技能开始事件
 M.config["未知-ET_UNIT_RELEASE_ABILITY_START"] = {
     _deprecated = true,
@@ -2813,6 +2890,7 @@ M.config["未知-ET_UNIT_RELEASE_ABILITY_START"] = {
 ---@field ability Ability # 施放的技能对象
 ---@field unit Unit # 触发事件的单位unit_
 ---@alias EventParam.未知-ET_UNIT_RELEASE_ABILITY_END EventParam.ET_UNIT_RELEASE_ABILITY_END
+
 --单位施放技能结束事件
 M.config["未知-ET_UNIT_RELEASE_ABILITY_END"] = {
     _deprecated = true,
@@ -2845,6 +2923,7 @@ M.config["未知-ET_UNIT_RELEASE_ABILITY_END"] = {
 ---@field ability Ability # 施放的技能对象
 ---@field unit Unit # 触发事件的单位unit_
 ---@alias EventParam.未知-ET_UNIT_RELEASE_MAGIC_BOOK EventParam.ET_UNIT_RELEASE_MAGIC_BOOK
+
 --单位施放技能事件
 M.config["未知-ET_UNIT_RELEASE_MAGIC_BOOK"] = {
     _deprecated = true,
@@ -2875,6 +2954,7 @@ M.config["未知-ET_UNIT_RELEASE_MAGIC_BOOK"] = {
 
 ---@class EventParam.ET_UNIT_LEVEL_CHANGE
 ---@alias EventParam.未知-ET_UNIT_LEVEL_CHANGE EventParam.ET_UNIT_LEVEL_CHANGE
+
 --单位技能变化事件
 M.config["未知-ET_UNIT_LEVEL_CHANGE"] = {
     _deprecated = true,
@@ -2889,6 +2969,7 @@ M.config["未知-ET_UNIT_LEVEL_CHANGE"] = {
 
 ---@class EventParam.ET_UNIT_EXP_CHANGE
 ---@alias EventParam.未知-ET_UNIT_EXP_CHANGE EventParam.ET_UNIT_EXP_CHANGE
+
 --单位经验变化事件
 M.config["未知-ET_UNIT_EXP_CHANGE"] = {
     _deprecated = true,
@@ -2906,6 +2987,7 @@ M.config["未知-ET_UNIT_EXP_CHANGE"] = {
 ---@field add_exp number # 增加的经验
 ---@field set_exp fun(exp: number) # 修改经验
 ---@alias EventParam.单位-获得经验前 EventParam.ET_UNIT_PRE_ADD_EXP
+
 --单位即将获得经验
 M.config["单位-获得经验前"] = {
     desc = "单位获得经验前触发",
@@ -2951,6 +3033,7 @@ M.config["单位-获得经验前"] = {
 ---@field unit Unit # 获得经验的单位
 ---@field add_exp number # 增加的经验
 ---@alias EventParam.单位-获得经验后 EventParam.ET_UNIT_ON_ADD_EXP
+
 --单位获得经验
 M.config["单位-获得经验后"] = {
     desc = "单位获得经验后触发",
@@ -2988,6 +3071,7 @@ M.config["单位-获得经验后"] = {
 ---@field item Item # 目标物品
 ---@field ability Ability # 释放的技能
 ---@alias EventParam.单位-接收命令 EventParam.ET_UNIT_ON_COMMAND
+
 --单位接收命令
 M.config["单位-接收命令"] = {
     desc = "接收到命令时触发，如果命令有目标会根据目标类型存到不同的字段里",
@@ -3064,6 +3148,7 @@ M.config["单位-接收命令"] = {
 ---@field damage_type integer # 致命伤害类型
 ---@field unit Unit # 无描述
 ---@alias EventParam.单位-击杀 EventParam.ET_KILL_UNIT
+
 --单位击杀其他单位
 M.config["单位-击杀"] = {
     desc = "单位击杀其他单位时触发",
@@ -3126,6 +3211,7 @@ M.config["单位-击杀"] = {
 ---@field unit Unit # 无描述
 ---@field lua_table py.Table # 用户自定义配置表
 ---@alias EventParam.单位-创建 EventParam.ET_UNIT_BORN
+
 --单位出生
 M.config["单位-创建"] = {
     desc = "单位被创建后触发",
@@ -3155,6 +3241,7 @@ M.config["单位-创建"] = {
 ---@class EventParam.ET_UNIT_ENTER_BATTLE
 ---@field unit Unit # 单位
 ---@alias EventParam.单位-进入战斗 EventParam.ET_UNIT_ENTER_BATTLE
+
 --单位进入战斗状态
 M.config["单位-进入战斗"] = {
     desc = "单位进入战斗时触发",
@@ -3178,6 +3265,7 @@ M.config["单位-进入战斗"] = {
 ---@class EventParam.ET_UNIT_EXIT_BATTLE
 ---@field unit Unit # 单位
 ---@alias EventParam.单位-脱离战斗 EventParam.ET_UNIT_EXIT_BATTLE
+
 --单位脱离战斗状态
 M.config["单位-脱离战斗"] = {
     desc = "单位离开战斗时触发",
@@ -3201,6 +3289,7 @@ M.config["单位-脱离战斗"] = {
 ---@class EventParam.ET_UNIT_CREATE_SLAVE
 ---@field unit Unit # 仆从
 ---@alias EventParam.未知-ET_UNIT_CREATE_SLAVE EventParam.ET_UNIT_CREATE_SLAVE
+
 --单位创建仆从
 M.config["未知-ET_UNIT_CREATE_SLAVE"] = {
     _deprecated = true,
@@ -3226,6 +3315,7 @@ M.config["未知-ET_UNIT_CREATE_SLAVE"] = {
 ---@field equip_slot_type py.SlotType # 背包类型
 ---@field item Item # 目标物品
 ---@alias EventParam.单位-即将拾取物品 EventParam.ET_UNIT_TRY_PICK_ITEM_NEW
+
 --单位即将拾取物品
 M.config["单位-即将拾取物品"] = {
     desc = "",
@@ -3264,6 +3354,7 @@ M.config["单位-即将拾取物品"] = {
 
 ---@class EventParam.ET_UNIT_LOAD_DEFAULT_AI
 ---@alias EventParam.单位-切换默认行为 EventParam.ET_UNIT_LOAD_DEFAULT_AI
+
 --单位切换默认行为
 M.config["单位-切换默认行为"] = {
     desc = "",
@@ -3279,6 +3370,7 @@ M.config["单位-切换默认行为"] = {
 ---@class EventParam.ET_UNIT_TRY_ACQUIRE_TARGET
 ---@field unit Unit # 单位
 ---@alias EventParam.单位-即将索敌 EventParam.ET_UNIT_TRY_ACQUIRE_TARGET
+
 --单位即将尝试索敌
 M.config["单位-即将索敌"] = {
     desc = "",
@@ -3303,6 +3395,7 @@ M.config["单位-即将索敌"] = {
 ---@field unit Unit # 单位
 ---@field target_unit Unit # 目标单位
 ---@alias EventParam.单位-发现目标 EventParam.ET_UNIT_ACQUIRED_TARGET
+
 --单位发现目标
 M.config["单位-发现目标"] = {
     desc = "",
@@ -3339,6 +3432,7 @@ M.config["单位-发现目标"] = {
 ---@field hitPos Point # 无描述
 ---@field hitNormal Point # 无描述
 ---@alias EventParam.本地-骨骼碰撞 EventParam.ET_DETECT_BONE_COLLISON
+
 --检测倒碰撞骨骼发生碰撞
 M.config["本地-骨骼碰撞"] = {
     desc = "骨骼碰撞时触发",
@@ -3388,6 +3482,7 @@ M.config["本地-骨骼碰撞"] = {
 
 ---@class EventParam.ET_DETECT_BONE_COLLISON
 ---@alias EventParam.物理-骨骼碰撞 EventParam.ET_DETECT_BONE_COLLISON
+
 --检测倒碰撞骨骼发生碰撞
 M.config["物理-骨骼碰撞"] = {
     desc = "骨骼碰撞时触发",
@@ -3440,6 +3535,7 @@ M.config["物理-骨骼碰撞"] = {
 ---@field attr_key string # 无描述
 ---@field delta number # 无描述
 ---@alias EventParam.未知-ET_ITEM_ATTACHED_ATTR_CHANGED EventParam.ET_ITEM_ATTACHED_ATTR_CHANGED
+
 --物品附加属性变化
 M.config["未知-ET_ITEM_ATTACHED_ATTR_CHANGED"] = {
     _deprecated = true,
@@ -3477,6 +3573,7 @@ M.config["未知-ET_ITEM_ATTACHED_ATTR_CHANGED"] = {
 ---@field cnt integer # 商品数量
 ---@field item Item # 商品物品
 ---@alias EventParam.单位-购买物品 EventParam.ET_UNIT_SHOP_BUY_ITEM
+
 --商品购买
 M.config["单位-购买物品"] = {
     desc = "购买物品时触发",
@@ -3536,6 +3633,7 @@ M.config["单位-购买物品"] = {
 ---@field cnt integer # 商品数量
 ---@field unit_stuff Unit # 商品单位
 ---@alias EventParam.单位-购买单位 EventParam.ET_UNIT_SHOP_BUY_UNIT
+
 --商品购买
 M.config["单位-购买单位"] = {
     desc = "购买单位时触发",
@@ -3593,6 +3691,7 @@ M.config["单位-购买单位"] = {
 ---@field shop_unit Unit # 商店单位
 ---@field item Item # 道具
 ---@alias EventParam.单位-出售物品 EventParam.ET_UNIT_ITEM_SELL
+
 --道具出售
 M.config["单位-出售物品"] = {
     desc = "出售物品时触发",
@@ -3635,6 +3734,7 @@ M.config["单位-出售物品"] = {
 ---@field shop_key string # 商品id
 ---@field curr_stock integer # 当前库存
 ---@alias EventParam.商店-商品变化 EventParam.ET_SHOP_ITEM_CHANGED
+
 --商店商品变化
 M.config["商店-商品变化"] = {
     desc = "",
@@ -3684,6 +3784,7 @@ M.config["商店-商品变化"] = {
 ---@field shop_key string # 商品id
 ---@field curr_stock integer # 当前库存
 ---@alias EventParam.商店-库存变化 EventParam.ET_SHOP_STOCK_CHANGED
+
 --商品库存变化
 M.config["商店-库存变化"] = {
     desc = "",
@@ -3734,6 +3835,7 @@ M.config["商店-库存变化"] = {
 ---@field res_type py.RoleResKey # 资源编号
 ---@field res_cost integer # 当前售价
 ---@alias EventParam.商店-售价变化 EventParam.ET_SHOP_RES_COST_CHANGED
+
 --商品售价变化
 M.config["商店-售价变化"] = {
     desc = "",
@@ -3790,6 +3892,7 @@ M.config["商店-售价变化"] = {
 ---@field compose_id py.ItemKey # 道具编号
 ---@field item_prop Item # 道具
 ---@alias EventParam.单位-物品合成 EventParam.ET_UNIT_ITEM_COMPOSE
+
 --道具合成事件
 M.config["单位-物品合成"] = {
     desc = "物品合成时触发",
@@ -3831,6 +3934,7 @@ M.config["单位-物品合成"] = {
 ---@field shop_unit Unit # 商店单位
 ---@field item Item # 物品编号
 ---@alias EventParam.单位-购买物品合成 EventParam.ET_UNIT_SHOP_BUY_WITH_COMPOSE
+
 --商品合成购买
 M.config["单位-购买物品合成"] = {
     desc = "购买物品合成时触发",
@@ -3870,6 +3974,7 @@ M.config["单位-购买物品合成"] = {
 ---@class EventParam.ET_REVIVE_UNIT
 ---@field unit Unit # 无描述
 ---@alias EventParam.单位-复活 EventParam.ET_REVIVE_UNIT
+
 --单位重生
 M.config["单位-复活"] = {
     desc = "单位复活后触发",
@@ -3891,6 +3996,7 @@ M.config["单位-复活"] = {
 ---@class EventParam.ET_UPGRADE_UNIT
 ---@field unit Unit # 无描述
 ---@alias EventParam.单位-升级 EventParam.ET_UPGRADE_UNIT
+
 --单位升级
 M.config["单位-升级"] = {
     desc = "单位升级后触发",
@@ -3912,6 +4018,7 @@ M.config["单位-升级"] = {
 ---@class EventParam.ET_REACH_MOVE_TARGET_UNIT
 ---@field unit Unit # 无描述
 ---@alias EventParam.未知-ET_REACH_MOVE_TARGET_UNIT EventParam.ET_REACH_MOVE_TARGET_UNIT
+
 --单位运动目标达成
 M.config["未知-ET_REACH_MOVE_TARGET_UNIT"] = {
     _deprecated = true,
@@ -3933,6 +4040,7 @@ M.config["未知-ET_REACH_MOVE_TARGET_UNIT"] = {
 ---@class EventParam.ET_COLLIDE_OBSTACLE_UNIT
 ---@field unit Unit # 无描述
 ---@alias EventParam.未知-ET_COLLIDE_OBSTACLE_UNIT EventParam.ET_COLLIDE_OBSTACLE_UNIT
+
 --单位碰撞到障碍
 M.config["未知-ET_COLLIDE_OBSTACLE_UNIT"] = {
     _deprecated = true,
@@ -3954,6 +4062,7 @@ M.config["未知-ET_COLLIDE_OBSTACLE_UNIT"] = {
 ---@class EventParam.ET_UNIT_ENTER_GRASS
 ---@field unit Unit # 单位
 ---@alias EventParam.单位-进入草丛 EventParam.ET_UNIT_ENTER_GRASS
+
 --单位进入草丛
 M.config["单位-进入草丛"] = {
     desc = "单位进入草丛时触发",
@@ -3977,6 +4086,7 @@ M.config["单位-进入草丛"] = {
 ---@class EventParam.ET_UNIT_LEAVE_GRASS
 ---@field unit Unit # 单位
 ---@alias EventParam.单位-离开草丛 EventParam.ET_UNIT_LEAVE_GRASS
+
 --单位离开草丛
 M.config["单位-离开草丛"] = {
     desc = "单位离开草丛时触发",
@@ -3999,6 +4109,7 @@ M.config["单位-离开草丛"] = {
 
 ---@class EventParam.ET_MAP_VISIBILITY_CHANGE
 ---@alias EventParam.未知-ET_MAP_VISIBILITY_CHANGE EventParam.ET_MAP_VISIBILITY_CHANGE
+
 --地图显隐因触发器发生变化
 M.config["未知-ET_MAP_VISIBILITY_CHANGE"] = {
     _deprecated = true,
@@ -4016,6 +4127,7 @@ M.config["未知-ET_MAP_VISIBILITY_CHANGE"] = {
 ---@field old_player Player # 单位原所属玩家
 ---@field new_player Player # 单位新所属玩家
 ---@alias EventParam.单位-改变所属 EventParam.ET_UNIT_ROLE_CHANGED
+
 --单位所属玩家发生变化
 M.config["单位-改变所属"] = {
     desc = "单位的所有者玩家发生变化时触发",
@@ -4055,6 +4167,7 @@ M.config["单位-改变所属"] = {
 ---@class EventParam.ET_UNIT_KV_CHANGE
 ---@field kv_name string # KV名
 ---@alias EventParam.未知-ET_UNIT_KV_CHANGE EventParam.ET_UNIT_KV_CHANGE
+
 --单位的kv属性发送变化
 M.config["未知-ET_UNIT_KV_CHANGE"] = {
     _deprecated = true,
@@ -4078,6 +4191,7 @@ M.config["未知-ET_UNIT_KV_CHANGE"] = {
 ---@class EventParam.ET_UNIT_MUL_KV_CHANGE
 ---@field kv_name_list py.List # 单位原所属玩家
 ---@alias EventParam.未知-ET_UNIT_MUL_KV_CHANGE EventParam.ET_UNIT_MUL_KV_CHANGE
+
 --单位的多个kv属性发送变化
 M.config["未知-ET_UNIT_MUL_KV_CHANGE"] = {
     _deprecated = true,
@@ -4102,6 +4216,7 @@ M.config["未知-ET_UNIT_MUL_KV_CHANGE"] = {
 ---@field unit_key py.UnitKey # 单位类型
 ---@field player Player # 玩家
 ---@alias EventParam.单位类型-前置条件成立 EventParam.ET_UNIT_PRECONDITION_SUCCEED
+
 --单位类型的前置条件满足要求
 M.config["单位类型-前置条件成立"] = {
     desc = "前置条件由不成立变为成立时触发",
@@ -4133,6 +4248,7 @@ M.config["单位类型-前置条件成立"] = {
 ---@field unit_key py.UnitKey # 单位类型
 ---@field player Player # 玩家
 ---@alias EventParam.单位类型-前置条件不成立 EventParam.ET_UNIT_PRECONDITION_FAILED
+
 --单位类型的前置条件不满足要求
 M.config["单位类型-前置条件不成立"] = {
     desc = "前置条件由成立变为不成立时触发",
@@ -4164,6 +4280,7 @@ M.config["单位类型-前置条件不成立"] = {
 ---@field item_no py.ItemKey # 物品类型
 ---@field player Player # 玩家
 ---@alias EventParam.物品类型-前置条件成立 EventParam.ET_ITEM_PRECONDITION_SUCCEED
+
 --物品类型的前置条件满足要求
 M.config["物品类型-前置条件成立"] = {
     desc = "前置条件由不成立变为成立时触发",
@@ -4195,6 +4312,7 @@ M.config["物品类型-前置条件成立"] = {
 ---@field item_no py.ItemKey # 物品类型
 ---@field player Player # 玩家
 ---@alias EventParam.物品类型-前置条件不成立 EventParam.ET_ITEM_PRECONDITION_FAILED
+
 --物品类型的前置条件不满足要求
 M.config["物品类型-前置条件不成立"] = {
     desc = "前置条件由成立变为不成立时触发",
@@ -4226,6 +4344,7 @@ M.config["物品类型-前置条件不成立"] = {
 ---@field ability_id py.AbilityKey # 技能类型
 ---@field player Player # 玩家
 ---@alias EventParam.技能类型-前置条件成立 EventParam.ET_ABILITY_PRECONDITION_SUCCEED
+
 --技能类型的前置条件满足要求
 M.config["技能类型-前置条件成立"] = {
     desc = "前置条件由不成立变为成立时触发",
@@ -4263,6 +4382,7 @@ M.config["技能类型-前置条件成立"] = {
 ---@field ability_id py.AbilityKey # 技能类型
 ---@field player Player # 玩家
 ---@alias EventParam.技能类型-前置条件不成立 EventParam.ET_ABILITY_PRECONDITION_FAILED
+
 --技能类型的前置条件不满足要求
 M.config["技能类型-前置条件不成立"] = {
     desc = "前置条件由成立变为不成立时触发",
@@ -4300,6 +4420,7 @@ M.config["技能类型-前置条件不成立"] = {
 ---@field tech_no py.TechKey # 科技类型
 ---@field player Player # 玩家
 ---@alias EventParam.科技类型-前置条件成立 EventParam.ET_TECH_PRECONDITION_SUCCEED
+
 --科技类型的前置条件满足要求
 M.config["科技类型-前置条件成立"] = {
     desc = "前置条件由不成立变为成立时触发",
@@ -4337,6 +4458,7 @@ M.config["科技类型-前置条件成立"] = {
 ---@field tech_no py.TechKey # 科技类型
 ---@field player Player # 玩家
 ---@alias EventParam.科技类型-前置条件不成立 EventParam.ET_TECH_PRECONDITION_FAILED
+
 --科技类型的前置条件不满足要求
 M.config["科技类型-前置条件不成立"] = {
     desc = "前置条件由成立变为不成立时触发",
@@ -4374,6 +4496,7 @@ M.config["科技类型-前置条件不成立"] = {
 ---@field ability Ability # 技能对象
 ---@field unit Unit # 技能Owner
 ---@alias EventParam.技能-升级 EventParam.ET_ABILITY_UPGRADE
+
 --技能升级
 M.config["技能-升级"] = {
     desc = "技能升级后触发",
@@ -4414,6 +4537,7 @@ M.config["技能-升级"] = {
 ---@field ability_target_unit Unit # 技能目标单位
 ---@field cast Cast # 施法
 ---@alias EventParam.施法-即将开始 EventParam.ET_ABILITY_CS_START
+
 --技能开始施法
 M.config["施法-即将开始"] = {
     desc = "即将施法时触发",
@@ -4475,6 +4599,7 @@ M.config["施法-即将开始"] = {
 ---@field unit Unit # 技能Owner
 ---@field ability_target_unit Unit # 技能目标单位
 ---@alias EventParam.未知-ET_ABILITY_CS_END EventParam.ET_ABILITY_CS_END
+
 --技能开始施法结束
 M.config["未知-ET_ABILITY_CS_END"] = {
     _deprecated = true,
@@ -4517,6 +4642,7 @@ M.config["未知-ET_ABILITY_CS_END"] = {
 ---@field ability_target_unit Unit # 技能目标单位
 ---@field cast Cast # 施法
 ---@alias EventParam.施法-开始 EventParam.ET_ABILITY_PS_START
+
 --技能前摇开始
 M.config["施法-开始"] = {
     desc = "施法开始后，前摇开始前触发",
@@ -4578,6 +4704,7 @@ M.config["施法-开始"] = {
 ---@field ability_target_unit Unit # 技能目标单位
 ---@field cast Cast # 施法
 ---@alias EventParam.施法-引导 EventParam.ET_ABILITY_PS_END
+
 --技能前摇结束
 M.config["施法-引导"] = {
     desc = "前摇完成后，持续引导前触发",
@@ -4636,6 +4763,7 @@ M.config["施法-引导"] = {
 ---@class EventParam.ET_ITEM_ABILITY_PS_END
 ---@field ability Ability # 技能对象
 ---@alias EventParam.未知-ET_ITEM_ABILITY_PS_END EventParam.ET_ITEM_ABILITY_PS_END
+
 --道具技能前摇结束
 M.config["未知-ET_ITEM_ABILITY_PS_END"] = {
     _deprecated = true,
@@ -4662,6 +4790,7 @@ M.config["未知-ET_ITEM_ABILITY_PS_END"] = {
 ---@field ability_target_unit Unit # 技能目标单位
 ---@field cast Cast # 施法
 ---@alias EventParam.施法-出手 EventParam.ET_ABILITY_SP_END
+
 --技能准备结束
 M.config["施法-出手"] = {
     desc = "持续引导后，后摇开始前触发",
@@ -4723,6 +4852,7 @@ M.config["施法-出手"] = {
 ---@field ability_target_unit Unit # 技能目标单位
 ---@field cast Cast # 施法
 ---@alias EventParam.施法-完成 EventParam.ET_ABILITY_CST_END
+
 --技能持续施法结束
 M.config["施法-完成"] = {
     desc = "后摇结束后触发。只有施法正常完成才会触发。",
@@ -4784,6 +4914,7 @@ M.config["施法-完成"] = {
 ---@field ability_target_unit Unit # 技能目标单位
 ---@field cast Cast # 施法
 ---@alias EventParam.施法-结束 EventParam.ET_ABILITY_BS_END
+
 --技能后摇结束
 M.config["施法-结束"] = {
     desc = "整个施法的表现结束后触发",
@@ -4844,6 +4975,7 @@ M.config["施法-结束"] = {
 ---@field unit Unit # 技能Owner
 ---@field ability_target_unit Unit # 技能目标单位
 ---@alias EventParam.未知-ET_ABILITY_CS_INTERRUPT EventParam.ET_ABILITY_CS_INTERRUPT
+
 --技能准备阶段被打断
 M.config["未知-ET_ABILITY_CS_INTERRUPT"] = {
     _deprecated = true,
@@ -4886,6 +5018,7 @@ M.config["未知-ET_ABILITY_CS_INTERRUPT"] = {
 ---@field ability_target_unit Unit # 技能目标单位
 ---@field cast Cast # 施法
 ---@alias EventParam.施法-打断开始 EventParam.ET_ABILITY_PS_INTERRUPT
+
 --技能前摇阶段被打断
 M.config["施法-打断开始"] = {
     desc = "在“开始”到“引导”之间被打断",
@@ -4947,6 +5080,7 @@ M.config["施法-打断开始"] = {
 ---@field ability_target_unit Unit # 技能目标单位
 ---@field cast Cast # 施法
 ---@alias EventParam.施法-打断引导 EventParam.ET_ABILITY_SP_INTERRUPT
+
 --技能准备阶段被打断
 M.config["施法-打断引导"] = {
     desc = "在“引导”到“出手”之间被打断",
@@ -5008,6 +5142,7 @@ M.config["施法-打断引导"] = {
 ---@field ability_target_unit Unit # 技能目标单位
 ---@field cast Cast # 施法
 ---@alias EventParam.施法-打断出手 EventParam.ET_ABILITY_CST_INTERRUPT
+
 --技能持续施法阶段被打断
 M.config["施法-打断出手"] = {
     desc = "在“出手”到“完成”之间被打断",
@@ -5068,6 +5203,7 @@ M.config["施法-打断出手"] = {
 ---@field unit Unit # 技能Owner
 ---@field ability_target_unit Unit # 技能目标单位
 ---@alias EventParam.施法-打断完成 EventParam.ET_ABILITY_BS_INTERRUPT
+
 --技能后摇阶段被打断
 M.config["施法-打断完成"] = {
     extraObjs = {
@@ -5117,6 +5253,7 @@ M.config["施法-打断完成"] = {
 ---@field ability_target_unit Unit # 技能目标单位
 ---@field cast Cast # 施法
 ---@alias EventParam.施法-停止 EventParam.ET_ABILITY_END
+
 --技能结束（无论何种方式）
 M.config["施法-停止"] = {
     desc = "施法停止后触发，是施法流程的最后一个事件。",
@@ -5177,6 +5314,7 @@ M.config["施法-停止"] = {
 ---@field unit Unit # 单位
 ---@field lua_table py.Table # 用户自定义配置表
 ---@alias EventParam.技能-获得 EventParam.ET_ABILITY_OBTAIN
+
 --获得技能
 M.config["技能-获得"] = {
     desc = "获得技能后触发",
@@ -5223,6 +5361,7 @@ M.config["技能-获得"] = {
 ---@field ability Ability # 技能对象
 ---@field unit Unit # 单位
 ---@alias EventParam.技能-失去 EventParam.ET_ABILITY_LOSE
+
 --失去技能
 M.config["技能-失去"] = {
     desc = "失去技能后触发",
@@ -5261,6 +5400,7 @@ M.config["技能-失去"] = {
 ---@field ability Ability # 技能对象
 ---@field unit Unit # 技能Owner
 ---@alias EventParam.技能-交换 EventParam.ET_ABILITY_SWITCH
+
 --交换技能
 M.config["技能-交换"] = {
     desc = "技能交换后触发",
@@ -5298,6 +5438,7 @@ M.config["技能-交换"] = {
 ---@class EventParam.ET_ABILITY_DISABLE
 ---@field ability Ability # 技能对象
 ---@alias EventParam.技能-禁用 EventParam.ET_ABILITY_DISABLE
+
 --技能禁用
 M.config["技能-禁用"] = {
     desc = "",
@@ -5327,6 +5468,7 @@ M.config["技能-禁用"] = {
 ---@class EventParam.ET_ABILITY_ENABLE
 ---@field ability Ability # 技能对象
 ---@alias EventParam.技能-启用 EventParam.ET_ABILITY_ENABLE
+
 --技能启用
 M.config["技能-启用"] = {
     desc = "",
@@ -5357,6 +5499,7 @@ M.config["技能-启用"] = {
 ---@field ability Ability # 技能对象
 ---@field unit Unit # 技能Owner
 ---@alias EventParam.技能-冷却结束 EventParam.ET_ABILITY_CD_END
+
 --技能冷却事件
 M.config["技能-冷却结束"] = {
     desc = "技能冷却结束后触发",
@@ -5394,6 +5537,7 @@ M.config["技能-冷却结束"] = {
 ---@class EventParam.ET_ABILITY_SEND_CUE_EVENT
 ---@field ability Ability # 技能对象
 ---@alias EventParam.技能-自定义动画轴 EventParam.ET_ABILITY_SEND_CUE_EVENT
+
 --技能发送自定义CUE事件
 M.config["技能-自定义动画轴"] = {
     desc = "",
@@ -5431,6 +5575,7 @@ M.config["技能-自定义动画轴"] = {
 ---@field from_unit Unit # 效果施加者
 ---@field lua_table py.Table # 用户自定义配置表
 ---@alias EventParam.效果-获得 EventParam.ET_OBTAIN_MODIFIER
+
 --获得效果
 M.config["效果-获得"] = {
     desc = "获得魔法效果后触发",
@@ -5487,6 +5632,7 @@ M.config["效果-获得"] = {
 ---@field from_unit Unit # 效果施加者
 ---@field lua_table py.Table # 用户自定义配置表
 ---@alias EventParam.效果-失去 EventParam.ET_LOSS_MODIFIER
+
 --失去效果
 M.config["效果-失去"] = {
     desc = "失去魔法效果后触发",
@@ -5543,6 +5689,7 @@ M.config["效果-失去"] = {
 ---@field from_unit Unit # 效果施加者
 ---@field lua_table py.Table # 用户自定义配置表
 ---@alias EventParam.效果-心跳 EventParam.ET_MODIFIER_CYCLE_TRIGGER
+
 --循环触发事件
 M.config["效果-心跳"] = {
     desc = "魔法效果的周期性触发",
@@ -5599,6 +5746,7 @@ M.config["效果-心跳"] = {
 ---@field from_unit Unit # 效果施加者
 ---@field lua_table py.Table # 用户自定义配置表
 ---@alias EventParam.效果-叠加 EventParam.ET_MODIFIER_ADDTION
+
 --BUFF叠加事件
 M.config["效果-叠加"] = {
     desc = "魔法效果叠加时触发",
@@ -5656,6 +5804,7 @@ M.config["效果-叠加"] = {
 ---@field from_unit Unit # 效果施加者
 ---@field lua_table py.Table # 用户自定义配置表
 ---@alias EventParam.效果-层数变化 EventParam.ET_MODIFIER_LAYER_CHANGE
+
 --效果层数变化事件
 M.config["效果-层数变化"] = {
     desc = "魔法效果层数变化时触发",
@@ -5720,6 +5869,7 @@ M.config["效果-层数变化"] = {
 ---@field from_unit Unit # 效果施加者
 ---@field lua_table py.Table # 用户自定义配置表
 ---@alias EventParam.效果-即将获得 EventParam.ET_MODIFIER_GET_BEFORE_CREATE
+
 --魔法效果即将获得事件
 M.config["效果-即将获得"] = {
     desc = "魔法效果获得前触发",
@@ -5777,6 +5927,7 @@ M.config["效果-即将获得"] = {
 ---@field new_buff Buff # 新增的魔法效果
 ---@field lua_table py.Table # 用户自定义配置表
 ---@alias EventParam.效果-覆盖 EventParam.ET_MODIFIER_BE_COVERED
+
 --魔法效果被覆盖事件
 M.config["效果-覆盖"] = {
     desc = "魔法效果覆盖时触发",
@@ -5832,6 +5983,7 @@ M.config["效果-覆盖"] = {
 ---@field destructible Destructible # 可破坏物
 ---@field lua_table py.Table # 用户自定义配置表
 ---@alias EventParam.可破坏物-创建 EventParam.ET_DEST_CREATE_NEW
+
 --可破坏物创建
 M.config["可破坏物-创建"] = {
     desc = "可破坏物创建后触发",
@@ -5864,6 +6016,7 @@ M.config["可破坏物-创建"] = {
 ---@field destructible Destructible # 可破坏物
 ---@field unit_id_of_dest_killer Unit # 凶手单位ID
 ---@alias EventParam.可破坏物-死亡 EventParam.ET_DEST_DIE_NEW
+
 --可破坏物死亡
 M.config["可破坏物-死亡"] = {
     desc = "可破坏物死亡后触发",
@@ -5895,6 +6048,7 @@ M.config["可破坏物-死亡"] = {
 ---@class EventParam.ET_DEST_REVIVE_NEW
 ---@field destructible Destructible # 可破坏物
 ---@alias EventParam.可破坏物-复活 EventParam.ET_DEST_REVIVE_NEW
+
 --可破坏物复活
 M.config["可破坏物-复活"] = {
     desc = "可破坏物复活后触发",
@@ -5919,6 +6073,7 @@ M.config["可破坏物-复活"] = {
 ---@field destructible Destructible # 可破坏物
 ---@field res_chg_cnt_in_dest_event integer # 可破坏物资源变化量
 ---@alias EventParam.可破坏物-资源变化 EventParam.ET_DEST_RES_CNT_CHG_NEW
+
 --可破坏物资源量变化
 M.config["可破坏物-资源变化"] = {
     desc = "可破坏物存储的资源变化后触发",
@@ -5953,6 +6108,7 @@ M.config["可破坏物-资源变化"] = {
 ---@field ability_in_dest_event Ability # 事件中的技能对象
 ---@field player_res_cnt_in_event integer # 采集的玩家属性个数
 ---@alias EventParam.可破坏物-采集 EventParam.ET_DEST_COLLECTED_NEW
+
 --可破坏物被采集
 M.config["可破坏物-采集"] = {
     desc = "可破坏物被采集后触发",
@@ -6002,6 +6158,7 @@ M.config["可破坏物-采集"] = {
 ---@field unit_id_of_hurt_dest Unit # 事件中的单位
 ---@field damage_value_of_hurt_dest number # 受到的伤害
 ---@alias EventParam.可破坏物-受到伤害 EventParam.ET_GET_HURT_NEW
+
 --可破坏物受到伤害
 M.config["可破坏物-受到伤害"] = {
     desc = "可破坏物受到伤害后触发",
@@ -6042,6 +6199,7 @@ M.config["可破坏物-受到伤害"] = {
 ---@field player Player # 玩家
 ---@field destructible Destructible # 点击到可破坏物
 ---@alias EventParam.选中-可破坏物 EventParam.ET_SELECT_DEST
+
 --玩家选中可破坏物
 M.config["选中-可破坏物"] = {
     desc = "玩家选中可破坏物被后触发",
@@ -6074,6 +6232,7 @@ M.config["选中-可破坏物"] = {
 ---@field player Player # 玩家
 ---@field destructible Destructible # 点击到可破坏物
 ---@alias EventParam.本地-选中-可破坏物 EventParam.ET_ASYNC_SELECT_DEST
+
 --异步玩家选中可破坏物
 M.config["本地-选中-可破坏物"] = {
     desc = "本地玩家选中可破坏物被后触发",
@@ -6105,6 +6264,7 @@ M.config["本地-选中-可破坏物"] = {
 ---@class EventParam.ET_DEST_DELETE
 ---@field destructible Destructible # 触发事件的可破坏物
 ---@alias EventParam.可破坏物-移除 EventParam.ET_DEST_DELETE
+
 --删除可破坏物
 M.config["可破坏物-移除"] = {
     desc = "可破坏物被移除后触发",
@@ -6128,6 +6288,7 @@ M.config["可破坏物-移除"] = {
 ---@class EventParam.ET_PRODUCE_PROJECTILE
 ---@field projectile Projectile # 投射物
 ---@alias EventParam.投射物-创建 EventParam.ET_PRODUCE_PROJECTILE
+
 --投射物产生
 M.config["投射物-创建"] = {
     desc = "投射物创建后触发",
@@ -6155,6 +6316,7 @@ M.config["投射物-创建"] = {
 ---@class EventParam.ET_DEATH_PROJECTILE
 ---@field projectile Projectile # 投射物
 ---@alias EventParam.投射物-死亡 EventParam.ET_DEATH_PROJECTILE
+
 --投射物死亡
 M.config["投射物-死亡"] = {
     desc = "投射物死亡后触发",
@@ -6189,6 +6351,7 @@ M.config["投射物-死亡"] = {
 ---@field ui UI # ui
 ---@field data any # 自定义数据
 ---@alias EventParam.界面-消息 EventParam.ET_TRIGGER_COMPONENT_EVENT
+
 --ui编辑器事件
 M.config["界面-消息"] = {
     desc = "触发界面上标记的自定义事件后触发",
@@ -6282,6 +6445,7 @@ M.config["界面-消息"] = {
 ---@field player Player # 玩家
 ---@field mini_map_touched_world_pos Point # 点击对应的世界坐标
 ---@alias EventParam.玩家-点击小地图 EventParam.ET_ON_CLICK_MINI_MAP_PANEL
+
 --玩家点击小地图事件
 M.config["玩家-点击小地图"] = {
     desc = "点击小地图时触发",
@@ -6327,6 +6491,7 @@ M.config["玩家-点击小地图"] = {
 ---@field float1 number # 自定义信息
 ---@field ui UI # ui
 ---@alias EventParam.界面-滑动条变化 EventParam.ET_TRIGGER_UI_SLIDER_CHANGE_EVENT
+
 --ui滑动条事件
 M.config["界面-滑动条变化"] = {
     desc = "滑动条变化时触发",
@@ -6398,6 +6563,7 @@ M.config["界面-滑动条变化"] = {
 ---@field bool1 boolean # 自定义信息
 ---@field ui UI # ui
 ---@alias EventParam.界面-聊天框可见性变化 EventParam.ET_TRIGGER_UI_CHATBOX_VISIBLE_CHANGE_EVENT
+
 --ui聊天框元件可见性改变事件
 M.config["界面-聊天框可见性变化"] = {
     desc = "聊天框可见性变化时触发",
@@ -6472,6 +6638,7 @@ M.config["界面-聊天框可见性变化"] = {
 ---@field equip_slot_is_begin boolean # 是否拖拽开始
 ---@field ui UI # ui
 ---@alias EventParam.界面-装备拖拽 EventParam.ET_TRIGGER_UI_EQUIP_SLOT_DRAG_EVENT
+
 --UI装备栏拖拽事件
 M.config["界面-装备拖拽"] = {
     desc = "",
@@ -6567,6 +6734,7 @@ M.config["界面-装备拖拽"] = {
 ---@field bool1 boolean # 自定义信息
 ---@field ui UI # ui
 ---@alias EventParam.界面-复选框变化 EventParam.ET_TRIGGER_UI_CHECKBOX_CHANGE_EVENT
+
 --ui复选框事件
 M.config["界面-复选框变化"] = {
     desc = "复选框变化时触发",
@@ -6638,6 +6806,7 @@ M.config["界面-复选框变化"] = {
 ---@field str1 string # 自定义信息
 ---@field ui UI # ui
 ---@alias EventParam.界面-视频播放完成 EventParam.ET_TRIGGER_UI_VIDEO_END_EVENT
+
 --ui视频播放完成事件
 M.config["界面-视频播放完成"] = {
     desc = "",
@@ -6708,6 +6877,7 @@ M.config["界面-视频播放完成"] = {
 ---@field comp_name string # 触发事件控件名称
 ---@field ui UI # ui
 ---@alias EventParam.本地-界面-输入框获取焦点 EventParam.ET_TRIGGER_UI_INPUT_FIELD_GET_FOCUS_EVENT
+
 --UI输入框获取焦点事件
 M.config["本地-界面-输入框获取焦点"] = {
     desc = "",
@@ -6770,6 +6940,7 @@ M.config["本地-界面-输入框获取焦点"] = {
 ---@field comp_name string # 触发事件控件名称
 ---@field ui UI # ui
 ---@alias EventParam.本地-界面-输入框失去焦点 EventParam.ET_TRIGGER_UI_INPUT_FIELD_LOST_FOCUS_EVENT
+
 --UI输入框失去焦点事件
 M.config["本地-界面-输入框失去焦点"] = {
     desc = "",
@@ -6833,6 +7004,7 @@ M.config["本地-界面-输入框失去焦点"] = {
 ---@field str1 string # 文本内容
 ---@field ui UI # ui
 ---@alias EventParam.本地-界面-输入框内容改变 EventParam.ET_TRIGGER_UI_INPUT_FIELD_TEXT_CHANGED_EVENT
+
 --UI输入框内容改变事件
 M.config["本地-界面-输入框内容改变"] = {
     desc = "",
@@ -6901,6 +7073,7 @@ M.config["本地-界面-输入框内容改变"] = {
 ---@field player Player # 触发按键的玩家
 ---@field current_key py.KeyboardKey # 当前键盘按键
 ---@alias EventParam.键盘-按下 EventParam.ET_KEYBOARD_KEY_DOWN_EVENT
+
 --键盘按键按下
 M.config["键盘-按下"] = {
     desc = "键盘上的某个键按下时触发",
@@ -6943,6 +7116,7 @@ M.config["键盘-按下"] = {
 ---@field player Player # 触发按键的玩家
 ---@field current_key py.KeyboardKey # 当前键盘按键
 ---@alias EventParam.键盘-抬起 EventParam.ET_KEYBOARD_KEY_UP_EVENT
+
 --键盘按键抬起
 M.config["键盘-抬起"] = {
     desc = "键盘上的某个键抬起时触发",
@@ -6985,6 +7159,7 @@ M.config["键盘-抬起"] = {
 ---@field player Player # 触发按键的玩家
 ---@field current_key py.KeyboardKey # 当前键盘按键
 ---@alias EventParam.本地-键盘-按下 EventParam.ET_ASYNC_KEYBOARD_KEY_DOWN_EVENT
+
 --异步键盘按键按下
 M.config["本地-键盘-按下"] = {
     desc = "键盘上的某个键按下时触发",
@@ -7027,6 +7202,7 @@ M.config["本地-键盘-按下"] = {
 ---@field player Player # 触发按键的玩家
 ---@field current_key py.KeyboardKey # 当前键盘按键
 ---@alias EventParam.本地-键盘-抬起 EventParam.ET_ASYNC_KEYBOARD_KEY_UP_EVENT
+
 --异步键盘按键抬起
 M.config["本地-键盘-抬起"] = {
     desc = "键盘上的某个键抬起时触发",
@@ -7071,6 +7247,7 @@ M.config["本地-键盘-抬起"] = {
 ---@field pointing_world_pos Point # 鼠标指向的世界坐标
 ---@field is_click_swallowed_by_ui boolean # 点击事件是否被UI吞噬
 ---@alias EventParam.鼠标-按下 EventParam.ET_MOUSE_KEY_DOWN_EVENT
+
 --鼠标按键按下
 M.config["鼠标-按下"] = {
     desc = "鼠标上的某个键按下时触发",
@@ -7130,6 +7307,7 @@ M.config["鼠标-按下"] = {
 ---@field current_key py.MouseKey # 当前鼠标按键
 ---@field pointing_world_pos Point # 鼠标指向的世界坐标
 ---@alias EventParam.鼠标-抬起 EventParam.ET_MOUSE_KEY_UP_EVENT
+
 --鼠标按键抬起
 M.config["鼠标-抬起"] = {
     desc = "鼠标上的某个键抬起时触发",
@@ -7181,6 +7359,7 @@ M.config["鼠标-抬起"] = {
 ---@field current_key py.MouseKey # 当前鼠标按键
 ---@field pointing_world_pos Point # 鼠标指向的世界坐标
 ---@alias EventParam.鼠标-双击 EventParam.MOUSE_KEY_DB_CLICK_EVENT
+
 --鼠标按键双击
 M.config["鼠标-双击"] = {
     desc = "鼠标上的某个键双击时触发",
@@ -7233,6 +7412,7 @@ M.config["鼠标-双击"] = {
 ---@field pointing_world_pos Point # 鼠标指向的世界坐标
 ---@field is_click_swallowed_by_ui boolean # 点击事件是否被UI吞噬
 ---@alias EventParam.本地-鼠标-按下 EventParam.ET_ASYNC_MOUSE_KEY_DOWN_EVENT
+
 --异步鼠标按键按下
 M.config["本地-鼠标-按下"] = {
     desc = "鼠标上的某个键按下时触发",
@@ -7292,6 +7472,7 @@ M.config["本地-鼠标-按下"] = {
 ---@field current_key py.MouseKey # 当前鼠标按键
 ---@field pointing_world_pos Point # 鼠标指向的世界坐标
 ---@alias EventParam.本地-鼠标-抬起 EventParam.ET_ASYNC_MOUSE_KEY_UP_EVENT
+
 --异步鼠标按键抬起
 M.config["本地-鼠标-抬起"] = {
     desc = "鼠标上的某个键抬起时触发",
@@ -7343,6 +7524,7 @@ M.config["本地-鼠标-抬起"] = {
 ---@field current_key py.MouseKey # 当前鼠标按键
 ---@field pointing_world_pos Point # 鼠标指向的世界坐标
 ---@alias EventParam.本地-鼠标-双击 EventParam.ET_ASYNC_MOUSE_KEY_DB_CLICK_EVENT
+
 --异步鼠标按键双击
 M.config["本地-鼠标-双击"] = {
     desc = "鼠标上的某个键双击时触发",
@@ -7394,6 +7576,7 @@ M.config["本地-鼠标-双击"] = {
 ---@field current_key py.MouseKey # 当前鼠标按键
 ---@field unit Unit # 当前操作的单位
 ---@alias EventParam.鼠标-按下单位 EventParam.MOUSE_KEY_DOWN_UNIT_EVENT
+
 --鼠标按键按下单位
 M.config["鼠标-按下单位"] = {
     desc = "鼠标上的某个键对着单位按下时触发",
@@ -7445,6 +7628,7 @@ M.config["鼠标-按下单位"] = {
 ---@field current_key py.MouseKey # 当前鼠标按键
 ---@field unit Unit # 当前操作的单位
 ---@alias EventParam.鼠标-抬起单位 EventParam.MOUSE_KEY_UP_UNIT_EVENT
+
 --鼠标按键抬起单位
 M.config["鼠标-抬起单位"] = {
     desc = "鼠标上的某个键对着单位抬起时触发",
@@ -7496,6 +7680,7 @@ M.config["鼠标-抬起单位"] = {
 ---@field current_key py.MouseKey # 当前鼠标按键
 ---@field unit Unit # 当前操作的单位
 ---@alias EventParam.鼠标-双击单位 EventParam.MOUSE_KEY_DB_CLICK_UNIT_EVENT
+
 --鼠标按键双击单位
 M.config["鼠标-双击单位"] = {
     desc = "鼠标上的某个键对着单位双击时触发",
@@ -7547,6 +7732,7 @@ M.config["鼠标-双击单位"] = {
 ---@field current_key py.MouseKey # 当前鼠标按键
 ---@field unit Unit # 当前操作的单位
 ---@alias EventParam.本地-鼠标-按下单位 EventParam.ET_MOUSE_KEY_DOWN_UNIT_EVENT
+
 --异步鼠标按键按下单位
 M.config["本地-鼠标-按下单位"] = {
     desc = "鼠标上的某个键对着单位按下时触发",
@@ -7598,6 +7784,7 @@ M.config["本地-鼠标-按下单位"] = {
 ---@field current_key py.MouseKey # 当前鼠标按键
 ---@field unit Unit # 当前操作的单位
 ---@alias EventParam.本地-鼠标-抬起单位 EventParam.ET_MOUSE_KEY_UP_UNIT_EVENT
+
 --异步鼠标按键抬起单位
 M.config["本地-鼠标-抬起单位"] = {
     desc = "鼠标上的某个键对着单位抬起时触发",
@@ -7649,6 +7836,7 @@ M.config["本地-鼠标-抬起单位"] = {
 ---@field current_key py.MouseKey # 当前鼠标按键
 ---@field unit Unit # 当前操作的单位
 ---@alias EventParam.本地-鼠标-双击单位 EventParam.ET_MOUSE_KEY_DB_CLICK_UNIT_EVENT
+
 --异步鼠标按键双击单位
 M.config["本地-鼠标-双击单位"] = {
     desc = "鼠标上的某个键对着单位双击时触发",
@@ -7701,6 +7889,7 @@ M.config["本地-鼠标-双击单位"] = {
 ---@field tar_x integer # 鼠标指向的屏幕坐标X
 ---@field tar_y integer # 鼠标指向的屏幕坐标Y
 ---@alias EventParam.鼠标-移动 EventParam.MOUSE_MOVE_EVENT
+
 --鼠标移动事件
 M.config["鼠标-移动"] = {
     desc = "鼠标移动时触发",
@@ -7752,6 +7941,7 @@ M.config["鼠标-移动"] = {
 ---@field tar_x integer # 鼠标指向的屏幕坐标X
 ---@field tar_y integer # 鼠标指向的屏幕坐标Y
 ---@alias EventParam.本地-鼠标-移动 EventParam.ET_ASYNC_MOUSE_MOVE_EVENT
+
 --异步鼠标移动事件
 M.config["本地-鼠标-移动"] = {
     desc = "鼠标移动时触发",
@@ -7801,6 +7991,7 @@ M.config["本地-鼠标-移动"] = {
 ---@field player Player # 触发按键的玩家
 ---@field mouse_wheel py.MouseWheel # 当前鼠标滚轮
 ---@alias EventParam.鼠标-滚轮 EventParam.ET_MOUSE_WHEEL_EVENT
+
 --鼠标滚轮事件
 M.config["鼠标-滚轮"] = {
     desc = "鼠标滚轮滚动时触发",
@@ -7843,6 +8034,7 @@ M.config["鼠标-滚轮"] = {
 ---@field player Player # 触发按键的玩家
 ---@field mouse_wheel py.MouseWheel # 当前鼠标滚轮
 ---@alias EventParam.本地-鼠标-滚轮 EventParam.ET_ASYNC_MOUSE_WHEEL_EVENT
+
 --鼠标滚轮事件
 M.config["本地-鼠标-滚轮"] = {
     desc = "鼠标滚轮滚动时触发",
@@ -7885,6 +8077,7 @@ M.config["本地-鼠标-滚轮"] = {
 ---@field player Player # 玩家
 ---@field unit Unit # 点击到单位
 ---@alias EventParam.选中-单位 EventParam.ET_SELECT_UNIT
+
 --玩家选中单位
 M.config["选中-单位"] = {
     desc = "玩家选中单位时触发",
@@ -7917,6 +8110,7 @@ M.config["选中-单位"] = {
 ---@field player Player # 玩家
 ---@field unit Unit # 点击的单位
 ---@alias EventParam.本地-选中-单位 EventParam.ET_ASYNC_SELECT_UNIT
+
 --异步玩家选中单位
 M.config["本地-选中-单位"] = {
     desc = "本地玩家选中单位时触发",
@@ -7952,6 +8146,7 @@ M.config["本地-选中-单位"] = {
 ---@class EventParam.CANCEL_SELECT_UNIT
 ---@field player Player # 玩家
 ---@alias EventParam.选中-取消 EventParam.CANCEL_SELECT_UNIT
+
 --取消选中单位
 M.config["选中-取消"] = {
     desc = "玩家主动取消选中时触发",
@@ -7975,6 +8170,7 @@ M.config["选中-取消"] = {
 ---@class EventParam.ET_ASYNC_CANCEL_SELECT_UNIT
 ---@field player Player # 玩家
 ---@alias EventParam.本地-选中-取消 EventParam.ET_ASYNC_CANCEL_SELECT_UNIT
+
 --异步取消单位选中
 M.config["本地-选中-取消"] = {
     desc = "玩家的选中状态被取消时触发",
@@ -7999,6 +8195,7 @@ M.config["本地-选中-取消"] = {
 ---@field player Player # 玩家
 ---@field unit Unit # 点击到单位
 ---@alias EventParam.选中-失去单位 EventParam.LOST_SELECT_UNIT
+
 --失去选中单位
 M.config["选中-失去单位"] = {
     desc = "玩家被动失去对单位的选中状态时触发",
@@ -8031,6 +8228,7 @@ M.config["选中-失去单位"] = {
 ---@field player Player # 玩家
 ---@field unit Unit # 点击到单位
 ---@alias EventParam.本地-选中-失去单位 EventParam.ET_ASYNC_LOST_SELECT_UNIT
+
 --异步失去单位选中
 M.config["本地-选中-失去单位"] = {
     desc = "本地玩家被动失去对单位的选中状态时触发",
@@ -8063,6 +8261,7 @@ M.config["本地-选中-失去单位"] = {
 ---@field player Player # 玩家
 ---@field item Item # 点击到物品
 ---@alias EventParam.选中-物品 EventParam.ET_SELECT_ITEM
+
 --玩家选中物品
 M.config["选中-物品"] = {
     desc = "物品被选中时触发",
@@ -8095,6 +8294,7 @@ M.config["选中-物品"] = {
 ---@field player Player # 玩家
 ---@field item Item # 点击到物品
 ---@alias EventParam.本地-选中-物品 EventParam.ET_ASYNC_SELECT_ITEM
+
 --异步玩家选中物品
 M.config["本地-选中-物品"] = {
     desc = "本地玩家选中物品时触发",
@@ -8130,6 +8330,7 @@ M.config["本地-选中-物品"] = {
 ---@field cheating_value number # 作弊值
 ---@field real_value number # 真实值
 ---@alias EventParam.玩家-检测到作弊 EventParam.ET_ATTR_CHEATING_DETECTED
+
 --玩家作弊
 M.config["玩家-检测到作弊"] = {
     desc = "",
@@ -8186,6 +8387,7 @@ M.config["玩家-检测到作弊"] = {
 ---@field player Player # 玩家
 ---@field item Item # 双击到物品
 ---@alias EventParam.鼠标-双击物品 EventParam.ET_DOUBLE_CLICK_ITEM
+
 --玩家双击选中物品
 M.config["鼠标-双击物品"] = {
     desc = "鼠标上左键双击物品时触发",
@@ -8219,6 +8421,7 @@ M.config["鼠标-双击物品"] = {
 ---@field player Player # 玩家
 ---@field destructible Destructible # 双击到可破坏物
 ---@alias EventParam.鼠标-双击可破坏物 EventParam.ET_DOUBLE_CLICK_DEST
+
 --玩家双击选中可破坏物
 M.config["鼠标-双击可破坏物"] = {
     desc = "鼠标上左键双击可破坏物时触发",
@@ -8253,6 +8456,7 @@ M.config["鼠标-双击可破坏物"] = {
 ---@field unit_group_id_list UnitGroup # 框选到单位组id列表
 ---@field team_id integer # 队伍编号
 ---@alias EventParam.选中-单位组 EventParam.ET_SELECT_UNIT_GROUP
+
 --玩家选中单位组
 M.config["选中-单位组"] = {
     desc = "玩家选中单位组时触发",
@@ -8294,6 +8498,7 @@ M.config["选中-单位组"] = {
 ---@field unit_group_id_list UnitGroup # 框选到单位组id列表
 ---@field team_id integer # 队伍编号
 ---@alias EventParam.本地-选中-单位组 EventParam.ET_ASYNC_SELECT_UNIT_GROUP
+
 --玩家选中单位组
 M.config["本地-选中-单位组"] = {
     desc = "本地玩家选中单位组时触发",
@@ -8338,6 +8543,7 @@ M.config["本地-选中-单位组"] = {
 ---@field ability_seq py.AbilitySeq # 技能Seq
 ---@field ability Ability # 技能
 ---@alias EventParam.技能-打开指示器 EventParam.ET_START_SKILL_POINTER
+
 --打开技能指示器
 M.config["技能-打开指示器"] = {
     desc = "技能的瞄准指示器显示时触发",
@@ -8415,6 +8621,7 @@ M.config["技能-打开指示器"] = {
 ---@field ability_target_pos Point # 施法目标位置
 ---@field ability_release_id py.AbilityReleaseId # 单次技能释放唯一ID
 ---@alias EventParam.技能-建造技能释放前 EventParam.ET_BUILD_SKILL_BEFORE_RELEASE
+
 --建造技能释放前
 M.config["技能-建造技能释放前"] = {
     desc = "建造技能的命令将要发布时",
@@ -8499,6 +8706,7 @@ M.config["技能-建造技能释放前"] = {
 ---@field ability_seq py.AbilitySeq # 技能Seq
 ---@field ability Ability # 技能
 ---@alias EventParam.技能-关闭指示器 EventParam.ET_STOP_SKILL_POINTER
+
 --关闭技能指示器
 M.config["技能-关闭指示器"] = {
     desc = "技能的瞄准指示器消失时触发",
@@ -8572,6 +8780,7 @@ M.config["技能-关闭指示器"] = {
 ---@field item Item # 物品
 ---@field item_no py.ItemKey # 物品编号
 ---@alias EventParam.物品-获得 EventParam.ET_UNIT_ADD_ITEM
+
 --单位获得物品
 M.config["物品-获得"] = {
     desc = "单位获得物品时触发",
@@ -8613,6 +8822,7 @@ M.config["物品-获得"] = {
 ---@field item Item # 物品
 ---@field item_no py.ItemKey # 物品编号
 ---@alias EventParam.物品-进入物品栏 EventParam.ET_UNIT_ADD_ITEM_TO_BAR
+
 --单位获得物品到物品栏
 M.config["物品-进入物品栏"] = {
     desc = "物品进入单位的物品栏时触发",
@@ -8654,6 +8864,7 @@ M.config["物品-进入物品栏"] = {
 ---@field item Item # 物品
 ---@field item_no py.ItemKey # 物品编号
 ---@alias EventParam.物品-进入背包 EventParam.ET_UNIT_ADD_ITEM_TO_PKG
+
 --单位获得物品到背包栏
 M.config["物品-进入背包"] = {
     desc = "物品进入单位的背包时触发",
@@ -8695,6 +8906,7 @@ M.config["物品-进入背包"] = {
 ---@field item Item # 物品
 ---@field item_no py.ItemKey # 物品编号
 ---@alias EventParam.物品-失去 EventParam.ET_UNIT_REMOVE_ITEM
+
 --单位失去物品
 M.config["物品-失去"] = {
     desc = "单位失去物品时触发",
@@ -8736,6 +8948,7 @@ M.config["物品-失去"] = {
 ---@field item Item # 物品
 ---@field item_no py.ItemKey # 物品编号
 ---@alias EventParam.物品-离开物品栏 EventParam.ET_UNIT_REMOVE_ITEM_FROM_BAR
+
 --单位物品从物品栏离开
 M.config["物品-离开物品栏"] = {
     desc = "物品离开单位的物品栏时触发",
@@ -8777,6 +8990,7 @@ M.config["物品-离开物品栏"] = {
 ---@field item Item # 物品
 ---@field item_no py.ItemKey # 物品编号
 ---@alias EventParam.物品-离开背包 EventParam.ET_UNIT_REMOVE_ITEM_FROM_PKG
+
 --单位物品从背包栏离开
 M.config["物品-离开背包"] = {
     desc = "物品离开单位的背包时触发",
@@ -8818,6 +9032,7 @@ M.config["物品-离开背包"] = {
 ---@field item Item # 物品
 ---@field item_no py.ItemKey # 物品编号
 ---@alias EventParam.物品-使用 EventParam.ET_UNIT_USE_ITEM
+
 --单位使用物品
 M.config["物品-使用"] = {
     desc = "单位使用物品时触发",
@@ -8857,6 +9072,7 @@ M.config["物品-使用"] = {
 ---@class EventParam.ET_UNIT_START_NAV_EVENT
 ---@field unit Unit # 单位
 ---@alias EventParam.单位-寻路开始 EventParam.ET_UNIT_START_NAV_EVENT
+
 --单位开始寻路时
 M.config["单位-寻路开始"] = {
     desc = "攻击、移动、施法等行为均可能导致寻路",
@@ -8880,6 +9096,7 @@ M.config["单位-寻路开始"] = {
 ---@class EventParam.ET_UNIT_END_NAV_EVENT
 ---@field unit Unit # 单位
 ---@alias EventParam.单位-寻路结束 EventParam.ET_UNIT_END_NAV_EVENT
+
 --单位结束寻路时
 M.config["单位-寻路结束"] = {
     desc = "寻路到达目标位置或失败3次后触发",
@@ -8906,6 +9123,7 @@ M.config["单位-寻路结束"] = {
 ---@field item_no py.ItemKey # 物品编号
 ---@field delta_cnt integer # 变化值
 ---@alias EventParam.物品-堆叠变化 EventParam.ET_ITEM_STACK_CHANGED
+
 --物品层数变化
 M.config["物品-堆叠变化"] = {
     desc = "物品堆叠数变化时触发",
@@ -8956,6 +9174,7 @@ M.config["物品-堆叠变化"] = {
 ---@field item_no py.ItemKey # 物品编号
 ---@field delta_cnt integer # 变化值
 ---@alias EventParam.物品-充能变化 EventParam.ET_ITEM_CHARGE_CHANGED
+
 --物品充能变化
 M.config["物品-充能变化"] = {
     desc = "物品充能层数变化时触发",
@@ -9004,6 +9223,7 @@ M.config["物品-充能变化"] = {
 ---@field item Item # 被创建的物品
 ---@field lua_table py.Table # 用户自定义配置表
 ---@alias EventParam.物品-创建 EventParam.ET_ITEM_ON_CREATE
+
 --物品创建
 M.config["物品-创建"] = {
     desc = "物品创建时触发",
@@ -9035,6 +9255,7 @@ M.config["物品-创建"] = {
 ---@class EventParam.ET_ITEM_ON_DESTROY
 ---@field item Item # 销毁的物品
 ---@alias EventParam.物品-移除 EventParam.ET_ITEM_ON_DESTROY
+
 --物品销毁
 M.config["物品-移除"] = {
     desc = "物品移除时触发",
@@ -9062,6 +9283,7 @@ M.config["物品-移除"] = {
 ---@field buy_unit Unit # 收购物品的单位
 ---@field shop_unit Unit # 出售物品的单位
 ---@alias EventParam.物品-出售 EventParam.ET_ITEM_SOLD
+
 --出售物品
 M.config["物品-出售"] = {
     desc = "将物品出售给商店时触发",
@@ -9118,6 +9340,7 @@ M.config["物品-出售"] = {
 ---@field item Item # 被破坏的物品
 ---@field unit Unit # 破坏物品的单位
 ---@alias EventParam.物品-死亡 EventParam.ET_ITEM_BROKEN
+
 --破坏物品
 M.config["物品-死亡"] = {
     desc = "物品被破坏时触发",
@@ -9152,6 +9375,7 @@ M.config["物品-死亡"] = {
 ---@field unit Unit # 采集可破坏物事件中的单位
 ---@field ability Ability # 采集可破坏物的捷能
 ---@alias EventParam.物品-采集创建 EventParam.ET_ITEM_CREATE_ON_DEST_COLLECTED
+
 --物品被采集创建
 M.config["物品-采集创建"] = {
     desc = "物品通过采集被创建时会触发该事件。采集功能来自可破坏物。",
@@ -9201,6 +9425,7 @@ M.config["物品-采集创建"] = {
 ---@field tar_x number # 点击位置X坐标
 ---@field tar_y number # 点击位置Y坐标
 ---@alias EventParam.命令-攻击移动 EventParam.ET_ATTACK_MOVE_CMD
+
 --左键A地板
 M.config["命令-攻击移动"] = {
     desc = "",
@@ -9241,6 +9466,7 @@ M.config["命令-攻击移动"] = {
 ---@field shop_unit Unit # 商店单位
 ---@field item Item # 商品
 ---@alias EventParam.命令-出售物品 EventParam.ET_SELL_ITEM_CMD
+
 --出售物品
 M.config["命令-出售物品"] = {
     desc = "",
@@ -9277,6 +9503,7 @@ M.config["命令-出售物品"] = {
 ---@field target_item py.Dict # 释放技能参数
 ---@field ability Ability # 技能
 ---@alias EventParam.命令-施放技能 EventParam.ET_AI_RELEASE_SKILL_CMD
+
 --释放技能
 M.config["命令-施放技能"] = {
     desc = "",
@@ -9344,6 +9571,7 @@ M.config["命令-施放技能"] = {
 ---@field tar_x number # 点击位置X坐标
 ---@field tar_y number # 点击位置Y坐标
 ---@alias EventParam.命令-巡逻 EventParam.ET_PATROL_CMD
+
 --巡逻
 M.config["命令-巡逻"] = {
     desc = "",
@@ -9385,6 +9613,7 @@ M.config["命令-巡逻"] = {
 ---@field tar_x number # 点击位置X坐标
 ---@field tar_y number # 点击位置Y坐标
 ---@alias EventParam.命令-移动 EventParam.ET_MOVE_UNIT_TO_TARGET_CMD
+
 --寻路到位置
 M.config["命令-移动"] = {
     desc = "",
@@ -9427,6 +9656,7 @@ M.config["命令-移动"] = {
 ---@field item Item # 悬浮物品
 ---@field destructible Destructible # 悬浮可破坏物
 ---@alias EventParam.鼠标-悬停 EventParam.ET_MOUSE_HOVER_EVENT
+
 --鼠标悬停事件
 M.config["鼠标-悬停"] = {
     desc = "悬停进入或离开都会触发",
@@ -9478,6 +9708,7 @@ M.config["鼠标-悬停"] = {
 ---@field item Item # 悬浮物品
 ---@field destructible Destructible # 悬浮可破坏物
 ---@alias EventParam.本地-鼠标-悬停 EventParam.ET_ASYNC_MOUSE_HOVER_EVENT
+
 --异步鼠标悬停事件
 M.config["本地-鼠标-悬停"] = {
     desc = "悬停进入或离开都会触发",
@@ -9527,6 +9758,7 @@ M.config["本地-鼠标-悬停"] = {
 ---@field str1 string # 指令字符串
 ---@field player Player # 玩家
 ---@alias EventParam.玩家-发送消息 EventParam.ET_CHAT_SEND_GM
+
 --聊天中发送指令
 M.config["玩家-发送消息"] = {
     desc = "玩家发送任意消息时触发",
@@ -9562,6 +9794,7 @@ M.config["玩家-发送消息"] = {
 ---@field data table # 
 ---@field event string # 
 ---@alias EventParam.游戏-消息 EventParam.ET_EVENT_CUSTOM
+
 --自定义事件
 M.config["游戏-消息"] = {
     desc = "在事件管理处定义的事件通过这个方法进行触发",
@@ -9625,6 +9858,7 @@ M.config["游戏-消息"] = {
 ---@field audio_channel integer # 频道
 ---@field audio_bool boolean # 是否发言
 ---@alias EventParam.玩家-语音发言 EventParam.ET_MICRO_SPEAK
+
 --语音说话
 M.config["玩家-语音发言"] = {
     desc = "玩家开始语音和结束语音都会触发",
@@ -9666,6 +9900,7 @@ M.config["玩家-语音发言"] = {
 ---@field unit Unit # 单位
 ---@field is_active boolean # 是否开启
 ---@alias EventParam.未知-ET_UNIT_3D_ACTIVE EventParam.ET_UNIT_3D_ACTIVE
+
 --聊天中发送指令
 M.config["未知-ET_UNIT_3D_ACTIVE"] = {
     _deprecated = true,
@@ -9701,6 +9936,7 @@ M.config["未知-ET_UNIT_3D_ACTIVE"] = {
 ---@field store_item_expire_date integer # 平台道具到期时间戳
 ---@field player Player # 玩家
 ---@alias EventParam.玩家-平台道具变化 EventParam.ET_ROLE_STORE_ITEM_CHANGED
+
 --平台道具变化事件
 M.config["玩家-平台道具变化"] = {
     desc = "玩家平台道具变化时触发",
@@ -9757,6 +9993,7 @@ M.config["玩家-平台道具变化"] = {
 ---@field player Player # 玩家
 ---@field store_page_state boolean # 商城界面状态
 ---@alias EventParam.玩家-平台商城窗口变化 EventParam.ET_ROLE_STORE_PAGE_STATE_CHANGED
+
 --平台商城窗口变化事件
 M.config["玩家-平台商城窗口变化"] = {
     desc = "平台商城窗口变化事件",
@@ -9789,6 +10026,7 @@ M.config["玩家-平台商城窗口变化"] = {
 ---@class EventParam.ET_LUA_CONSOLE_COMMAND
 ---@field str1 string # 指令字符串
 ---@alias EventParam.控制台-输入 EventParam.ET_LUA_CONSOLE_COMMAND
+
 --LuaConsole命令
 M.config["控制台-输入"] = {
     desc = "",
@@ -9811,6 +10049,7 @@ M.config["控制台-输入"] = {
 ---@class EventParam.ET_LUA_CONSOLE_TIPS
 ---@field str1 string # 指令前缀
 ---@alias EventParam.控制台-请求补全 EventParam.ET_LUA_CONSOLE_TIPS
+
 --LuaConsole命令补全
 M.config["控制台-请求补全"] = {
     desc = "",
@@ -9833,6 +10072,7 @@ M.config["控制台-请求补全"] = {
 ---@class EventParam.ET_MALL_NOTIFY_FRIEND_NEW
 ---@field nick_name string # 申请者名称
 ---@alias EventParam.steam-收到好友申请 EventParam.ET_MALL_NOTIFY_FRIEND_NEW
+
 --steam大厅收到好友申请事件
 M.config["steam-收到好友申请"] = {
     desc = "",
@@ -9855,6 +10095,7 @@ M.config["steam-收到好友申请"] = {
 ---@class EventParam.ET_MALL_NOTIFY_FRIEND_DELETE
 ---@field player_aid integer # 删除者ID
 ---@alias EventParam.steam-收到被好友删除 EventParam.ET_MALL_NOTIFY_FRIEND_DELETE
+
 --steam大厅收到被好友删除事件
 M.config["steam-收到被好友删除"] = {
     desc = "",
@@ -9878,6 +10119,7 @@ M.config["steam-收到被好友删除"] = {
 ---@field online_state y3.Const.SteamOnlineState # 好友在线状态
 ---@field player_aid integer # 好友ID
 ---@alias EventParam.steam-好友在线状态变化 EventParam.ET_MALL_NOTIFY_FRIEND_UPDATE
+
 --steam大厅好友在线状态变化事件
 M.config["steam-好友在线状态变化"] = {
     desc = "",
@@ -9907,6 +10149,7 @@ M.config["steam-好友在线状态变化"] = {
 
 ---@class EventParam.ET_MALL_NOTIFY_TEAM_UPDATE
 ---@alias EventParam.steam-本地玩家队伍变化 EventParam.ET_MALL_NOTIFY_TEAM_UPDATE
+
 --steam大厅本地玩家队伍发生变化
 M.config["steam-本地玩家队伍变化"] = {
     desc = "",
@@ -9923,6 +10166,7 @@ M.config["steam-本地玩家队伍变化"] = {
 ---@field nick_name string # 发送方名称
 ---@field team_id integer # 队伍ID
 ---@alias EventParam.steam-收到队伍邀请 EventParam.ET_MALL_NOTIFY_TEAM_INVITE
+
 --steam大厅收到队伍邀请
 M.config["steam-收到队伍邀请"] = {
     desc = "",
@@ -9960,6 +10204,7 @@ M.config["steam-收到队伍邀请"] = {
 
 ---@class EventParam.ET_MALL_NOTIFY_ENTER_LOBBY
 ---@alias EventParam.steam-进入大厅 EventParam.ET_MALL_NOTIFY_ENTER_LOBBY
+
 --steam大厅收到队伍邀请
 M.config["steam-进入大厅"] = {
     desc = "",
@@ -9973,6 +10218,7 @@ M.config["steam-进入大厅"] = {
 
 ---@class EventParam.ET_MALL_NOTIFY_START_MATCH
 ---@alias EventParam.steam-开始匹配 EventParam.ET_MALL_NOTIFY_START_MATCH
+
 --steam大厅开始匹配
 M.config["steam-开始匹配"] = {
     desc = "",
@@ -9986,6 +10232,7 @@ M.config["steam-开始匹配"] = {
 
 ---@class EventParam.ET_MALL_NOTIFY_CANCEL_MATCH
 ---@alias EventParam.steam-取消匹配 EventParam.ET_MALL_NOTIFY_CANCEL_MATCH
+
 --steam大厅取消匹配
 M.config["steam-取消匹配"] = {
     desc = "",
@@ -9999,6 +10246,7 @@ M.config["steam-取消匹配"] = {
 
 ---@class EventParam.ET_MALL_NOTIFY_ROOM_INFO_CHANGE
 ---@alias EventParam.steam-本地房间信息变化 EventParam.ET_MALL_NOTIFY_ROOM_INFO_CHANGE
+
 --steam本地房间信息发生变化
 M.config["steam-本地房间信息变化"] = {
     desc = "",
@@ -10015,6 +10263,7 @@ M.config["steam-本地房间信息变化"] = {
 ---@field player_aid integer # 邀请人ID
 ---@field nick_name string # 邀请人名称
 ---@alias EventParam.steam-被邀请加入房间 EventParam.ET_MALL_NOTIFY_ROOM_INVITE
+
 --steam被邀请加入房间
 M.config["steam-被邀请加入房间"] = {
     desc = "",
@@ -10052,6 +10301,7 @@ M.config["steam-被邀请加入房间"] = {
 
 ---@class EventParam.ET_MALL_NOTIFY_ROOM_KICK_OFF
 ---@alias EventParam.steam-被踢出房间 EventParam.ET_MALL_NOTIFY_ROOM_KICK_OFF
+
 --steam被踢出房间
 M.config["steam-被踢出房间"] = {
     desc = "",
@@ -10065,6 +10315,7 @@ M.config["steam-被踢出房间"] = {
 
 ---@class EventParam.ET_MALL_NOTIFY_ROOM_BUILD
 ---@alias EventParam.steam-创建房间成功 EventParam.ET_MALL_NOTIFY_ROOM_BUILD
+
 --steam被踢出房间
 M.config["steam-创建房间成功"] = {
     desc = "",
@@ -10081,6 +10332,7 @@ M.config["steam-创建房间成功"] = {
 ---@field mlscript_event_name string # 事件名
 ---@field mlscript_event_data py.Table # 事件数据一维表
 ---@alias EventParam.玩家-收到云脚本消息 EventParam.ET_ON_MLS_SCRIPT_EVENT
+
 --收到云脚本消息
 M.config["玩家-收到云脚本消息"] = {
     desc = "收到云脚本消息时触发",
