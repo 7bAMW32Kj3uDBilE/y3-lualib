@@ -4,7 +4,6 @@
 ---@field _localPlayer Player 本地玩家
 ---@field _localPlayerId integer 本地玩家ID
 ---@field _name string 界面名称
----@field _block                UI                        背景遮罩（* 阻止鼠标穿透)
 ---@field block?                boolean                   是否启用背景遮罩（默认开启，M.block = false 可关闭）
 ---@field _isAttached boolean 是否已完成 attach
 ---@field _eventHandlers table<string, function[]> 面板内部事件监听器
@@ -204,12 +203,30 @@ function M:open(...)
 
     -- 背景遮罩默认开启：阻断点击穿透到场景
     -- 子类可用 M.block = false 关闭
-    if self.block ~= false and self._block then
-        if self._block_trigger then
-            self._block_trigger:enable()
+    -- ? UI编辑器不设置拦截照样会阻断穿透，因为没有接口获取UI是否设置了拦截
+    if self.block ~= false then
+        if self._block_triggers then
+            for i = 1, #self._block_triggers do
+                self._block_triggers[i]:enable()
+            end
         else
-            self._block_trigger = self._block:add_fast_event('鼠标-右击', function(trg, data)
-            end)
+            -- ! 约定
+            local root = self._panelObj:get_child('root')
+            if root then
+                local bind = y3.ui.property
+                self._block_triggers = {}
+                -- 添加一个空的右键点击事件来阻止鼠标穿透
+                self._block_triggers[#self._block_triggers + 1] = root:add_fast_event('鼠标-右击', function(trg, data)
+                end)
+                self._block_triggers[#self._block_triggers + 1] = root:add_fast_event('鼠标-移出', function(trg, data)
+                    bind.is_mouse_in_panel = false
+                    self.__mouse_over = false
+                end)
+                self._block_triggers[#self._block_triggers + 1] = root:add_fast_event('鼠标-移入', function(trg, data)
+                    bind.is_mouse_in_panel = true
+                    self.__mouse_over = true
+                end)
+            end
         end
     end
     -- 调用子类 on_refresh
@@ -222,9 +239,19 @@ function M:close()
         return
     end
 
-    if self.block ~= false and self._block_trigger then
-        self._block_trigger:disable()
+    if self._block_triggers then
+        for i = 1, #self._block_triggers do
+            self._block_triggers[i]:disable()
+        end
     end
+
+    local bind = y3.ui.property
+
+    if self.__mouse_over and bind.is_mouse_in_panel then
+        self.__mouse_over = false
+        bind.is_mouse_in_panel = false
+    end
+
     self._panelObj:set_visible(false)
 
     -- 调用子类 on_hide
