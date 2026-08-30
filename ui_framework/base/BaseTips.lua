@@ -21,7 +21,7 @@ function M:attach(uiNode)
     self._localPlayerId = 1
     self._root = y3.ui.get_by_handle(self._localPlayer, uiNode)
     self._isAttached = true
-
+    self._root:set_visible(false)
     -- 调用子类 on_init
     self:on_init(self._root, self._localPlayer)
 end
