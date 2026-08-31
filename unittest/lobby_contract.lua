@@ -330,6 +330,22 @@ _G.y3 = {
             return { remove = function() end }
         end,
     },
+    ctimer = {
+        wait_frame = function(_, callback)
+            local timer = {
+                removed = false,
+                remove = function(self)
+                    self.removed = true
+                end,
+            }
+            frame_callbacks[#frame_callbacks + 1] = function()
+                if not timer.removed then
+                    callback(timer, 1)
+                end
+            end
+            return timer
+        end,
+    },
     player = {
         get_local = function()
             return {
@@ -1318,6 +1334,94 @@ bob:get_player_info(99009, function(_, err)
     propagated_player_error = err
 end)
 assert_equal(propagated_player_error, 300123, 'get_player_info 透传 get_team_info 远端错误')
+
+do
+    local original_is_valid = IsValid
+    local bob_valid = true
+    IsValid = function(value)
+        if value == bob then
+            return bob_valid
+        end
+        return original_is_valid(value)
+    end
+    GameAPI.get_dungeon_info = function()
+        return { env = 'prod' }
+    end
+    y3.json.decode = function()
+        return {
+            ['2.0'] = {
+                ['@metadata@'] = {
+                    ['@displayversion@'] = '2.5.24.762647',
+                },
+            },
+        }
+    end
+
+    local function begin_version_check(local_version, injection_status)
+        local scenario = {
+            completion_count = 0,
+            need_update = nil,
+            first_frame_index = #frame_callbacks + 1,
+        }
+        local remote_callback
+        y3.game = {
+            is_debug_mode = function()
+                return false
+            end,
+            request_url = function(_, _, _, callback)
+                remote_callback = callback
+            end,
+        }
+        _G['_SVN_VERSION'] = local_version
+        _G['_SVN_VERSION_INJECTION_STATUS'] = injection_status
+        bob_valid = true
+        bob:check_update(function(need_update)
+            scenario.completion_count = scenario.completion_count + 1
+            scenario.need_update = need_update
+        end)
+        assert_equal(type(remote_callback), 'function', '版本检查发起远端请求')
+        remote_callback('{}')
+        return scenario
+    end
+
+    local pending = begin_version_check(nil, 'pending')
+    assert_equal(pending.completion_count, 0, '本地版本注入 pending 时不应完成版本检查')
+    assert_equal(type(frame_callbacks[pending.first_frame_index]), 'function', '本地版本注入 pending 时等待下一客户端帧')
+    _G['_SVN_VERSION'] = '2.5.24.762647'
+    _G['_SVN_VERSION_INJECTION_STATUS'] = 'ok'
+    frame_callbacks[pending.first_frame_index]()
+    assert_equal(pending.completion_count, 1, '本地版本注入完成后只完成一次版本检查')
+    assert_equal(pending.need_update, false, '本地与远端版本一致时无需更新')
+    frame_callbacks[pending.first_frame_index]()
+    assert_equal(pending.completion_count, 1, '重复客户端帧回调不能重复完成版本检查')
+
+    local stale = begin_version_check('stale-version', 'pending')
+    assert_equal(stale.completion_count, 0, '注入 pending 时不能使用残留的旧版本')
+    _G['_SVN_VERSION'] = '2.5.24.762647'
+    _G['_SVN_VERSION_INJECTION_STATUS'] = 'ok'
+    frame_callbacks[stale.first_frame_index]()
+    assert_equal(stale.completion_count, 1, '残留版本被新注入覆盖后完成检查')
+    assert_equal(stale.need_update, false, '新注入版本一致时无需更新')
+
+    local destroyed = begin_version_check(nil, 'pending')
+    local callbacks_before_destroy = #frame_callbacks
+    bob_valid = false
+    frame_callbacks[destroyed.first_frame_index]()
+    assert_equal(destroyed.completion_count, 0, 'BOB 销毁后不再完成版本检查')
+    assert_equal(#frame_callbacks, callbacks_before_destroy, 'BOB 销毁后不再继续等待版本注入')
+
+    local exhausted = begin_version_check(nil, 'pending')
+    for index = exhausted.first_frame_index, exhausted.first_frame_index + 149 do
+        frame_callbacks[index]()
+    end
+    assert_equal(exhausted.completion_count, 1, '版本注入等待耗尽后完成检查')
+    assert_equal(exhausted.need_update, false, '版本注入等待耗尽后按 fail-open 继续')
+
+    local failed = begin_version_check(nil, 'failed: test')
+    assert_equal(failed.completion_count, 1, '版本注入失败时立即完成检查')
+    assert_equal(failed.need_update, false, '版本注入失败时按 fail-open 继续')
+    IsValid = original_is_valid
+end
 
 local client_api = require 'y3.game.lobby.service.client'
 local raw_client = client_api.new_client('127.0.0.1', 8092, 10086, 'client-runtime-token-secret', TEST_GAME_PLAY_ID)
