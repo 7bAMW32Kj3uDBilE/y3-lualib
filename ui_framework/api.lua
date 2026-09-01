@@ -145,10 +145,19 @@ end
 -- Tips 控制
 ----------------------------
 
+local current_tips = nil
+
+--- 获取当前显示的 Tips 名称
+---@return string?
+function API.get_tips()
+    return current_tips
+end
+
 ---显示 Tips
 ---@param name string Tips 名称
 ---@param param? table 参数
 function API.show_tips(name, param)
+    current_tips = name
     share.uiMgr:showTips(name, param)
 end
 
@@ -156,6 +165,7 @@ end
 ---@param name string Tips 名称
 ---@param param? table 参数
 function API.hide_tips(name, param)
+    current_tips = nil
     share.uiMgr:hideTips(name, param)
 end
 
