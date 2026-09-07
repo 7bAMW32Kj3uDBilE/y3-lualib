@@ -175,7 +175,7 @@ function M.is_ready()
         and is_valid_client(state.runtime.client)
 end
 
----@param game_play_id integer
+---@param game_play_id integer? # 缺失或无效的玩法 ID 会返回拒绝结果
 ---@param finish fun(request: table, success: boolean, code: string, reason: string?, data: table?)
 ---@param in_game boolean?
 ---@param endpoint_env string?

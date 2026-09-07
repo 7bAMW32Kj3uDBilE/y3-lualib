@@ -3,75 +3,75 @@ local const = require "y3.game.lobby.network.protocol"
 local fsm = require "y3.game.lobby.network.fsm"
 
 ---@class LobbyClient
----@field public ClientPush_ClientRegister fun(self: Client, aid: integer):boolean, string
+---@field public ClientPush_ClientRegister fun(self: LobbyClient, aid: integer):boolean, string
 ---comment '注册客户端，注册成功后可收到服务器推送消息，游戏初始化时调用'
 ---param aid 玩家id
 ---return boolean, string
----@field public ClientPush_ClientUnregister fun(self: Client, aid: integer):boolean, string
+---@field public ClientPush_ClientUnregister fun(self: LobbyClient, aid: integer):boolean, string
 ---comment 注销客户端'
 ---param aid 玩家id
 ---return boolean, string
----@field public Team_UpdatePlayerInfo fun(self: Client, player_info: PlayerInfo):boolean, string
+---@field public Team_UpdatePlayerInfo fun(self: LobbyClient, player_info: PlayerInfo):boolean, string
 ---comment '上报/更新玩家信息，一切业务依赖玩家信息，游戏初始化时上报'
 ---param player_info 玩家信息
 ---return boolean, string
----@field public Team_Login fun(self: Client, player_info: PlayerInfo): boolean, string
+---@field public Team_Login fun(self: LobbyClient, player_info: PlayerInfo): boolean, string
 ---comment '登录'
 ---param player_info 玩家信息
 ---return boolean, string
----@field public Team_DelPlayerInfo fun(self: Client, aid: integer):boolean, string
+---@field public Team_DelPlayerInfo fun(self: LobbyClient, aid: integer):boolean, string
 ---comment '移除玩家信息，请在退出游戏前调用'
 ---param aid 玩家id
 ---return boolean, string
 ----------------队伍相关----------------
----@field public Team_CreateTeam fun(self: Client, aid: integer, member_limit: integer):boolean, string
+---@field public Team_CreateTeam fun(self: LobbyClient, aid: integer, member_limit: integer):boolean, string
 ---comment '请求创建队伍，队长为aid'
 ---param aid 玩家id
 ---return boolean, string
----@field public Team_LeaveTeam fun(self: Client, aid: integer):boolean, string
+---@field public Team_LeaveTeam fun(self: LobbyClient, aid: integer):boolean, string
 ---comment '请求离开队伍'
 ---param aid 玩家id
 ---return boolean, string
----@field public Team_JoinTeam fun(self: Client, aid: integer, team_id: integer):boolean, string
+---@field public Team_JoinTeam fun(self: LobbyClient, aid: integer, team_id: integer):boolean, string
 ---comment '请求加入队伍'
 ---param aid 玩家id
 ---param team_id 队伍id
 ---return boolean, string
----@field public Team_TeamKick fun(self: Client, aid: integer, kicki_aid: integer):boolean, string
+---@field public Team_TeamKick fun(self: LobbyClient, aid: integer, kicki_aid: integer):boolean, string
 ---comment '请求踢出队伍'
 ---param aid 玩家id
 ---param kicki_aid 踢出的目标玩家id
 ---return boolean, string
----@field public Team_ChangeTeamLeader fun(self: Client, aid: integer, new_leader_aid: integer):boolean, string
+---@field public Team_ChangeTeamLeader fun(self: LobbyClient, aid: integer, new_leader_aid: integer):boolean, string
 ---comment '请求转移队长'
 ---param aid 玩家id
 ---param new_leader_aid 转移的队长玩家id
 ---return boolean, string
----@field public Team_GetTeamInfoByAid fun(self: Client, aid: integer):boolean, string
+---@field public Team_GetTeamInfoByAid fun(self: LobbyClient, aid: integer):boolean, string
 ---comment '请求玩家所在队伍信息'
 ---param aid 玩家id
 ---return boolean, string
----@field public Team_DismissTeam fun(self: Client, aid: integer):boolean, string
+---@field public Team_DismissTeam fun(self: LobbyClient, aid: integer):boolean, string
 ---comment '请求解散队伍'
 ---param aid 玩家id
 ---return boolean, string
 ----------------队伍相关----------------
 ----------------匹配相关----------------
----@field public Match_startMatch fun(self: Client, unit_id: integer, score: integer, is_team: boolean, match_info: MatchInfo):boolean, string
+---@field public Match_startMatch fun(self: LobbyClient, unit_id: integer, score: integer, is_team: boolean, match_info: MatchInfo):boolean, string
 ---comment '请求开始匹配'
 ---param unit_id 匹配单元id，单人为玩家id，多人为队伍id
 ---param score 分数
 ---param is_team 是否为队伍
 ---param match_info 匹配信息
 ---return boolean, string
----@field public Match_cancelMatch fun(self: Client, unit_id: integer):boolean, string
+---@field public Match_cancelMatch fun(self: LobbyClient, unit_id: integer):boolean, string
 ---comment '请求离开匹配'
 ---param unit_id 匹配单元id，单人为玩家id，多人为队伍id
 ---return boolean, string
 ----------------匹配相关----------------
 ----------------聊天相关----------------
----@field public ApiRouter_SendChatMsg fun(self: Client, sender: integer, chat_msg: string, channel_type: integer, dst_id: integer, flag: integer):boolean, string
----@field public ApiRouter_UpdateChannel fun(self: Client, op_type: integer, channel_type: integer, channel_id: integer, members: integer[], game_play_id: integer):boolean, string
+---@field public ApiRouter_SendChatMsg fun(self: LobbyClient, sender: integer, chat_msg: string, channel_type: integer, dst_id: integer, flag: integer):boolean, string
+---@field public ApiRouter_UpdateChannel fun(self: LobbyClient, op_type: integer, channel_type: integer, channel_id: integer, members: integer[], game_play_id: integer):boolean, string
 ---comment '发送聊天消息'
 ---param sender 发送者玩家id
 ---param chat_msg 聊天信息
@@ -81,12 +81,12 @@ local fsm = require "y3.game.lobby.network.fsm"
 ---return boolean, string
 ----------------聊天相关----------------
 ----------------开始游戏----------------
----@field public BattleCreate_CreateMultiBattleSpace fun(self: Client, battle_info: MultiBattleField):boolean, string
+---@field public BattleCreate_CreateMultiBattleSpace fun(self: LobbyClient, battle_info: MultiBattleField):boolean, string
 ---comment '创建多人战场(本地多开)'
 ---param battle_info 战场信息
 ---return boolean, string
 ---@class LobbyClient
----@field public DungeonManager_StartMatchPrivateDungeonGame fun(self: Client, dungeonSpaceInfo: DungeonSpaceField, players: DungeonPlayerField[]):boolean, string
+---@field public DungeonManager_StartMatchPrivateDungeonGame fun(self: LobbyClient, dungeonSpaceInfo: DungeonSpaceField, players: DungeonPlayerField[]):boolean, string
 ---comment '请求多人切换副本'
 ---param dungeonSpaceInfo 副本信息
 ---param players 玩家列表；每项必须包含 aid 和 version，version 当前固定传 '2.0'
@@ -207,6 +207,7 @@ end
 
 ---主动关闭当前连接并重新连接。
 ---@param reason? string
+---@return boolean
 function M:reconnect(reason)
     log.warn('[Client] reconnect:', reason or 'unknown')
     self._closing = false
@@ -582,7 +583,7 @@ local API = {}
 ---@param aid integer # 玩家id
 ---@param token string # token
 ---@param game_play_id integer # 地图固定id
----@return Client
+---@return LobbyClient
 function API.new_client(ip, port, aid, token, game_play_id)
     local client = New 'LobbyClient' (ip, port, aid, token, game_play_id)
     return client
