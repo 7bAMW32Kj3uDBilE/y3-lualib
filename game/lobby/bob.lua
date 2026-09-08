@@ -30,18 +30,19 @@ local leave_reason = {
 ---| 'login'
 
 ---@class LobbyBob: CustomEvent, GCHost
----@field event_on fun(self: Bob, event: '准备就绪', callback: fun(trg: Trigger)): Trigger
----@field event_on fun(self: Bob, event: '在线状态变化', callback: fun(trg: Trigger, state: Bob.State)): Trigger
----@field event_on fun(self: Bob, event: '匹配状态变化', callback: fun(trg: Trigger, state: boolean)): Trigger
----@field event_on fun(self: Bob, event: '启动状态变化', callback: fun(trg: Trigger, state: boolean)): Trigger
----@field event_on fun(self: Bob, event: '收到消息', callback: fun(trg: Trigger, data: Bob.ChatInfo)): Trigger
----@field event_on fun(self: Bob, event: '队伍变化', callback: fun(trg: Trigger, data: Bob.TeamInfo)): Trigger
----@field event_on fun(self: Bob, event: '加入队伍', callback: fun(trg: Trigger)): Trigger
----@field event_on fun(self: Bob, event: '离开队伍', callback: fun(trg: Trigger, reason: Bob.LeaveReason, last_team_info: Bob.TeamInfo)): Trigger
----@field event_on fun(self: Bob, event: '有人加入队伍', callback: fun(trg: Trigger, data: Bob.PlayerInfo)): Trigger
----@field event_on fun(self: Bob, event: '有人离开队伍', callback: fun(trg: Trigger, data: Bob.PlayerInfo)): Trigger
----@field event_on fun(self: Bob, event: '客户端需要更新', callback: fun(trg: Trigger)): Trigger
----@overload fun(game_play_id: integer):Bob
+---@field chat_event? Trigger
+---@field event_on fun(self: LobbyBob, event: '准备就绪', callback: fun(trg: Trigger)): Trigger
+---@field event_on fun(self: LobbyBob, event: '在线状态变化', callback: fun(trg: Trigger, state: Bob.State)): Trigger
+---@field event_on fun(self: LobbyBob, event: '匹配状态变化', callback: fun(trg: Trigger, state: boolean)): Trigger
+---@field event_on fun(self: LobbyBob, event: '启动状态变化', callback: fun(trg: Trigger, state: boolean)): Trigger
+---@field event_on fun(self: LobbyBob, event: '收到消息', callback: fun(trg: Trigger, data: LobbyBob.ChatInfo)): Trigger
+---@field event_on fun(self: LobbyBob, event: '队伍变化', callback: fun(trg: Trigger, data: LobbyBob.TeamInfo)): Trigger
+---@field event_on fun(self: LobbyBob, event: '加入队伍', callback: fun(trg: Trigger)): Trigger
+---@field event_on fun(self: LobbyBob, event: '离开队伍', callback: fun(trg: Trigger, reason: Bob.LeaveReason, last_team_info: LobbyBob.TeamInfo)): Trigger
+---@field event_on fun(self: LobbyBob, event: '有人加入队伍', callback: fun(trg: Trigger, data: LobbyBob.PlayerInfo)): Trigger
+---@field event_on fun(self: LobbyBob, event: '有人离开队伍', callback: fun(trg: Trigger, data: LobbyBob.PlayerInfo)): Trigger
+---@field event_on fun(self: LobbyBob, event: '客户端需要更新', callback: fun(trg: Trigger)): Trigger
+---@overload fun(game_play_id: integer):LobbyBob
 local M = Class 'LobbyBob'
 
 local CHANNEL_OP_JOIN = 2
@@ -72,7 +73,7 @@ M.score = 0
 ---@field mode Bob.ChatType
 ---@field time integer
 ---@field message string
----@field chat? Bob.ChatData
+---@field chat? LobbyBob.ChatData
 
 local function to_positive_integer(value)
     if type(value) ~= 'number' then
@@ -120,11 +121,11 @@ function M:__init(game_play_id)
     ---@private
     self.request_handlers = {}
     --收到的聊天
-    ---@type Bob.ChatInfo[]
+    ---@type LobbyBob.ChatInfo[]
     self.message_history = {}
     --已知的玩家信息
     ---@private
-    ---@type table<integer, Bob.PlayerInfo>
+    ---@type table<integer, LobbyBob.PlayerInfo>
     self.player_infos = {}
 
     -- 官方库不绑定项目 UI；聊天展示由项目自行订阅“收到消息”事件处理。
@@ -587,6 +588,7 @@ end
 
 ---@private
 ---@param done? fun(result: any?, err: any?)
+---@return boolean
 function M:refresh_player_info(done)
     log.debug('【BOB】请求更新玩家信息')
     if self._refreshing_player_info then
@@ -885,6 +887,7 @@ end
 --加入队伍
 ---@param team_id integer
 ---@param done? fun(result: any?, err: any?) # 加入完成后调用
+---@return boolean?, string?
 function M:join_team(team_id, done)
     log.debug('【BOB】尝试加入队伍', team_id)
     if self:is_matching() or self:is_launching() then
@@ -911,6 +914,7 @@ end
 
 --解散队伍
 ---@param done? fun(ok?: boolean, err?: string) # 解散完成后调用
+---@return boolean, string?
 function M:dismiss_team(done)
     log.debug('【BOB】尝试解散队伍')
     if not self:is_in_team() then
@@ -943,6 +947,7 @@ end
 --踢出队伍
 ---@param lick_aid integer
 ---@param done? fun(result: any?, err: any?)
+---@return boolean, string?
 function M:team_kick(lick_aid, done)
     log.debug('【BOB】尝试踢出队伍', lick_aid)
     local target_aid = math.tointeger(lick_aid)
@@ -990,6 +995,7 @@ end
 --转移队长
 ---@param new_leader_aid integer
 ---@param done? fun(result: any?, err: any?) # 转移完成后调用
+---@return boolean, string?
 function M:change_captain(new_leader_aid, done)
     log.debug('【BOB】尝试转移队长', new_leader_aid)
     local target_aid = math.tointeger(new_leader_aid)
@@ -1055,7 +1061,7 @@ end
 ---@field team_id integer
 ---@field team_state Bob.TeamState
 ---@field captain integer
----@field members Bob.PlayerInfo[]
+---@field members LobbyBob.PlayerInfo[]
 ---@field version integer
 
 function M:convert_player_info(player_info)
@@ -1074,7 +1080,7 @@ end
 
 ---@private
 ---@param team_info table
----@return Bob.TeamInfo
+---@return LobbyBob.TeamInfo
 function M:convert_team_info(team_info)
     for key, state in pairs(team_state) do
         if state == team_info.state then
@@ -1090,7 +1096,7 @@ end
 
 --获取队伍信息
 ---@param aid integer
----@param response fun(result: Bob.TeamInfo?, err: any?)
+---@param response fun(result: LobbyBob.TeamInfo?, err: any?)
 function M:get_team_info(aid, response)
     log.debug('【BOB】请求队伍信息', aid)
     self:request_with_token('Team_GetTeamInfoByAid', function()
@@ -1118,7 +1124,7 @@ end
 
 --获取玩家信息
 ---@param aid integer
----@param done fun(result: Bob.PlayerInfo?, err: any?)
+---@param done fun(result: LobbyBob.PlayerInfo?, err: any?)
 function M:get_player_info(aid, done)
     log.debug('【BOB】请求玩家信息', aid)
     if self.player_infos[aid] then
@@ -1168,7 +1174,7 @@ end
 
 ---@param players DungeonPlayerField[]?
 ---@return boolean
----@return ('不是队长' | '正在匹配' | '失去连接' | '有人在匹配' | '正在启动' | '没有合格玩家')?
+---@return ('当前不在队伍中' | '不是队长' | '正在匹配' | '失去连接' | '有人在匹配' | '正在启动' | '没有合格玩家')?
 function M:can_start_private_dungeon_filtered(players)
     if not self:is_in_team() then
         return false, '当前不在队伍中'
@@ -1372,6 +1378,7 @@ end
 ---@param dungeon_info DungeonSpaceField
 ---@param players DungeonPlayerField[] 每项只包含字符串 aid 和固定 version '2.0'
 ---@param done? fun(result: any?, err: any?)
+---@return boolean, string?
 function M:start_private_dungeon_game_filtered(dungeon_info, players, done)
     local can_start, reason = self:can_start_private_dungeon_filtered(players)
     if not can_start then
@@ -1401,7 +1408,7 @@ function M:start_private_dungeon_game_filtered(dungeon_info, players, done)
 end
 
 --格式化聊天消息
----@param chat_data Bob.ChatInfo
+---@param chat_data LobbyBob.ChatInfo
 ---@return string
 function M:format_message(chat_data)
     if chat_data.mode == '系统' then
@@ -1449,6 +1456,8 @@ end
 
 --修改自己的分数
 ---@param score integer
+---@param done? fun(result: any?, err: any?)
+---@return boolean
 function M:set_score(score, done)
     log.debug('[BOB] set score', score)
     self.score = score
@@ -1471,8 +1480,8 @@ end
 ---@field chat_type integer # 信息类型
 
 ---@private
----@param chat_data Bob.ChatData
----@return Bob.ChatInfo
+---@param chat_data LobbyBob.ChatData
+---@return LobbyBob.ChatInfo
 function M:record_chat(chat_data)
     local message_info = {
         mode    = '聊天',
@@ -1505,7 +1514,7 @@ end
 
 ---@private
 function M:notify_chat(data)
-    ---@type Bob.ChatData
+    ---@type LobbyBob.ChatData
     local chat_data = data.arg1
     if chat_data.sender and chat_data.sender.aid == self.aid then
         log.debug('【BOB】忽略已由成功回包显示的自身聊天消息', y3.inspect(chat_data))
