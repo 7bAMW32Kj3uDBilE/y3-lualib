@@ -914,13 +914,7 @@ M.FloatTextType = {
 }
 
 ---@enum(key) y3.Const.FloatTextJumpType
-M.FloatTextJumpType = {
-    ['伤害_左上'] = 934231441,
-    ['伤害_中上'] = 934269508,
-    ['伤害_右上'] = 934266669,
-    ['伤害_左下'] = 934252831,
-    ['金币跳字'] = 934277693,
-}
+M.FloatTextJumpType = {}
 
 ---@enum(key) y3.Const.UIAnimKey
 M.UIAnimKey = {}
