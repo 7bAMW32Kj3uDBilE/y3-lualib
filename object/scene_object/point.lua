@@ -11,11 +11,9 @@ local M = Class 'Point'
 M.type = 'point'
 
 function M:__tostring()
-    return string.format('{Point|%.3f,%.3f,%.3f}'
+    return string.format('{P|%.1f,%.1f}'
         , self:get_x()
-        , self:get_y()
-        , self:get_z()
-    )
+        , self:get_y())
 end
 
 ---@param py_point Point.HandleType
