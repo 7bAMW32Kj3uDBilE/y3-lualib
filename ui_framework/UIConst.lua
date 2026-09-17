@@ -69,7 +69,6 @@ UIConst.Path = {
 UIConst.Mutual = {
     -- 示例:
     -- group1 = { "PopupA", "PopupB" },
-    tracking = { 'TestRoomPanel', 'TrackingPanel' }
 }
 
 ----------------------------
