@@ -51,7 +51,7 @@ M.UnitState = {
     DISSOLVE = 'Dissolve',
 }
 
----@enum(key) y3.Const.UnitAttr
+---@enum(key, partial) y3.Const.UnitAttr
 M.UnitAttr = {
     ['生命'] = 'hp_cur',
     ['魔法'] = 'mp_cur',
@@ -122,7 +122,7 @@ M.UnitKeyFloatAttr = {
     ['ATTACK_RANGE'] = 'attack_range', -- 攻速
 }
 
----@enum(key) y3.Const.UnitAttrType
+---@enum(key, partial) y3.Const.UnitAttrType
 M.UnitAttrType = {
     ["基础"] = "ATTR_BASE",
     ["基础加成"] = "ATTR_BASE_RATIO", --百分比
@@ -158,7 +158,7 @@ M.UnitEnumState = {
     ["禁止使用道具"] = 1 << 23,
 }
 
----@enum(key) y3.Const.PlayerAttr
+---@enum(key, partial) y3.Const.PlayerAttr
 M.PlayerAttr = {}
 
 M.ModifyType = {
@@ -913,10 +913,10 @@ M.FloatTextType = {
     ['华康圆体W9'] = 'HKYuanW9',
 }
 
----@enum(key) y3.Const.FloatTextJumpType
+---@enum(key, partial) y3.Const.FloatTextJumpType
 M.FloatTextJumpType = {}
 
----@enum(key) y3.Const.UIAnimKey
+---@enum(key, partial) y3.Const.UIAnimKey
 M.UIAnimKey = {}
 
 ---@alias y3.Const.UIRelativeParentPosType
@@ -985,7 +985,7 @@ M.CollisionLayers = {
     ['物件'] = 1 << 8,
 }
 
----@enum(key) y3.Const.SceneUI
+---@enum(key, partial) y3.Const.SceneUI
 M.SceneUI = {}
 
 ---@enum(key) y3.Const.PlatFormRoleCommunityType
