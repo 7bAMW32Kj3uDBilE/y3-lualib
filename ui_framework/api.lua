@@ -81,7 +81,8 @@ end
 ----------------------------
 
 ---打开界面
----@param name string 界面名
+---@generic T: string
+---@param name `T` 界面名
 ---@param ... any 传递给 on_refresh 的参数
 function API.open(name, ...)
     share.uiMgr:openUI(name, ...)
