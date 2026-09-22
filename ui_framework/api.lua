@@ -73,7 +73,15 @@ end
 ---配置不响应 ESC 关闭的界面
 ---@param names string[] 界面名列表
 function API.set_no_esc(names)
-    UIConst.NoEsc = names
+    -- UIManager 加载时捕获了 UIConst.NoEsc 的引用，必须就地修改，替换引用会使名单失效
+    local no_esc = UIConst.NoEsc or {}
+    for k in pairs(no_esc) do
+        no_esc[k] = nil
+    end
+    for _, name in ipairs(names) do
+        no_esc[#no_esc + 1] = name
+    end
+    UIConst.NoEsc = no_esc
 end
 
 ----------------------------
@@ -81,8 +89,9 @@ end
 ----------------------------
 
 ---打开界面
+---参数联合 string：字面量绑定面板名取精确类型，泛型变量/动态 string 亦可透传
 ---@generic T: string
----@param name `T` 界面名
+---@param name `T`|string 界面名
 ---@param ... any 传递给 on_refresh 的参数
 function API.open(name, ...)
     share.uiMgr:openUI(name, ...)
@@ -128,8 +137,9 @@ function API.has_popup()
 end
 
 ---获取界面控制器（BasePanel 实例）
+---参数联合 string：字面量绑定面板名取精确类型，泛型变量/动态 string 亦可透传
 ---@generic T: string
----@param name `T` 界面名
+---@param name `T`|string 界面名
 ---@return T|nil
 function API.get_ctrl(name)
     return share.uiMgr:getUICtrl(name)
