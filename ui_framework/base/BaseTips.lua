@@ -115,72 +115,40 @@ function M:setPoint(pos)
 end
 
 ---设置坐标（根据触发UI的位置动态调整）
----会根据UI位置自动选择显示在四个方向之一，避免超出屏幕
+---画布坐标系：设计分辨率1920x1080按 窗口高/1080 等比缩放，原点在屏幕左下、Y轴向上
+---垂直方向：触发UI在上半屏时提示显示在其下方，下半屏时显示在上方，避免超出屏幕
+---水平方向：跟随触发UI居中，并钳制在窗口可见区域内（窗口比16:9窄时画布左右会被裁切）
 ---@param ui UI 触发tips的UI元素
 ---@param offset? number[] 偏移量 [x偏移, y偏移]，默认为 [0, 0]
 function M:setPointByUI(ui, offset)
     offset = offset or { 0, 0 }
     self._root:set_follow_mouse(false)
 
-    -- 获取触发UI的信息
+    local scale = y3.ui.get_window_height() / 1080.0
+    local canvasW = y3.ui.get_screen_width() * scale
+    local canvasH = y3.ui.get_window_height()
+    local visMinX = math.max((canvasW - y3.ui.get_window_width()) / 2, 0)
+    local visMaxX = canvasW - visMinX
+
     local uiX = ui:get_absolute_x()
     local uiY = ui:get_absolute_y()
-    local uiWidth = ui:get_real_width()
-    local uiHeight = ui:get_real_height()
+    local tipsW = self._root:get_real_width()
+    local tipsH = self._root:get_real_height()
+    local margin = 5
 
-    -- 获取UI在屏幕上的百分比位置
-    local mouseXPercent = uiX / y3.ui.get_window_width()
-    local mouseYPercent = uiY / y3.ui.get_window_height()
-
-    -- 根据位置判断tips显示方向 (分为四个象限)
-    local direction
-    local isLeft = mouseXPercent < 0.5
-    local isTop = mouseYPercent < 0.5
-
-    if isLeft and isTop then
-        direction = 'right_down' -- 左上 > 右下
-    elseif not isLeft and isTop then
-        direction = 'left_down' -- 右上 > 左下
-    elseif isLeft and not isTop then
-        direction = 'right_up' -- 左下 > 右上
+    local x = math.max(math.min(uiX + offset[1], visMaxX - tipsW / 2), visMinX + tipsW / 2)
+    local y
+    if (uiY / canvasH) > 0.5 then
+        -- 上半屏：枢轴取控件顶边(anchor y=1)，从触发UI底边向下展开
+        self._root:set_anchor(0.5, 1)
+        y = math.max(uiY - ui:get_real_height() / 2 - offset[2], tipsH + margin)
     else
-        direction = 'left_up' -- 右下 > 左上
+        -- 下半屏：枢轴取控件底边(anchor y=0)，从触发UI顶边向上展开
+        self._root:set_anchor(0.5, 0)
+        y = math.min(uiY + ui:get_real_height() / 2 + offset[2], canvasH - tipsH - margin)
     end
 
-    -- 四个方向的参数配置
-    local directions = {
-        right_down = {
-            tipsX = function() return uiX + uiWidth / 2 + offset[1] end,
-            tipsY = function() return uiY - uiHeight / 2 - offset[2] end,
-            anchorX = 0,
-            anchorY = 0
-        },
-        left_down = {
-            tipsX = function() return uiX - uiWidth / 2 - offset[1] end,
-            tipsY = function() return uiY - uiHeight / 2 - offset[2] end,
-            anchorX = 1,
-            anchorY = 0
-        },
-        right_up = {
-            tipsX = function() return uiX + uiWidth / 2 + offset[1] end,
-            tipsY = function() return uiY + uiHeight / 2 + offset[2] end,
-            anchorX = 0,
-            anchorY = 1
-        },
-        left_up = {
-            tipsX = function() return uiX - uiWidth / 2 - offset[1] end,
-            tipsY = function() return uiY + uiHeight / 2 + offset[2] end,
-            anchorX = 1,
-            anchorY = 1
-        }
-    }
-
-    local dirConfig = directions[direction]
-    local tipsX = dirConfig.tipsX()
-    local tipsY = dirConfig.tipsY()
-
-    self._root:set_anchor(dirConfig.anchorX, dirConfig.anchorY)
-    self._root:set_absolute_pos(tipsX, tipsY)
+    self._root:set_absolute_pos(x, y)
 end
 
 return M
