@@ -53,22 +53,11 @@ function M:show(data)
         self._root:set_visible(true)
     end
     self:on_refresh(data)
-    -- 设置了挂载节点 self.mask 的Tips，创建全屏遮罩
-    -- 点击空白处自动关闭，同时拦截鼠标穿透到底层界面
-    if self.mask then
-        self._mask = y3.ui.create_mask(self._localPlayer, self.mask, function()
-            self:hide()
-        end)
-    end
 end
 
 ---隐藏Tips
 ---@param data? table 传递给 on_hide 的数据
 function M:hide(data)
-    -- 已启用遮罩则先移除，再隐藏根节点，最后执行子类 on_hide
-    if self.mask then
-        y3.ui.remove_mask(self)
-    end
     self:_hideRoot()
     self:on_hide(data)
 end
