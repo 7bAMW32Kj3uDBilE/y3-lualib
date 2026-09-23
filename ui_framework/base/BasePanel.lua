@@ -388,7 +388,7 @@ end
 ---创建循环定时器
 ---@param interval number 间隔秒数
 ---@param callback function 回调函数
----@return table 定时器对象（可调用 :remove() 停止）
+---@return ClientTimer 定时器对象（可调用 :remove() 停止）
 function M:loop(interval, callback)
     local timer = y3.ctimer.loop(interval, function(t, count, localPlayer)
         if callback then
@@ -406,7 +406,7 @@ end
 ---创建延时定时器
 ---@param delay number 延迟秒数
 ---@param callback function 回调函数
----@return table 定时器对象
+---@return ClientTimer 定时器对象
 function M:wait(delay, callback)
     local timer = y3.ctimer.wait(delay, function(t, count, localPlayer)
         if callback then
@@ -425,7 +425,7 @@ end
 ---@param interval number 间隔秒数
 ---@param count integer 执行次数
 ---@param callback function 回调函数
----@return table 定时器对象
+---@return ClientTimer 定时器对象
 function M:loopCount(interval, count, callback)
     local timer = y3.ctimer.loop_count(interval, count, function(t, c, localPlayer)
         if callback then
