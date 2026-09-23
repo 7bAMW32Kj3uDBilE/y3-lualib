@@ -66,6 +66,7 @@ function M:__init(time, mode, count, on_timer)
     self.on_timer = on_timer
     self.include_name = y3.reload.getCurrentIncludeName()
     self.init_ms = cur_ms
+    self.start_ms = cur_ms
     self.init_frame = cur_frame
 
     M.all_timers[id] = self
@@ -193,11 +194,8 @@ function M:pause()
         return
     end
     self.pausing = true
-    if self.mode == 'second' then
-        self.paused_at_ms = cur_ms
-    else
-        self.paused_at_frame = cur_frame
-    end
+    self.paused_at_ms = cur_ms
+    self.paused_at_frame = cur_frame
     self:pop()
 end
 
@@ -207,15 +205,12 @@ function M:resume()
         return
     end
     self.pausing = false
-    if self.mode == 'second' then
-        local paused_ms = cur_ms - self.paused_at_ms
-        self.paused_ms = self.paused_ms + paused_ms
-        self.total_paused_ms = self.total_paused_ms + paused_ms
-    else
-        local paused_frame = cur_frame - self.paused_at_frame
-        self.paused_frame = self.paused_frame + paused_frame
-        self.total_paused_frame = self.total_paused_frame + paused_frame
-    end
+    local paused_ms = cur_ms - self.paused_at_ms
+    self.paused_ms = self.paused_ms + paused_ms
+    self.total_paused_ms = self.total_paused_ms + paused_ms
+    local paused_frame = cur_frame - self.paused_at_frame
+    self.paused_frame = self.paused_frame + paused_frame
+    self.total_paused_frame = self.total_paused_frame + paused_frame
 
     if not self.waking_up then
         self:set_time_out()
@@ -235,7 +230,8 @@ function M:get_elapsed_time()
         return 0.0
     end
     if self.mode ~= 'second' then
-        return 0.0
+        local anchor_ms = self.pausing and self.paused_at_ms or cur_ms
+        return (anchor_ms - self.init_ms - self.total_paused_ms) / 1000.0
     end
     if self.waking_up then
         return (self.target_ms - self.start_ms - self.paused_ms) / 1000.0
