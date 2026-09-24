@@ -439,7 +439,7 @@ function M.switch_level(level_id_str)
 end
 
 ---获取当前关卡
----@return py.Map # 当前关卡
+---@return string # 当前关卡
 function M.get_level()
     return GameAPI.get_current_level()
 end
@@ -913,7 +913,7 @@ function M.load_sub_scene(point, level_id, rotate, has_light, has_decoration, ha
     )
 end
 
---本地客户端每帧回调此函数  
+--本地客户端每帧回调此函数
 --只能注册一个回调，后注册的会覆盖之前的，
 --如有需要请自己在回调中分发
 --
