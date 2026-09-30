@@ -1147,7 +1147,7 @@ function m.keysOf(t)
 end
 
 ---@generic V
----@param t { [any]: V }
+---@param t table<any, V>
 ---@return V[]
 function m.valuesOf(t)
     local values = {}
