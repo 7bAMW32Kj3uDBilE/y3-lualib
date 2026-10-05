@@ -162,7 +162,7 @@ local function createClient(port)
 
         local callbacks = onReadyCallbacks
         onReadyCallbacks = nil
-        for _, callback in ipairs(callbacks) do
+        for _, callback in ipairs(callbacks or {}) do
             xpcall(callback, log.error, client)
         end
     end)
