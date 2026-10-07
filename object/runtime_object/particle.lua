@@ -173,12 +173,12 @@ function M:set_time(duration)
 end
 
 --设置特效颜色
----@param x number # x
----@param y number # y
----@param z number # z
----@param w number # w
-function M:set_color(x, y, z, w)
-    GameAPI.set_sfx_color(self.handle, x, y, z, w)
+---@param r number 0~255
+---@param g number 0~255
+---@param b number 0~255
+---@param a number 0~255
+function M:set_color(r, g, b, a)
+    GameAPI.set_sfx_color(self.handle, r, g, b, a)
 end
 
 --设置特效显示
