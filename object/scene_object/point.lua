@@ -2,6 +2,9 @@
 
 --点
 ---@class Point
+---@field private x number
+---@field private y number
+---@field private z number
 ---@field handle Point.HandleType
 ---@field res_id? integer
 ---@overload fun(py_point: Point.HandleType): self
