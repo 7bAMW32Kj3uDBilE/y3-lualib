@@ -38,7 +38,7 @@ function M:__init(py_player)
 end
 
 function M:__tostring()
-    return string.format('{player|%s|%d}'
+    return string.format('{玩家|%s|%d}'
         , self:get_name()
         , self.id
     )

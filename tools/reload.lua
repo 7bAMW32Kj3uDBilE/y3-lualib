@@ -72,7 +72,8 @@ end
 function M:fire()
     ---@private
     M._reloading = true
-    log.info('=========== reload start ===========')
+    log.warn('────────────────────────────────────────────')
+    log.warn('▶ 开始重载')
 
     local beforeReloadCallbacksNoReload = {}
     local afterReloadCallbacksNoReload  = {}
@@ -113,7 +114,8 @@ function M:fire()
     for _, data in ipairs(M.afterReloadCallbacks) do
         xpcall(data.callback, log.error, self, self:isValidName(data.name))
     end
-    log.info('=========== reload finish ===========')
+    log.warn('▶ 完成重载')
+    log.warn('────────────────────────────────────────────')
     M._reloading = false
 
     return needReload
