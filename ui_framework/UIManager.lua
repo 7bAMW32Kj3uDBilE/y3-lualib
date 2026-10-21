@@ -133,7 +133,7 @@ function M:openUI(viewName, ...)
 
             -- attach：绑定 UI 节点并执行 on_init
             panel:attach(ui)
-            log.info("[UIManager] 界面 attach 完成: " .. viewName)
+            log.info("[UIManager] 界面 attach: " .. viewName)
         end
 
         -- 调用 open（内部会 set_visible + on_refresh）
