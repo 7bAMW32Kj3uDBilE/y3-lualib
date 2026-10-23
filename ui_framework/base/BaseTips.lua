@@ -6,7 +6,17 @@
 ---@field _isAttached boolean 是否已完成 attach
 ---@field _mask          UI.MaskInstance 全屏遮罩实例（点击空白关闭）
 ---@field mask           UI              遮罩挂载节点（非nil则启用）
+---@field private _showTimer? ClientTimer 延迟定时器
+---@field private _fadeTimer? ClientTimer 渐显定时器
 local M = Class 'BaseTips'
+
+local SHOW_DELAY_FRAME = 3
+-- 渐显总时长（秒）
+local FADE_TIME = 0.3
+-- 渐显采样间隔（秒）
+local FADE_INTERVAL = 0.03
+-- 透明度满值（口径 0~100）
+local ALPHA_FULL = 100
 
 -- 继承 GCHost，与 BasePanel / LocalUILogic 保持一致
 Extends('BaseTips', 'GCHost')
@@ -46,20 +56,67 @@ end
 ---显示Tips
 ---@param data? table 传递给 on_refresh 的数据
 function M:show(data)
+    if not self._root then
+        return
+    end
+
     if self:isOpen() then
-        self:hide()
+        self:hide(data)
     end
-    if self._root then
-        self._root:set_visible(true)
-    end
+
+    self:_cancelPending()
     self:on_refresh(data)
+
+    self._root:set_alpha(0)
+    self._showTimer = y3.ctimer.wait_frame(SHOW_DELAY_FRAME, function()
+        M.fade_in(self)
+    end)
+end
+
+---渐显（延迟结束，内容已排版好）
+function M:fade_in()
+    self._showTimer = nil
+    self._root:set_visible(true)
+    self._root:set_alpha(0)
+    -- set_anim_opacity 会直接跳到结束值（不补间），渐变只能自己按步抬透明度
+    self._fadeTimer = y3.ctimer.loop(FADE_INTERVAL, function(timer, count)
+        M.step_fade(self, timer, count)
+    end)
+end
+
+---渐显推进一步
+---@param timer ClientTimer
+---@param count integer 第几次触发（从 1 开始）
+function M:step_fade(timer, count)
+    local progress = count * FADE_INTERVAL / FADE_TIME
+    if progress >= 1 then
+        timer:remove()
+        self._fadeTimer = nil
+        self._root:set_alpha(ALPHA_FULL)
+        return
+    end
+    self._root:set_alpha(ALPHA_FULL * progress)
 end
 
 ---隐藏Tips
 ---@param data? table 传递给 on_hide 的数据
 function M:hide(data)
+    self:_cancelPending()
     self:_hideRoot()
     self:on_hide(data)
+    self._root:set_alpha(ALPHA_FULL)
+end
+
+---取消还没到点的显示与未跑完的渐显
+function M:_cancelPending()
+    if self._showTimer then
+        self._showTimer:remove()
+        self._showTimer = nil
+    end
+    if self._fadeTimer then
+        self._fadeTimer:remove()
+        self._fadeTimer = nil
+    end
 end
 
 ---判断Tips是否打开
