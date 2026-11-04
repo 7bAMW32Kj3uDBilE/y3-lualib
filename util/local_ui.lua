@@ -54,7 +54,7 @@ function M:__init(path_or_ui)
     ---@type table<string, true>
     self._need_refresh = {}
 
-    y3.ltimer.wait(0, function ()
+    self:bindGC(y3.ltimer.wait(0, function ()
         if type(path_or_ui) == 'string' then
             local main = y3.ui.get_ui(local_player, path_or_ui)
             self:attach(main)
@@ -62,7 +62,7 @@ function M:__init(path_or_ui)
         if type(path_or_ui) == 'table' then
             self:attach(path_or_ui)
         end
-    end)
+    end))
 end
 
 ---删除本地UI逻辑
@@ -367,10 +367,10 @@ function M:refresh(name, player)
     self._need_refresh[name] = true
 
     if not self._refresh_next_tick_timer then
-        self._refresh_next_tick_timer = y3.ctimer.wait(0, function ()
+        self._refresh_next_tick_timer = self:bindGC(y3.ctimer.wait(0, function ()
             self._refresh_next_tick_timer = nil
             self:refreshAll()
-        end)
+        end))
     end
 end
 
@@ -384,8 +384,8 @@ function M:refreshAll()
         for _, info in ipairs(infos) do
             local ui = self._childs[info.name]
             if ui then
-                if not mark[ui] then
-                    mark[ui] = true
+                if not mark[info] then
+                    mark[info] = true
                     xpcall(info.on_refresh, log.error, ui, local_player, self)
                 end
             else

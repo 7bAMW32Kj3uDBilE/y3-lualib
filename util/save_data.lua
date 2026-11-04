@@ -103,6 +103,9 @@ M.player_tables = y3.util.multiTable(2)
 ---@param disable_cover? boolean # 是否禁用覆盖，必须和存档设置中的一致（默认为 `true`)
 ---@return table
 function M.load_table(player, slot, disable_cover)
+    if disable_cover == nil then
+        disable_cover = true
+    end
     local last_table = M.player_tables[player][slot]
     if last_table then
         if last_table[2] == disable_cover then
@@ -112,7 +115,7 @@ function M.load_table(player, slot, disable_cover)
     end
     last_table = {}
     M.player_tables[player][slot] = last_table
-    if disable_cover == true or disable_cover == nil then
+    if disable_cover then
         last_table[1] = M.load_table_with_cover_disable(player, slot)
     else
         last_table[1] = M.load_table_with_cover_enable(player, slot)
@@ -309,6 +312,9 @@ function M.load_table_with_cover_disable(player, slot)
             value = y3.helper.as_lua(value)
             local vtype = type(value)
             local cache
+            if path and #path >= 3 then
+                error('存档表最多只支持3层嵌套')
+            end
             if vtype == 'table' then
                 if next(value) ~= nil then
                     if raw[key] ~= nil then
@@ -319,9 +325,6 @@ function M.load_table_with_cover_disable(player, slot)
                     end
                     cache = value
                     value = {}
-                end
-                if path and #path >= 3 then
-                    error('存档表最多只支持3层嵌套')
                 end
                 if y3.proxy.raw(value) then
                     value = y3.proxy.raw(value)
