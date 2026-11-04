@@ -2,6 +2,8 @@
 ---@field _allView table<string, BasePanel> 管理所有的界面
 ---@field _allBaseView table<string, BaseView> 管理所有的视图控制器
 ---@field _allTips table<string, BaseTips> 管理所有的提示界面
+---@field _tipsOwner table<string, string> Tips 归属（Tips 名 → 界面名，界面关闭时一并收掉）
+---@field _currentTips string? 当前显示的 Tips 名
 ---@field _uiStack string[] UI栈（用于ESC关闭）
 ---@field _uiLock table<string, any> 锁定状态
 ---@overload fun():self
@@ -42,6 +44,7 @@ function M:__init()
     self._allView = {}
     self._allBaseView = {}
     self._allTips = {}
+    self._tipsOwner = {}
     self._uiStack = {}
     self._uiLock = {}
     return self
@@ -165,6 +168,13 @@ function M:closeUI(viewName)
     if panel then
         -- 调用 close（内部会 set_visible(false) + on_hide）
         panel:close()
+
+        self._tipsOwner = self._tipsOwner or {}
+        for tipsName, owner in pairs(self._tipsOwner) do
+            if owner == viewName then
+                self:hideTips(tipsName)
+            end
+        end
         -- 从栈中移除
         for i = #self._uiStack, 1, -1 do
             if self._uiStack[i] == viewName then
@@ -262,6 +272,9 @@ function M:showTips(tipsName, param)
     if not tipsName or not self._allTips[tipsName] then
         return
     end
+    self._tipsOwner = self._tipsOwner or {}
+    self._tipsOwner[tipsName] = param and param.owner
+    self._currentTips = tipsName
     self._allTips[tipsName]:show(param)
 end
 
@@ -272,6 +285,9 @@ function M:hideTips(tipsName, param)
     if not tipsName or not self._allTips[tipsName] then
         return
     end
+    self._tipsOwner = self._tipsOwner or {}
+    self._tipsOwner[tipsName] = nil
+    self._currentTips = nil
     self._allTips[tipsName]:hide(param)
 end
 
