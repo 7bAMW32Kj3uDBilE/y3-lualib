@@ -491,7 +491,7 @@ end
 ---@generic Extends: string
 ---@param name `Class` | table
 ---@param extendsName `Extends`
----@param init? fun(self: Class, super: Extends, ...)
+---@param init? fun(self: Class, super: fun(...), ...)
 function M.extends(name, extendsName, init)
     local config = M.getConfig(name)
     config:extends(extendsName, init)
