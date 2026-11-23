@@ -84,6 +84,19 @@ function API.set_no_esc(names)
     UIConst.NoEsc = no_esc
 end
 
+--- 配置打开时镜头避让的界面
+---@param names string[] 界面名列表
+function API.set_camera_avoid(names)
+    local avoid = UIConst.CameraAvoid or {}
+    for k in pairs(avoid) do
+        avoid[k] = nil
+    end
+    for _, name in ipairs(names) do
+        avoid[name] = true
+    end
+    UIConst.CameraAvoid = avoid
+end
+
 ----------------------------
 -- 界面控制
 ----------------------------

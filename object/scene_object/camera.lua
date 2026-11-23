@@ -136,11 +136,12 @@ function M.linear_move_by_time(player, point, time, move_type)
 end
 
 ---设置镜头跟随单位
+---* x/y/height 偏移参数实测（沙盘正交）无效
 ---@param player Player 玩家
 ---@param unit Unit 目标单位
----@param x? number 过渡时间
----@param y? number 移动模式
----@param height? number 高度
+---@param x? number
+---@param y? number
+---@param height? number
 ---@param socket? string socket
 function M.set_camera_follow_unit(player, unit, x, y, height, socket)
     ---@diagnostic disable-next-line: missing-parameter
