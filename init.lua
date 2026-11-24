@@ -13,6 +13,7 @@ y3.proxy   = require 'y3.tools.proxy'
 y3.class   = require 'y3.tools.class'
 y3.util    = require 'y3.tools.utility'
 y3.json    = require 'y3.tools.json'
+y3.seri    = require 'y3.tools.serialization'
 y3.inspect = require 'y3.tools.inspect'
 y3.await   = require 'y3.tools.await'
 pcall(function ()
@@ -123,6 +124,11 @@ y3.aes          = require 'y3.util.aes'
 y3.local_ui     = require 'y3.util.local_ui'
 y3.fs           = require 'y3.util.fs'
 y3.rsa          = require 'y3.util.rsa'
+
+y3.util.enableCloseFunction()
+y3.util.enableFormatString()
+
+require 'y3.cloud'
 
 pcall(function ()
     require 'y3-helper.meta'
